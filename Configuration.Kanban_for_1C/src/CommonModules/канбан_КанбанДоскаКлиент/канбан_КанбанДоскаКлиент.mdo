@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0dd962bc-d123-42f0-9302-4da723aadce1">
+  <name>канбан_КанбанДоскаКлиент</name>
+  <synonym>
+    <key>ru</key>
+    <value>Канбан доска клиент</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

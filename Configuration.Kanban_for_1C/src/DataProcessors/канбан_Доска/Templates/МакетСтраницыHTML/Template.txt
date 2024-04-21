@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи с фильтрами</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <div class="flexDiv">
+
+            <input type="checkbox" id="drive-box" checked />
+            <label for="drive-box">
+                <div class="tag drive pos-abs">1C:Drive</div>
+            </label>
+
+            <input type="checkbox" id="CPM-box" checked />
+            <label for="CPM-box">
+                <div class="tag CPM pos-abs">1C:CPM</div>
+            </label>
+
+            <input type="checkbox" id="UZ-box" checked />
+            <label for="UZ-box">
+                <div class="tag UZ pos-abs">1С:Управление задачами</div>
+            </label>
+
+            <div class="kanban-board">
+
+                <div class="kanban-block" id="Backlog" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">Backlog</strong>
+                    <strong class="kanban-block-number">0</strong>
+                </div>
+
+                <div class="kanban-block" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">Зарегистрирована</strong>
+                    <strong class="kanban-block-number">0</strong>
+
+                    <!-- карточки -->
+                    <div class="card" id="task1" draggable="true" ondragstart="drag(event)">
+                        <!-- текст карточки -->
+                        <span>№1. Поправить иконки в дизайн-системе dfsdfsdf dfs sdfdsf sdfdsfsdfsdf sdf dsf sdfs
+                            dfsdf sdf sdf sdf sdf dfsfsd fdsfdsfadsfdasfda dfadsfad asdfadsfdsfad</span>
+                        <!-- тег -->
+                        <div class="tag drive">1C:Drive</div>
+
+                    </div>
+
+                    <div class="card" id="task2" draggable="true" ondragstart="drag(event)">
+                        <span>№2. Atomic Habits / James Clear</span>
+                        <div class="tag UZ">1С:УЗ</div>
+                    </div>
+
+                    <div class="card" id="task3" draggable="true" ondragstart="drag(event)">
+                        <span>№3. Сходить на лекцию по йоге</span>
+                        <div class="tag CPM">1C:CPM</div>
+                    </div>
+
+                    <div class="card" id="task4" draggable="true" ondragstart="drag(event)">
+                        <span>№4. «Ясно, понятно» / Максим Ильяхов</span>
+                        <div class="tag UZ">1С:УЗ</div>
+                    </div>
+
+                    <div class="card" id="task5" draggable="true" ondragstart="drag(event)">
+                        <span>№5. Купить шампунь</span>
+                        <div class="tag CPM">1C:CPM</div>
+                    </div>
+
+                    <div class="card" id="task6" draggable="true" ondragstart="drag(event)">
+                        <span>№6. Добавить анимацию при наведении на кнопки</span>
+                        <div class="tag drive">1C:Drive</div>
+                    </div>
+
+                </div>
+
+                <div class="kanban-block" id="awaiting" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">Ожидает ответа</strong>
+                    <strong class="kanban-block-number">0</strong>
+                </div>
+
+                <div class="kanban-block" id="inprogress" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">В процессе выполнения</strong>
+                    <strong class="kanban-block-number">0</strong>
+                </div>
+
+                <div class="kanban-block" id="testing" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">На тестировании</strong>
+                    <strong class="kanban-block-number">0</strong>
+                </div>
+
+                <div class="kanban-block" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <strong class="kanban-block-name">Готово</strong>
+                    <strong class="kanban-block-number">0</strong>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <style>
+        /* подключаем внешний шрифт */
+        @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+        /* общие настройки для всего */
+        #wrapper {
+            /* включаем абсолютное позиционирование */
+            position: absolute;
+            /* отступы сверху и слева */
+            top: 0;
+            left: 0;
+            /* высота и ширина блока */
+            width: 100%;
+            height: 100%;
+            /* цвет */
+            color: #333333;
+            /* шрифт */
+            font-family: "Inter", sans-serif;
+        }
+
+        /* внутренний блок */
+        .flexDiv {
+            /* включаем гибкую вёрстку */
+            /* display: flex; */
+            position: absolute;
+            /* отступ сверху */
+            margin-top: 60px;
+            /* высота блока */
+            width: 90vw;
+            /* двигаем содержимое блока, если оно не помещается рядом */
+            /* flex-wrap: wrap; */
+            /* максимальная ширина блока */
+            /* max-width: 800px; */
+            /* отступы слева и сверху */
+            left: 5%;
+            top: 0;
+            /* сдвигаем влево по горизонтали */
+            /* transform: translateX(-50%); */
+            height: 90%;
+        }
+
+        /* чекбоксы */
+        /* скрываем флажок у чекбокса */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        /* абсолютное позиционирование для тегов */
+        .pos-abs {
+            /* включаем абсолютное позиционирование */
+            position: absolute;
+            /* отступ сверху */
+            top: -50px;
+            /* внутренний отступ до левой и верхней границы */
+            margin: 8px;
+            margin-top: 8px !important;
+        }
+
+        /* для тега с личными записями */
+        .pos-abs.CPM {
+            /* двигаем тег левее */
+            left: 102px;
+        }
+
+        /* для тега с рабочими записями */
+        .pos-abs.UZ {
+            /* двигаем тег ещё левее */
+            left: 208px;
+        }
+
+        /* общие настройки для тегов */
+        .tag {
+            /* внешние отступы */
+            padding: 6px 12px;
+            /* подгоняем размер блока под содержимое */
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            /* радиус скругления */
+            border-radius: 9999px;
+            /* отступ сверху */
+            margin-top: 12px;
+            /* запрещаем выделять мышкой этот элемент */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+        /* добавляем хештег перед тегом */
+        .tag::before {
+            /* добавляем текст, отступ и прозрачность */
+            content: "#";
+            margin-right: 2px;
+            opacity: 0.3;
+        }
+
+        /* чекбоксы */
+
+        /* ТЕГИ */
+        /* настройки переменных для цветов тегов */
+        .drive,
+        .card:has(.drive) {
+            /* рабочий */
+            --tagColor: #fcdbcf;
+        }
+
+        .CPM,
+        .card:has(.CPM) {
+            /* личный */
+            --tagColor: #ccdcff;
+        }
+
+        .UZ,
+        .card:has(.UZ) {
+            /* почитать */
+            --tagColor: #f9cafc;
+        }
+
+        /* настройки цвета фона тегов */
+        .drive,
+        .CPM,
+        .UZ {
+            /* берём значение фона из переменных */
+            background-color: var(--tagColor);
+        }
+
+        /* ТЕГИ */
+
+        /* КАРТОЧКИ */
+        /* настройки карточки */
+        .card {
+            /* цвет фона */
+            background-color: #ffffff;
+            /* граница */
+            border: 1px solid #ebebeb;
+            /* рисуем границу по периметру карточки */
+            /* box-sizing: border-box; */
+            /* межстрочное расстояние */
+            line-height: 1.5;
+            /* радиус скругления */
+            border-radius: 8px;
+            /* рисуем тень */
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 4px;
+            /* скрываем всё, что не помещается в блок */
+            /* overflow: hidden; */
+            /* включаем гибкую вёрстку */
+            display: flex;
+            /* организуем вёрстку по столбцам */
+            flex-direction: column;
+            /* выравниваем карточки по центру друг относительно друга */
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding: 5px;
+        }
+
+        /* меняем цвет рамки карточки при наведении */
+        .card:hover {
+            border-color: var(--tagColor);
+        }
+
+        /* если тег отмечен */
+        #drive-box:checked~.kanban-board>.kanban-block>.card:has(.drive),
+        #CPM-box:checked~.kanban-board>.kanban-block>.card:has(.CPM),
+        #UZ-box:checked~.kanban-board>.kanban-block>.card:has(.UZ) {
+            opacity: 1;
+            display: flex;
+            animation: fadeInOut 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                display: none;
+            }
+
+            50% {
+                opacity: 0.5;
+                display: flex;
+            }
+
+            100% {
+                opacity: 1;
+                display: flex;
+            }
+        }
+
+        /* если тег отмечен — ставим ему указанный цвет фона */
+        #drive-box:checked+label div,
+        #CPM-box:checked+label div,
+        #UZ-box:checked+label div {
+            /* цвет фона берём из переменной */
+            background-color: var(--tagColor);
+            color: unset;
+        }
+
+        /* КАРТОЧКИ */
+
+        /* АНИМАЦИЯ
+/* если тег не отмечен */
+        #drive-box+label div,
+        #CPM-box+label div,
+        #UZ-box+label div {
+            /* ставим белый фон */
+            background-color: white;
+            /* оставляем рамку цвета изначального фона */
+            border: 1px solid var(--tagColor);
+            /* текст тоже делаем цвета изначального фона */
+            color: var(--tagColor);
+        }
+
+        /* если тег не отмечен */
+        #drive-box~.kanban-board>.kanban-block>.card:has(.drive),
+        #CPM-box~.kanban-board>.kanban-block>.card:has(.CPM),
+        #UZ-box~.kanban-board>.kanban-block>.card:has(.UZ) {
+            opacity: 0;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+
+            0% {
+                opacity: 1;
+                display: flex;
+            }
+
+            50% {
+                opacity: 0.5;
+                display: flex;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        /* меняем курсор при наведении на тег */
+        label {
+            cursor: pointer;
+        }
+
+        /* делаем тег чуть бледнее при наведении */
+        label:hover {
+            opacity: 0.5;
+        }
+
+        /* АНИМАЦИЯ */
+
+        .kanban-board {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .kanban-block {
+            padding: 0.6rem;
+            width: 30.5%;
+            min-width: 14rem;
+            min-height: 4.5rem;
+            border-radius: 0.3rem;
+            overflow: auto;
+            margin-right: 5px;
+            --boardColor: rgb(247, 246, 246);
+            background-color: var(--boardColor);
+            /* text-align: center; */
+        }
+
+        .kanban-block-name,
+        .kanban-block-number {
+            color: rgb(121, 121, 121);
+        }
+
+        .create-new-task-block {
+            display: none;
+            /* display: flex; */
+            background: #ffaf00;
+            width: 64.4%;
+            flex-direction: column;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        #edit-button,
+        #save-button,
+        #cancel-button {
+            margin: 0.2rem 0rem 0.1rem 0rem;
+            background-color: white;
+            border-radius: 0.2rem;
+            width: 49.2%;
+            border: 0.25rem solid black;
+            padding: 0.5rem 2.7rem;
+            border-radius: 0.3rem;
+            font-size: 1rem;
+        }
+
+        #edit-button {
+            display: none;
+        }
+    </style>
+    <script>
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.currentTarget.appendChild(document.getElementById(data));
+            RecalculateKanbanBlock();
+
+        }
+
+        function RecalculateKanbanBlock() {
+            let blocks = document.getElementsByClassName("kanban-block");
+            for (const item of blocks) {
+                let tasks = item.getElementsByClassName("card");
+                let number = item.getElementsByClassName("kanban-block-number");
+                number[0].textContent = tasks.length;
+            }
+        }
+
+        RecalculateKanbanBlock();
+
+
+
+        // function createTask(){
+        //     var x = document.getElementById("inprogress");
+        //     var y = document.getElementById("done");
+        //     var z = document.getElementById("create-new-task-block");
+        //     if (x.style.display === "none") {
+        //         x.style.display = "block";
+        //         y.style.display = "block";
+        //         z.style.display = "none";
+        //     } else {
+        //         x.style.display = "none";
+        //         y.style.display = "none";
+        //         z.style.display = "flex";
+        //     }
+        // }
+
+        // function saveTask(){
+        //     // var saveButton = document.getElementById("save-button");
+        //     // var editButton = document.getElementById("edit-button");
+        //     // if (saveButton.style.display === "none") {
+        //     //     saveButton.style.display = "block";
+        //     //     editButton.style.display = "none";
+        //     // } else{
+        //     //     saveButton.style.display = "none";
+        //     //     editButton.style.display = "block";
+        //     // }
+
+        //     var todo = document.getElementById("todo");
+        //     var taskName = document.getElementById("task-name").value;
+        //     todo.innerHTML += `
+        //     <div class="task" id="${taskName.toLowerCase().split(" ").join("")}" draggable="true" ondragstart="drag(event)">
+        //         <span>${taskName}</span>
+        //     </div>
+        //     `
+        // }
+        //
+        // function editTask(){
+        //     var saveButton = document.getElementById("save-button");
+        //     var editButton = document.getElementById("edit-button");
+        //     if (saveButton.style.display === "none") {
+        //         saveButton.style.display = "block";
+        //         editButton.style.display = "none";
+        //     } else{
+        //         saveButton.style.display = "none";
+        //         editButton.style.display = "block";
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e612f4f7-8e38-4eb5-b065-b4e0e315276a">
+  <name>канбан_Доска</name>
+  <synonym>
+    <key>ru</key>
+    <value>Канбан доска</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <content>CommonModule.канбан_КанбанДоска</content>
+  <content>CommonModule.канбан_КанбанДоскаПереопределяемый</content>
+  <content>CommonModule.канбан_КанбанДоскаКлиент</content>
+  <content>Role.kanban_ОсновнаяРоль</content>
+  <content>Constant.kanban_КанбанДоскаВключена</content>
+</mdclass:Subsystem>
