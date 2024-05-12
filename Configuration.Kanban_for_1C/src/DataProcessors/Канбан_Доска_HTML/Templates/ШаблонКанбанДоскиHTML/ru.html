@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи с фильтрами</title>
+    <style type="text/css">
+        /* :root {
+            
+        } */
+
+        /* подключаем внешний шрифт */
+        @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+        /* общие настройки для всего */
+        body {
+            margin: 0;
+        }
+
+        .wrapper {
+            color: #333333;
+            font-family: "Inter", sans-serif;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+        }
+
+        .kanban-board {
+            display: flex;
+        }
+
+        .kanban-block {
+            padding: 0.6rem;
+            width: 30.5%;
+            min-width: 14rem;
+            min-height: 4.5rem;
+            border-radius: 0.3rem;
+            overflow: auto;
+            margin-right: 5px;
+            margin-right: 5px;
+            background-color: rgb(247, 246, 246);
+        }
+
+        /* чекбоксы */
+        /* скрываем флажок у чекбокса */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .pos-abs {
+            margin: 8px;
+            height: 20px !important;
+        }
+
+        .checkboxes {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* общие настройки для тегов */
+        .tag {
+            /* внешние отступы */
+            padding: 6px 12px;
+            height: 25px;
+            /* подгоняем размер блока под содержимое */
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            /* радиус скругления */
+            border-radius: 9999px;
+            /* отступ сверху */
+            margin-top: 12px;
+            margin-bottom: 12px;
+            /* запрещаем выделять мышкой этот элемент */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            /* user-select: none; */
+            background-color: var(--tagColor);
+        }
+
+
+        /* добавляем хештег перед тегом */
+        .tag::before {
+            /* добавляем текст, отступ и прозрачность */
+            content: "#";
+            margin-right: 2px;
+            opacity: 0.3;
+        }
+
+        /* чекбоксы */
+
+        /* ТЕГИ */
+        /* настройки переменных для цветов тегов */
+        .drive {
+            /* .card:has(.drive) { */
+            --tagColor: #fcdbcf;
+        }
+
+        .CPM {
+            /* .card:has(.CPM) { */
+            --tagColor: #ccdcff;
+        }
+
+        .UZ {
+            /* .card:has(.UZ) { */
+            --tagColor: #f9cafc;
+        }
+
+        /* ТЕГИ */
+
+        /* КАРТОЧКИ */
+        /* настройки карточки */
+        .card {
+            /* цвет фона */
+            background-color: #ffffff;
+            /* граница */
+            border: 1px solid #ebebeb;
+            /* рисуем границу по периметру карточки */
+            /* межстрочное расстояние */
+            line-height: 1.5;
+            /* радиус скругления */
+            border-radius: 8px;
+            /* рисуем тень */
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 4px;
+            /* скрываем всё, что не помещается в блок */
+            /* overflow: hidden; */
+            /* включаем гибкую вёрстку */
+            display: flex;
+            /* организуем вёрстку по столбцам */
+            flex-direction: column;
+            /* выравниваем карточки по центру друг относительно друга */
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding: 5px;
+        }
+
+        /* меняем цвет рамки карточки при наведении */
+        .card:hover {
+            border-color: var(--tagColor);
+        }
+
+        /* если тег отмечен */
+        .card__active {
+            opacity: 1;
+            display: flex;
+            animation: fadeInOut 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                display: none;
+            }
+
+            50% {
+                opacity: 0.5;
+                display: flex;
+            }
+
+            100% {
+                opacity: 1;
+                display: flex;
+            }
+        }
+
+        /* если тег не отмечен */
+        .card__inactive {
+            opacity: 0;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+
+            0% {
+                opacity: 1;
+                display: flex;
+            }
+
+            50% {
+                opacity: 0.5;
+                display: flex;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        /* если тег отмечен — ставим ему указанный цвет фона */
+        #drive-box:checked+label div,
+        #CPM-box:checked+label div,
+        #UZ-box:checked+label div {
+            /* цвет фона берём из переменной */
+            background-color: var(--tagColor);
+            color: unset;
+        }
+
+        /* КАРТОЧКИ */
+
+        /* АНИМАЦИЯ */
+        /* если тег не отмечен */
+        #drive-box+label div,
+        #CPM-box+label div,
+        #UZ-box+label div {
+            /* ставим белый фон */
+            background-color: white;
+            /* оставляем рамку цвета изначального фона */
+            border: 1px solid var(--tagColor);
+            /* текст тоже делаем цвета изначального фона */
+            color: var(--tagColor);
+        }
+
+        /* меняем курсор при наведении на тег */
+        label {
+            cursor: pointer;
+        }
+
+        /* делаем тег чуть бледнее при наведении */
+        label:hover {
+            opacity: 0.5;
+        }
+
+        /* АНИМАЦИЯ */
+        .kanban-block__name,
+        .kanban-block__number {
+            color: rgb(121, 121, 121);
+        }
+
+        .card__header {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .card__link {
+            color: rgb(17, 138, 236);
+        }
+
+        .card__photo {
+            width: 35px;
+            height: 40px;
+            border: 1px solid rgb(184, 194, 196);
+        }
+
+        .card__text {
+            display: flex;
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="checkboxes">
+
+            <div>
+                <input id="drive-box" onclick="checkFluency(id, 'drive')" type="checkbox" checked="">
+                <label for="drive-box">
+                    <div class="tag drive tag__pos-abs">1C:Drive</div>
+                </label>
+            </div>
+
+            <div>
+                <input id="CPM-box" onclick="checkFluency(id, 'CPM')" type="checkbox" checked="">
+                <label for="CPM-box">
+                    <div class="tag CPM tag__pos-abs">1C:CPM</div>
+                </label>
+            </div>
+
+            <div>
+                <input id="UZ-box" onclick="checkFluency(id, 'UZ')" type="checkbox" checked="">
+                <label for="UZ-box">
+                    <div class="tag UZ tag__pos-abs">1С:Управление задачами</div>
+                </label>
+            </div>
+
+        </div>
+
+        <div class="kanban-board">
+
+            <div class="kanban-block" id="Backlog" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">Backlog</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+            <div class="kanban-block" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">Зарегистрирована</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+            <div class="kanban-block" id="awaiting" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">Ожидает ответа</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+            <div class="kanban-block" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">В процессе выполнения</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+            <div class="kanban-block" id="testing" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">На тестировании</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+            <div class="kanban-block" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <strong class="kanban-block__name">Готово</strong>
+                <strong class="kanban-block__number">0</strong>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.currentTarget.appendChild(document.getElementById(data));
+            RecalculateKanbanBlock();
+
+        }
+
+        function RecalculateKanbanBlock() {
+            let blocks = document.getElementsByClassName("kanban-block");
+            for (const item of blocks) {
+                let tasks = item.getElementsByClassName("card");
+                let number = item.getElementsByClassName("kanban-block__number");
+                number[0].textContent = tasks.length;
+            }
+        }
+
+        RecalculateKanbanBlock();
+
+        function checkFluency(id, tag) {
+            driveCheckbox = document.getElementById(id);
+            selector = `.card.${tag}`;
+            driveCards = document.querySelectorAll(selector);
+            driveCards.forEach(element => {
+                element.classList.toggle('card__active');
+                element.classList.toggle('card__inactive');
+            });
+        }
+
+    </script>
+</body>
+
+</html>

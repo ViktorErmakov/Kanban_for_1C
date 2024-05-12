@@ -50,14 +50,16 @@
   <subsystems>Subsystem.канбан_ДоскаИнтерфейс</subsystems>
   <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
+  <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
   <roles>Role.kanban_ОсновнаяРоль</roles>
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <commonModules>CommonModule.узОбщийМодульКлиент</commonModules>
-  <constants>Constant.kanban_КанбанДоскаВключена</constants>
+  <constants>Constant.kanban_КанбанДоскаHTML</constants>
+  <catalogs>Catalog.узЗадачи</catalogs>
   <enums>Enum.узОтображениеПисемПоЗадачамНаДоске</enums>
   <enums>Enum.узОтображениеФайловЗадачНаДоске</enums>
   <enums>Enum.узОтображениеЧеклистаЗадачНаДоске</enums>
-  <dataProcessors>DataProcessor.канбан_Доска</dataProcessors>
+  <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
 </mdclass:Configuration>

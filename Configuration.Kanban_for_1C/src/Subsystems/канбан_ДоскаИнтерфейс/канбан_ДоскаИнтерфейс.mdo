@@ -15,5 +15,5 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.канбан_Доска</picture>
   </picture>
-  <content>DataProcessor.канбан_Доска</content>
+  <content>DataProcessor.Канбан_Доска_HTML</content>
 </mdclass:Subsystem>

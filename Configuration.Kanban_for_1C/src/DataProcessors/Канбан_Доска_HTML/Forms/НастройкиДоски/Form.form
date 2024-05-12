@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
-    <name>КанбанДоска</name>
+    <name>КонстантыНаборkanban_КанбанДоскаВключена</name>
     <id>1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -9,11 +9,11 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>КанбанДоска</segments>
+      <segments>КонстантыНабор.kanban_КанбанДоскаHTML</segments>
     </dataPath>
-    <titleLocation>None</titleLocation>
+    <titleLocation>Right</titleLocation>
     <extendedTooltip>
-      <name>КанбанДоскаРасширеннаяПодсказка</name>
+      <name>КонстантыНаборkanban_КанбанДоскаВключенаРасширеннаяПодсказка</name>
       <id>3</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -28,7 +28,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>КанбанДоскаКонтекстноеМеню</name>
+      <name>КонстантыНаборkanban_КанбанДоскаВключенаКонтекстноеМеню</name>
       <id>2</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -37,19 +37,12 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
-    <type>HTMLDocumentField</type>
+    <type>CheckBoxField</type>
     <editMode>Enter</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:HtmlFieldExtInfo">
-      <width>50</width>
-      <autoMaxWidth>true</autoMaxWidth>
-      <height>10</height>
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <verticalStretch>true</verticalStretch>
-    </extInfo>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <autoCommandBar>
     <name>ФормаКоманднаяПанель</name>
@@ -61,10 +54,6 @@
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>ПриСозданииНаСервере</name>
-  </handlers>
   <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -75,15 +64,14 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>КанбанДоска</name>
+    <name>КонстантыНабор</name>
     <title>
       <key>ru</key>
-      <value>Канбан доска</value>
+      <value>Константы набор</value>
     </title>
     <id>1</id>
     <valueType>
-      <types>String</types>
-      <stringQualifiers/>
+      <types>ConstantsSet</types>
     </valueType>
     <view>
       <common>true</common>

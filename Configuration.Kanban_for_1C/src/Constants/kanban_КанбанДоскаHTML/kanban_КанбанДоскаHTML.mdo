@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="978b741f-2100-4d47-9a6b-f56ba9fc5465">
+  <producedTypes>
+    <managerType typeId="2eda16e3-f281-4ad7-8e4d-7dc912d47047" valueTypeId="bb4c65da-7995-40aa-abbf-bb76b3c7706b"/>
+    <valueManagerType typeId="89268ad1-0762-468c-9082-1f9851cde3d5" valueTypeId="565cc348-1022-4d40-98d5-b5b67fc16abe"/>
+    <valueKeyType typeId="e44b5103-ffa1-4bd4-a6cd-8954db49dc1f" valueTypeId="d8c7e9ad-27a6-4c0a-9678-00060a2a86c5"/>
+  </producedTypes>
+  <name>kanban_КанбанДоскаHTML</name>
+  <synonym>
+    <key>ru</key>
+    <value>Канбан доска включена</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>
