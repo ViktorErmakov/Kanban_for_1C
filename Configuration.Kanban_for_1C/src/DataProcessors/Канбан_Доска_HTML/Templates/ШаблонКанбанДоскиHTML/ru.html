@@ -26,7 +26,7 @@
             /* justify-content: center; */
         }
 
-        .kanban-board {
+        #kanban-board {
             display: flex;
         }
 
@@ -284,37 +284,7 @@
 
         </div>
 
-        <div class="kanban-board">
-
-            <div class="kanban-block" id="Backlog" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">Backlog</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
-
-            <div class="kanban-block" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">Зарегистрирована</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
-
-            <div class="kanban-block" id="awaiting" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">Ожидает ответа</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
-
-            <div class="kanban-block" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">В процессе выполнения</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
-
-            <div class="kanban-block" id="testing" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">На тестировании</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
-
-            <div class="kanban-block" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <strong class="kanban-block__name">Готово</strong>
-                <strong class="kanban-block__number">0</strong>
-            </div>
+        <div id="kanban-board">
 
         </div>
 

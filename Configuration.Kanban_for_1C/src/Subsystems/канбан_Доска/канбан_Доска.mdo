@@ -12,4 +12,6 @@
   <content>Role.kanban_ОсновнаяРоль</content>
   <content>Constant.kanban_КанбанДоскаHTML</content>
   <content>CommonPicture.канбан_ФотоПоУмолчанию</content>
+  <content>DefinedType.канбан_Задачи</content>
+  <content>DefinedType.канбан_СтатусыЗадач</content>
 </mdclass:Subsystem>

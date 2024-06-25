@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e931bc99-944e-4afb-a184-49a19c9fe439" extendedConfigurationObject="a38a8fef-099f-48f6-8dc4-dd0163a87b6e">
+  <producedTypes>
+    <objectType typeId="3c5dfaf8-ed1f-461f-92d2-8e1e48af3899" valueTypeId="35068cfd-574d-4cf9-b260-484d21f45451"/>
+    <refType typeId="b6129141-28cf-426a-b1af-b91dc1e7fec3" valueTypeId="5ee5f595-a3a6-4f05-9dd2-6cfc6d393045"/>
+    <selectionType typeId="cd20df96-04da-4630-aca1-21aab84e6620" valueTypeId="8e2a3df9-5bf2-414e-a018-70f3777dfde6"/>
+    <listType typeId="01b6f4d3-eb03-4bf8-9c98-90eb96e288a5" valueTypeId="0dd5185d-37cb-4743-bafa-fd7710fcf20b"/>
+    <managerType typeId="c18cbfd3-2fbc-49fd-a9ac-a9e9c0f47eb1" valueTypeId="20434ebe-3803-40b2-90dc-01223b2ddbb8"/>
+  </producedTypes>
+  <name>узСтатусыЗадачи</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Catalog>
