@@ -28,14 +28,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <templates uuid="62f79d9d-2c1c-4ef8-af3f-3f21a5c4f365">
-    <name>СтраницаКанбанДоска</name>
-    <synonym>
-      <key>ru</key>
-      <value>Страница канбан доска</value>
-    </synonym>
-    <templateType>HTMLDocument</templateType>
-  </templates>
   <templates uuid="d2e72251-d28f-4ee6-983a-a99008a98bd1">
     <name>ШаблонКанбанДоскиHTML</name>
     <synonym>
