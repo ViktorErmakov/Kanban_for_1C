@@ -34,7 +34,6 @@
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <scriptVariant>Russian</scriptVariant>
-  <defaultRoles>Role.kanban_ОсновнаяРоль</defaultRoles>
   <defaultLanguage>Language.Русский</defaultLanguage>
   <interfaceCompatibilityMode>TaxiEnableVersion8_2</interfaceCompatibilityMode>
   <compatibilityMode>8.3.21</compatibilityMode>
@@ -51,7 +50,6 @@
   <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
-  <roles>Role.kanban_ОсновнаяРоль</roles>
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
@@ -59,6 +57,7 @@
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
   <constants>Constant.kanban_КанбанДоскаHTML</constants>
+  <catalogs>Catalog.Пользователи</catalogs>
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
   <enums>Enum.узОтображениеПисемПоЗадачамНаДоске</enums>

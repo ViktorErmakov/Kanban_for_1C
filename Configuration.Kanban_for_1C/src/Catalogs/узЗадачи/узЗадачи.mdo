@@ -26,4 +26,17 @@
       </typeExtension>
     </extension>
   </attributes>
+  <attributes uuid="daca0602-941c-436c-9147-fdff90990e86" extendedConfigurationObject="0ba7cac9-af0c-4b78-9371-7cc21b80d923">
+    <name>Исполнитель</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.Пользователи</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
 </mdclass:Catalog>
