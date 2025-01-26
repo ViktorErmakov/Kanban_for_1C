@@ -1,20 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
-  <items xsi:type="form:FormField">
-    <name>КонстантыНаборkanban_КанбанДоскаВключена</name>
-    <id>1</id>
+  <title>
+    <key>ru</key>
+    <value>Настройки канбан доски HTML</value>
+  </title>
+  <items xsi:type="form:FormGroup">
+    <name>ГруппаОбщие</name>
+    <id>4</id>
+    <items xsi:type="form:FormField">
+      <name>КонстантыНаборkanban_КанбанДоскаHTML</name>
+      <id>1</id>
+      <title>
+        <key>ru</key>
+        <value>Канбан доска HTML</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>КонстантыНабор.kanban_КанбанДоскаHTML</segments>
+      </dataPath>
+      <titleLocation>Right</titleLocation>
+      <toolTip>
+        <key>ru</key>
+        <value>Включает использование доски HTML вместо типовой.</value>
+      </toolTip>
+      <toolTipRepresentation>ShowBottom</toolTipRepresentation>
+      <handlers>
+        <event>OnChange</event>
+        <name>КонстантыНаборkanban_КанбанДоскаHTMLПриИзменении</name>
+      </handlers>
+      <extendedTooltip>
+        <name>КонстантыНаборkanban_КанбанДоскаHTMLРасширеннаяПодсказка</name>
+        <id>3</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>КонстантыНаборkanban_КанбанДоскаHTMLКонтекстноеМеню</name>
+        <id>2</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>КонстантыНабор.kanban_КанбанДоскаHTML</segments>
-    </dataPath>
-    <titleLocation>Right</titleLocation>
+    <title>
+      <key>ru</key>
+      <value>Общие	</value>
+    </title>
     <extendedTooltip>
-      <name>КонстантыНаборkanban_КанбанДоскаВключенаРасширеннаяПодсказка</name>
-      <id>3</id>
+      <name>ГруппаОбщиеРасширеннаяПодсказка</name>
+      <id>5</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -27,22 +88,18 @@
         <horizontalAlign>Left</horizontalAlign>
       </extInfo>
     </extendedTooltip>
-    <contextMenu>
-      <name>КонстантыНаборkanban_КанбанДоскаВключенаКонтекстноеМеню</name>
-      <id>2</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>CheckBoxField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+      <group>HorizontalIfPossible</group>
+      <behavior>Collapsible</behavior>
+      <controlRepresentation>Picture</controlRepresentation>
+      <representation>NormalSeparation</representation>
+      <showLeftMargin>true</showLeftMargin>
+      <united>true</united>
+      <showTitle>true</showTitle>
+      <throughAlign>Auto</throughAlign>
+      <currentRowUse>Auto</currentRowUse>
+    </extInfo>
   </items>
   <autoCommandBar>
     <name>ФормаКоманднаяПанель</name>
@@ -55,7 +112,6 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <saveWindowSettings>true</saveWindowSettings>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -79,9 +135,11 @@
     <edit>
       <common>true</common>
     </edit>
+    <main>true</main>
   </attributes>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
+  <extInfo xsi:type="form:ConstantsFormExtInfo"/>
 </form:Form>

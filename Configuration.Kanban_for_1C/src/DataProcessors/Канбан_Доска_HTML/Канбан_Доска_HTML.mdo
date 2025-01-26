@@ -49,7 +49,7 @@
     <name>ОткрытьНастройкиКанбанДоски</name>
     <synonym>
       <key>ru</key>
-      <value>Открыть настройки канбан доски</value>
+      <value>Настройки канбан доски HTML</value>
     </synonym>
     <group>ActionsPanelTools</group>
     <representation>Auto</representation>

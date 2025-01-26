@@ -51,9 +51,9 @@
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
+  <commonModules>CommonModule.канбан_КанбанДоскаВызовСервера</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
-  <commonModules>CommonModule.узОбщийМодульКлиент</commonModules>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
   <constants>Constant.kanban_КанбанДоскаHTML</constants>
@@ -64,4 +64,5 @@
   <enums>Enum.узОтображениеФайловЗадачНаДоске</enums>
   <enums>Enum.узОтображениеЧеклистаЗадачНаДоске</enums>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
+  <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
 </mdclass:Configuration>
