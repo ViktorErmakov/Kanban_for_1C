@@ -56,7 +56,6 @@
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
-  <constants>Constant.kanban_КанбанДоскаHTML</constants>
   <catalogs>Catalog.Пользователи</catalogs>
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>

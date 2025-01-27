@@ -8,8 +8,8 @@
     <name>ГруппаОбщие</name>
     <id>4</id>
     <items xsi:type="form:FormField">
-      <name>КонстантыНаборkanban_КанбанДоскаHTML</name>
-      <id>1</id>
+      <name>КанбанДоскаHTML</name>
+      <id>6</id>
       <title>
         <key>ru</key>
         <value>Канбан доска HTML</value>
@@ -20,7 +20,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>КонстантыНабор.kanban_КанбанДоскаHTML</segments>
+        <segments>КанбанДоскаHTML</segments>
       </dataPath>
       <titleLocation>Right</titleLocation>
       <toolTip>
@@ -30,11 +30,11 @@
       <toolTipRepresentation>ShowBottom</toolTipRepresentation>
       <handlers>
         <event>OnChange</event>
-        <name>КонстантыНаборkanban_КанбанДоскаHTMLПриИзменении</name>
+        <name>КанбанДоскаHTMLПриИзменении</name>
       </handlers>
       <extendedTooltip>
-        <name>КонстантыНаборkanban_КанбанДоскаHTMLРасширеннаяПодсказка</name>
-        <id>3</id>
+        <name>КанбанДоскаHTMLРасширеннаяПодсказка</name>
+        <id>8</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -48,8 +48,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>КонстантыНаборkanban_КанбанДоскаHTMLКонтекстноеМеню</name>
-        <id>2</id>
+        <name>КанбанДоскаHTMLКонтекстноеМеню</name>
+        <id>7</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -111,6 +111,10 @@
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>ПриСозданииНаСервере</name>
+  </handlers>
   <saveWindowSettings>true</saveWindowSettings>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -120,14 +124,14 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>КонстантыНабор</name>
+    <name>КанбанДоскаHTML</name>
     <title>
       <key>ru</key>
-      <value>Константы набор</value>
+      <value>Канбан доска HTML</value>
     </title>
     <id>1</id>
     <valueType>
-      <types>ConstantsSet</types>
+      <types>Boolean</types>
     </valueType>
     <view>
       <common>true</common>
@@ -135,7 +139,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <main>true</main>
   </attributes>
   <commandInterface>
     <navigationPanel/>
