@@ -3,7 +3,7 @@
   <name>канбан_ДоскаИнтерфейс</name>
   <synonym>
     <key>ru</key>
-    <value>Доска интерфейс</value>
+    <value>Канбан доска HTML</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <help>

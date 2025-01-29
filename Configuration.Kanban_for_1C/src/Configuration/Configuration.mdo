@@ -64,4 +64,5 @@
   <enums>Enum.узОтображениеЧеклистаЗадачНаДоске</enums>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
+  <informationRegisters>InformationRegister.канбан_ИспользуемыеСтатусыДоски</informationRegisters>
 </mdclass:Configuration>
