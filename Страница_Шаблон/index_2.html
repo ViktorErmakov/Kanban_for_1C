@@ -254,7 +254,6 @@
             display: flex;
             width: 100%;
         }
-
     </style>
 </head>
 
@@ -288,12 +287,12 @@
 
         <div class="kanban-board">
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Backlog</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Зарегистрирована</strong>
                 <strong class="kanban-block__number">0</strong>
 
@@ -303,80 +302,87 @@
                     <!-- текст карточки -->
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №1</a>
-                        <img src="/src/pictures/DSC_5-985.jpg" alt="foto" class="card__photo">
+                        <img src="src/pictures/DSC_5-985.jpg" alt="foto" class="card__photo">
                     </div>
                     <div class="card__text">
-                        <span >Поправить иконки в дизайн-системе dfsdfsdf dfs sdfdsf sdfdsfsdfsdf sdf dsf sdfs
+                        <span>Поправить иконки в дизайн-системе dfsdfsdf dfs sdfdsf sdfdsfsdfsdf sdf dsf sdfs
                             dfsdf sdf sdf sdf sdf dfsfsd fdsfdsfadsfdasfda dfadsfad asdfadsfdsfad</span>
                     </div>
                     <!-- тег -->
                     <div class="tag">1C:Drive</div>
+                    <button class="changeStatus task1" style="visibility: hidden;"></button>
 
                 </div>
 
                 <div class="card UZ card__active" id="task2" draggable="true" ondragstart="drag(event)">
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №2</a>
-                        <img src="/src/pictures/DSC_59-89.jpg" alt="foto" class="card__photo">
+                        <img src="src/pictures/DSC_59-89.jpg" alt="foto" class="card__photo">
                     </div>
                     <span class="card__text">Atomic Habits / James Clear</span>
                     <div class="tag">1С:УЗ</div>
+                    <button class="changeStatus task2" style="visibility: hidden;"></button>
                 </div>
 
                 <div class="card CPM card__active" id="task3" draggable="true" ondragstart="drag(event)">
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №3</a>
-                        <img src="/src/pictures/DSC_59-92.jpg" alt="foto" class="card__photo">
+                        <img src="src/pictures/DSC_59-92.jpg" alt="foto" class="card__photo">
                     </div>
                     <span class="card__text">Сходить на лекцию по йоге</span>
                     <div class="tag">1C:CPM</div>
+                    <button class="changeStatus task3" style="visibility: hidden;"></button>
                 </div>
 
                 <div class="card UZ card__active" id="task4" draggable="true" ondragstart="drag(event)">
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №4</a>
-                        <img src="/src/pictures/DSC_598-8.jpg" alt="foto" class="card__photo">
+                        <img src="src/pictures/DSC_598-8.jpg" alt="foto" class="card__photo">
                     </div>
                     <span class="card__text">«Ясно, понятно» / Максим Ильяхов</span>
                     <div class="tag">1С:УЗ</div>
+                    <button class="changeStatus task4" style="visibility: hidden;"></button>
                 </div>
 
                 <div class="card CPM card__active" id="task5" draggable="true" ondragstart="drag(event)">
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №5</a>
-                        <img src="/src/pictures/DSC_87--89.jpg" alt="foto" class="card__photo">
+                        <img src="src/pictures/DSC_87--89.jpg" alt="foto" class="card__photo">
                     </div>
                     <span class="card__text">Купить шампунь</span>
                     <div class="tag">1C:CPM</div>
+                    <button class="changeStatus task5" style="visibility: hidden;"></button>
                 </div>
 
                 <div class="card drive card__active" id="task6" draggable="true" ondragstart="drag(event)">
                     <div class="card__header">
                         <a class="card__link" href="https://ru.bem.info/methodology/quick-start/" target="_blank">Задача №6</a>
-                        <img src="/src/pictures/person_user_customer_man_male_man_boy_people_1687.png" alt="foto" class="card__photo">
+                        <img src="src/pictures/person_user_customer_man_male_man_boy_people_1687.png" alt="foto"
+                            class="card__photo">
                     </div>
                     <span class="card__text">Добавить анимацию при наведении на кнопки</span>
                     <div class="tag">1C:Drive</div>
+                    <button class="changeStatus task6" style="visibility: hidden;"></button>
                 </div>
 
             </div>
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Ожидает ответа</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">В процессе выполнения</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">На тестировании</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Готово</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
@@ -384,22 +390,40 @@
         </div>
 
     </div>
+    
     <script>
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
         }
 
-        function allowDrop(ev) {
-            ev.preventDefault();
+        function allowDrop(event) {
+            event.preventDefault();
         }
 
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.currentTarget.appendChild(document.getElementById(data));
-            RecalculateKanbanBlock();
+        dropZones = document.querySelectorAll(".kanban-block");
+        dropZones.forEach(function (item) {
+            item.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const data = event.dataTransfer.getData("text");
+                const draggedElement = document.getElementById(data);
 
-        }
+                const status = event.target.closest(".kanban-block");
+
+                if (status == draggedElement.parentElement) {
+                    return;
+                }
+                
+                item.appendChild(draggedElement);
+                console.log('элемент сброшен в зону');
+
+                RecalculateKanbanBlock();
+
+                const taskButton = document.querySelector(`.${data}`);
+                taskButton.click();
+
+            });
+        });
 
         function RecalculateKanbanBlock() {
             let blocks = document.getElementsByClassName("kanban-block");

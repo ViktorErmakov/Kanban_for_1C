@@ -290,22 +290,39 @@
         </div>
 
     </div>
+    
     <script>
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+    
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
         }
 
-        function allowDrop(ev) {
-            ev.preventDefault();
+        function allowDrop(event) {
+            event.preventDefault();
         }
 
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.currentTarget.appendChild(document.getElementById(data));
-            RecalculateKanbanBlock();
+        dropZones = document.querySelectorAll(".kanban-block");
+        dropZones.forEach(function (item) {
+            item.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const data = event.dataTransfer.getData("text");
+                const draggedElement = document.getElementById(data);
 
-        }
+                const status = event.target.closest(".kanban-block");
+
+                if (status == draggedElement.parentElement) {
+                    return;
+                }
+                
+                item.appendChild(draggedElement);
+                
+                RecalculateKanbanBlock();
+
+                const taskButton = document.querySelector(`.${data}`);
+                taskButton.click();
+
+            });
+        });
 
         function RecalculateKanbanBlock() {
             let blocks = document.getElementsByClassName("kanban-block");
