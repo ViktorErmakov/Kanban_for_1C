@@ -287,12 +287,12 @@
 
         <div class="kanban-board">
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="1" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Backlog</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="2" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Зарегистрирована</strong>
                 <strong class="kanban-block__number">0</strong>
 
@@ -367,22 +367,22 @@
 
             </div>
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="3" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Ожидает ответа</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="4" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">В процессе выполнения</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="5" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">На тестировании</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
 
-            <div class="kanban-block" ondragover="allowDrop(event)">
+            <div id="6" class="kanban-block" ondragover="allowDrop(event)">
                 <strong class="kanban-block__name">Готово</strong>
                 <strong class="kanban-block__number">0</strong>
             </div>
@@ -404,23 +404,25 @@
         dropZones = document.querySelectorAll(".kanban-block");
         dropZones.forEach(function (item) {
             item.addEventListener("drop", (event) => {
+                
                 event.preventDefault();
+                
+                // Перетаскиваем элемент в другую колонку статуса, что бы получить его в платформе 1С
                 const data = event.dataTransfer.getData("text");
                 const draggedElement = document.getElementById(data);
-
-                const status = event.target.closest(".kanban-block");
-
-                if (status == draggedElement.parentElement) {
+                const lastStatus = draggedElement.parentElement;
+                if (item == lastStatus) {
                     return;
                 }
-                
                 item.appendChild(draggedElement);
-                console.log('элемент сброшен в зону');
-
-                RecalculateKanbanBlock();
-
+                
+                // Вызываем событие в платформе 1С
                 const taskButton = document.querySelector(`.${data}`);
                 taskButton.click();
+
+                // Возвращаем элемент в исходную колонку статуса
+                item.removeChild(draggedElement);
+                lastStatus.appendChild(draggedElement);
 
             });
         });

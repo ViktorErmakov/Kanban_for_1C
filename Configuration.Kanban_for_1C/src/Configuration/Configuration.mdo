@@ -53,6 +53,7 @@
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаВызовСервера</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
+  <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
