@@ -13,4 +13,5 @@
   <content>DefinedType.канбан_Задачи</content>
   <content>DefinedType.канбан_СтатусыЗадач</content>
   <content>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</content>
+  <content>DefinedType.канбан_Проекты</content>
 </mdclass:Subsystem>

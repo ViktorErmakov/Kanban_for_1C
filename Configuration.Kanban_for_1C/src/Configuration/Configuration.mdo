@@ -56,9 +56,11 @@
   <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
+  <definedTypes>DefinedType.канбан_Проекты</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
   <catalogs>Catalog.Пользователи</catalogs>
   <catalogs>Catalog.узЗадачи</catalogs>
+  <catalogs>Catalog.узПроекты</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
   <enums>Enum.узОтображениеПисемПоЗадачамНаДоске</enums>
   <enums>Enum.узОтображениеФайловЗадачНаДоске</enums>
