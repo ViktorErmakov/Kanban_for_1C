@@ -39,4 +39,17 @@
       </typeExtension>
     </extension>
   </attributes>
+  <attributes uuid="b55c68a8-d4b3-4838-918a-eb7842b15871" extendedConfigurationObject="c182f64b-fa93-49c1-a6ce-06016e4f7dbe">
+    <name>Проект</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <extendedConfigurationObject>Checked</extendedConfigurationObject>
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.узПроекты</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
 </mdclass:Catalog>
