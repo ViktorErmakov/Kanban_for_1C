@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Задачи с фильтрами</title>
     <style type="text/css">
-        /* :root {
+       /* :root {
             
         } */
 
         /* подключаем внешний шрифт */
-        @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-
+        /*@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");*/
+		
         /* общие настройки для всего */
         body {
             margin: 0;
@@ -23,7 +23,6 @@
             font-family: "Inter", sans-serif;
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
         }
 
         #kanban-board {
@@ -77,7 +76,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             /* user-select: none; */
-            background-color: var(--tagColor);
+            cursor: pointer;
         }
 
 
@@ -90,25 +89,6 @@
         }
 
         /* чекбоксы */
-
-        /* ТЕГИ */
-        /* настройки переменных для цветов тегов */
-        .drive {
-            /* .card:has(.drive) { */
-            --tagColor: #fcdbcf;
-        }
-
-        .CPM {
-            /* .card:has(.CPM) { */
-            --tagColor: #ccdcff;
-        }
-
-        .UZ {
-            /* .card:has(.UZ) { */
-            --tagColor: #f9cafc;
-        }
-
-        /* ТЕГИ */
 
         /* КАРТОЧКИ */
         /* настройки карточки */
@@ -139,7 +119,7 @@
 
         /* меняем цвет рамки карточки при наведении */
         .card:hover {
-            border-color: var(--tagColor);
+            border-color: rgb(155,155,155);
             border-width: .15rem;
         }
 
@@ -192,37 +172,14 @@
             }
         }
 
-        /* если тег отмечен — ставим ему указанный цвет фона */
-        #drive-box:checked+label div,
-        #CPM-box:checked+label div,
-        #UZ-box:checked+label div {
-            /* цвет фона берём из переменной */
-            background-color: var(--tagColor);
-            color: unset;
-        }
-
         /* КАРТОЧКИ */
 
         /* АНИМАЦИЯ */
-        /* если тег не отмечен */
-        #drive-box+label div,
-        #CPM-box+label div,
-        #UZ-box+label div {
-            /* ставим белый фон */
-            background-color: white;
-            /* оставляем рамку цвета изначального фона */
-            border: 1px solid var(--tagColor);
-            /* текст тоже делаем цвета изначального фона */
-            color: var(--tagColor);
-        }
-
+     
         /* меняем курсор при наведении на тег */
-        label {
-            cursor: pointer;
-        }
-
+        
         /* делаем тег чуть бледнее при наведении */
-        .tag__pos-abs:hover {
+        .tag:hover {
             opacity: 0.5;
         }
 
@@ -260,29 +217,8 @@
 <body>
     <div class="wrapper">
 
-        <div class="checkboxes">
-
-            <div>
-                <input type="checkbox" id="drive-box" checked onclick="checkFluency(id, 'drive')" />
-                <label for="drive-box">
-                    <div class="tag drive tag__pos-abs">1C:Drive</div>
-                </label>
-            </div>
-
-            <div>
-                <input type="checkbox" id="CPM-box" checked onclick="checkFluency(id, 'CPM')" />
-                <label for="CPM-box">
-                    <div class="tag CPM tag__pos-abs">1C:CPM</div>
-                </label>
-            </div>
-
-            <div>
-                <input type="checkbox" id="UZ-box" checked onclick="checkFluency(id, 'UZ')" />
-                <label for="UZ-box">
-                    <div class="tag UZ tag__pos-abs">1С:Управление задачами</div>
-                </label>
-            </div>
-
+        <div id="checkboxes" class="checkboxes">
+			
         </div>
 
         <div id="kanban-board">
@@ -349,6 +285,7 @@
         }
 
     </script>
+    
 </body>
 
 </html>
