@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acad904b-ca75-43d2-bd1e-24dec4193a5a">
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acad904b-ca75-43d2-bd1e-24dec4193a5a">
   <producedTypes>
     <objectType typeId="feed2ee1-a362-4daf-86d6-6380e9da82a5" valueTypeId="3413c9c0-03fb-4ff3-aadb-cf420a91d18d"/>
     <managerType typeId="abb26a30-4a2d-433e-8dee-f30c31ed2bda" valueTypeId="8507a5d4-adf6-4988-935a-04f1828eb6e9"/>
@@ -10,44 +10,6 @@
     <value>Доска</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <tabularSections uuid="895e9001-d710-4308-b4fe-ae9baee0225d">
-    <producedTypes>
-      <objectType typeId="ffa7c8b5-63fd-414d-8416-6d0d66fb4e97" valueTypeId="a47b27d7-aec8-4c7b-a2ed-226fc258510e"/>
-      <rowType typeId="a0680c01-888f-4145-a8bd-798bde9ad715" valueTypeId="6ae66738-25b1-479b-aa7d-1b0103710245"/>
-    </producedTypes>
-    <name>ИспользуемыеПроектыДоски</name>
-    <synonym>
-      <key>ru</key>
-      <value>Используемые проекты доски</value>
-    </synonym>
-    <attributes uuid="23334a64-cec2-466b-9295-580da79db99d">
-      <name>Проект</name>
-      <synonym>
-        <key>ru</key>
-        <value>Проект</value>
-      </synonym>
-      <type>
-        <types>DefinedType.канбан_Проекты</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="6adbaf6a-9268-42c8-8f19-ca22692a994d">
-      <name>Цвет</name>
-      <synonym>
-        <key>ru</key>
-        <value>Цвет</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>10</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
   <forms uuid="bdb83a41-3233-4e0b-ac17-2c14849a26a4">
     <name>Доска</name>
     <synonym>

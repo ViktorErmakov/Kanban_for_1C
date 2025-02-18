@@ -692,95 +692,30 @@
     <id>132</id>
     <items xsi:type="form:Table">
       <name>ИспользуемыеПроектыДоски</name>
-      <id>134</id>
+      <id>249</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Объект.ИспользуемыеПроектыДоски</segments>
+        <segments>ИспользуемыеПроектыДоски</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
-      <excludedCommands>Copy</excludedCommands>
-      <excludedCommands>Change</excludedCommands>
-      <excludedCommands>EndEdit</excludedCommands>
-      <excludedCommands>ShowRowRearrangement</excludedCommands>
-      <excludedCommands>MoveUp</excludedCommands>
-      <excludedCommands>MoveDown</excludedCommands>
-      <excludedCommands>SortListAsc</excludedCommands>
-      <excludedCommands>SortListDesc</excludedCommands>
-      <excludedCommands>FindByCurrentValue</excludedCommands>
-      <toolTip>
-        <key>ru</key>
-        <value>Используемые проекты на доске.
-Персональная настройка пользователя.</value>
-      </toolTip>
-      <toolTipRepresentation>ShowTop</toolTipRepresentation>
-      <items xsi:type="form:FormField">
-        <name>ИспользуемыеПроектыДоскиНомерСтроки</name>
-        <id>147</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Объект.ИспользуемыеПроектыДоски.LineNumber</segments>
-        </dataPath>
-        <extendedTooltip>
-          <name>ИспользуемыеПроектыДоскиНомерСтрокиРасширеннаяПодсказка</name>
-          <id>149</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>ИспользуемыеПроектыДоскиНомерСтрокиКонтекстноеМеню</name>
-          <id>148</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
       <items xsi:type="form:FormField">
         <name>ИспользуемыеПроектыДоскиПроект</name>
-        <id>150</id>
+        <id>262</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Объект.ИспользуемыеПроектыДоски.Проект</segments>
+          <segments>ИспользуемыеПроектыДоски.Проект</segments>
         </dataPath>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиПроектРасширеннаяПодсказка</name>
-          <id>152</id>
+          <id>264</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -795,7 +730,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ИспользуемыеПроектыДоскиПроектКонтекстноеМеню</name>
-          <id>151</id>
+          <id>263</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -819,18 +754,18 @@
       </items>
       <items xsi:type="form:FormField">
         <name>ИспользуемыеПроектыДоскиЦвет</name>
-        <id>171</id>
+        <id>265</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Объект.ИспользуемыеПроектыДоски.Цвет</segments>
+          <segments>ИспользуемыеПроектыДоски.Цвет</segments>
         </dataPath>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиЦветРасширеннаяПодсказка</name>
-          <id>173</id>
+          <id>267</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -845,7 +780,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ИспользуемыеПроектыДоскиЦветКонтекстноеМеню</name>
-          <id>172</id>
+          <id>266</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -875,75 +810,7 @@
       </items>
       <autoCommandBar>
         <name>ИспользуемыеПроектыДоскиКоманднаяПанель</name>
-        <id>135</id>
-        <items xsi:type="form:Button">
-          <name>ИспользуемыеПроектыДоскиДобавить</name>
-          <id>157</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>ИспользуемыеПроектыДоскиДобавитьРасширеннаяПодсказка</name>
-            <id>158</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <commandName>Form.Item.ИспользуемыеПроектыДоски.StandardCommand.Add</commandName>
-          <representation>Picture</representation>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <placementArea>UserCmds</placementArea>
-          <picture xsi:type="core:PictureRef">
-            <picture>StdPicture.CreateListItem</picture>
-          </picture>
-          <representationInContextMenu>Auto</representationInContextMenu>
-          <locationInCommandBar>InCommandBar</locationInCommandBar>
-        </items>
-        <items xsi:type="form:Button">
-          <name>ИспользуемыеПроектыДоскиУдалить</name>
-          <id>159</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>ИспользуемыеПроектыДоскиУдалитьРасширеннаяПодсказка</name>
-            <id>160</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <commandName>Form.Item.ИспользуемыеПроектыДоски.StandardCommand.Delete</commandName>
-          <representation>Picture</representation>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <placementArea>UserCmds</placementArea>
-          <picture xsi:type="core:PictureRef">
-            <picture>StdPicture.Delete</picture>
-          </picture>
-          <representationInContextMenu>Auto</representationInContextMenu>
-          <locationInCommandBar>InCommandBar</locationInCommandBar>
-        </items>
+        <id>250</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -959,10 +826,10 @@
           <common>true</common>
         </userVisible>
         <name>ИспользуемыеПроектыДоскиСтрокаПоиска</name>
-        <id>138</id>
+        <id>253</id>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиСтрокаПоискаРасширеннаяПодсказка</name>
-          <id>140</id>
+          <id>255</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -977,7 +844,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ИспользуемыеПроектыДоскиСтрокаПоискаКонтекстноеМеню</name>
-          <id>139</id>
+          <id>254</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -997,10 +864,10 @@
           <common>true</common>
         </userVisible>
         <name>ИспользуемыеПроектыДоскиСостояниеПросмотра</name>
-        <id>144</id>
+        <id>259</id>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиСостояниеПросмотраРасширеннаяПодсказка</name>
-          <id>146</id>
+          <id>261</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1015,7 +882,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ИспользуемыеПроектыДоскиСостояниеПросмотраКонтекстноеМеню</name>
-          <id>145</id>
+          <id>260</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1036,10 +903,10 @@
           <common>true</common>
         </userVisible>
         <name>ИспользуемыеПроектыДоскиУправлениеПоиском</name>
-        <id>141</id>
+        <id>256</id>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиУправлениеПоискомРасширеннаяПодсказка</name>
-          <id>143</id>
+          <id>258</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1054,7 +921,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>ИспользуемыеПроектыДоскиУправлениеПоискомКонтекстноеМеню</name>
-          <id>142</id>
+          <id>257</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1070,7 +937,7 @@
       </searchControlAddition>
       <extendedTooltip>
         <name>ИспользуемыеПроектыДоскиРасширеннаяПодсказка</name>
-        <id>137</id>
+        <id>252</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1085,7 +952,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>ИспользуемыеПроектыДоскиКонтекстноеМеню</name>
-        <id>136</id>
+        <id>251</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1286,8 +1153,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <main>true</main>
-    <savedData>true</savedData>
   </attributes>
   <attributes>
     <name>АдресЛоготипа</name>
@@ -1305,6 +1170,60 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>ИспользуемыеПроектыДоски</name>
+    <title>
+      <key>ru</key>
+      <value>Используемые проекты доски</value>
+    </title>
+    <id>15</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Проект</name>
+      <title>
+        <key>ru</key>
+        <value>Проект</value>
+      </title>
+      <id>17</id>
+      <valueType>
+        <types>DefinedType.канбан_Проекты</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Цвет</name>
+      <title>
+        <key>ru</key>
+        <value>Цвет</value>
+      </title>
+      <id>18</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>ЗаписатьИЗакрыть</name>
@@ -1344,5 +1263,4 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:ObjectFormExtInfo"/>
 </form:Form>

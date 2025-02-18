@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4a4f8cf-e159-47bc-aadd-7a118c0176d7">
+  <producedTypes>
+    <containerType typeId="3ecfef9f-71ed-42d0-9c51-4e7c802ca14c" valueTypeId="d5eef163-d0a5-4b1b-b351-0b7fd24beb5a"/>
+  </producedTypes>
+  <name>канбан_Пользователь</name>
+  <synonym>
+    <key>ru</key>
+    <value>Пользователь</value>
+  </synonym>
+  <type>
+    <types>CatalogRef.Пользователи</types>
+  </type>
+</mdclass:DefinedType>

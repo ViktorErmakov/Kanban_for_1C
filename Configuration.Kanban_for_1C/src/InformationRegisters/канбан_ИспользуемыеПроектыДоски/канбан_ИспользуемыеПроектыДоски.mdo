@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="873b83a5-8684-4b8f-853a-7b426e27cca9">
+  <producedTypes>
+    <selectionType typeId="4fdf8aeb-c44d-48fc-91b0-48b67d91bec8" valueTypeId="7fa9603f-7899-4ed4-8304-b9c1bbd25d0e"/>
+    <listType typeId="234959d0-af4d-4b76-adc5-188360129634" valueTypeId="c566e9fa-5870-42a2-8efa-067bdd98e172"/>
+    <managerType typeId="c6d96b41-4a0a-4813-800f-fbe2c7403f3d" valueTypeId="a3b7bc2d-46bd-4495-9460-7a82420bfc8a"/>
+    <recordSetType typeId="8c3692a8-1a5d-422b-85e6-35377bb1a7ab" valueTypeId="6624e011-66ed-4227-8071-f99ea1b0a319"/>
+    <recordKeyType typeId="793c5ee0-6e39-4890-9124-8fa4ce9a8c5d" valueTypeId="32263e01-740c-4c53-85d0-888483c9ddc8"/>
+    <recordType typeId="3a6f30e7-0e4b-448c-8834-9a01a260f0de" valueTypeId="8063feed-bd65-4e65-9923-1842582ce50e"/>
+    <recordManagerType typeId="d8365b43-5205-4986-a1b8-c658bb62152b" valueTypeId="28563e6f-4aef-48a8-a03d-701bdd9d861f"/>
+  </producedTypes>
+  <name>канбан_ИспользуемыеПроектыДоски</name>
+  <synonym>
+    <key>ru</key>
+    <value>Используемые проекты доски</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <attributes uuid="22cfedfb-08a0-406d-b15c-d43fdaea79f9">
+    <name>Цвет</name>
+    <synonym>
+      <key>ru</key>
+      <value>Цвет</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="5af1e3eb-1fd5-4adf-a6eb-0a4ff8f7dec5">
+    <name>ИдентификаторПроектаСтрока</name>
+    <synonym>
+      <key>ru</key>
+      <value>Идентификатор проекта строка</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <dimensions uuid="90a1b083-2819-45f0-9ccd-ad174b22e5f0">
+    <name>Пользователь</name>
+    <synonym>
+      <key>ru</key>
+      <value>Пользователь</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_Пользователь</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="823973a6-bedb-4b3e-b8da-d3c850b3b40f">
+    <name>Проект</name>
+    <synonym>
+      <key>ru</key>
+      <value>Проект</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_Проекты</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

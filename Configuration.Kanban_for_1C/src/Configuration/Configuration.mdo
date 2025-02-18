@@ -56,6 +56,7 @@
   <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
+  <definedTypes>DefinedType.канбан_Пользователь</definedTypes>
   <definedTypes>DefinedType.канбан_Проекты</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
   <catalogs>Catalog.Пользователи</catalogs>
@@ -67,5 +68,6 @@
   <enums>Enum.узОтображениеЧеклистаЗадачНаДоске</enums>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
+  <informationRegisters>InformationRegister.канбан_ИспользуемыеПроектыДоски</informationRegisters>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеСтатусыДоски</informationRegisters>
 </mdclass:Configuration>
