@@ -10,6 +10,7 @@
     <value>Доска</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.Канбан_Доска_HTML.Form.НастройкиДоски</defaultForm>
   <forms uuid="bdb83a41-3233-4e0b-ac17-2c14849a26a4">
     <name>Доска</name>
     <synonym>
@@ -19,11 +20,11 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="f287eb47-73fc-412f-8099-0ecb5cb734f9">
+  <forms uuid="8185b75b-82d0-455b-939c-524cf122e93f">
     <name>НастройкиДоски</name>
     <synonym>
       <key>ru</key>
-      <value>Настройки канбан доски</value>
+      <value>Настройки доски</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
