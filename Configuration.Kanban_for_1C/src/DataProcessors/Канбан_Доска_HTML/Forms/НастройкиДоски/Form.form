@@ -770,6 +770,7 @@
         <extInfo xsi:type="form:InputFieldExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
+          <horizontalStretch>true</horizontalStretch>
           <wrap>true</wrap>
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
@@ -787,6 +788,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>ИспользуемыеПроектыДоски.Цвет</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>ИспользуемыеПроектыДоскиЦветПриИзменении</name>
+        </handlers>
         <extendedTooltip>
           <name>ИспользуемыеПроектыДоскиЦветРасширеннаяПодсказка</name>
           <id>80</id>
@@ -812,7 +817,7 @@
             <event>StartChoice</event>
             <name>ИспользуемыеПроектыДоскиЦветНачалоВыбора</name>
           </handlers>
-          <autoMaxWidth>true</autoMaxWidth>
+          <width>5</width>
           <autoMaxHeight>true</autoMaxHeight>
           <wrap>true</wrap>
           <choiceButton>true</choiceButton>
