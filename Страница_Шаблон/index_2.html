@@ -254,6 +254,10 @@
             display: flex;
             width: 100%;
         }
+
+        .tag__inactive {
+            opacity: 0.5;
+        }
     </style>
 </head>
 
@@ -439,7 +443,10 @@
         RecalculateKanbanBlock();
 
         function checkFluency(id, tag) {
-            driveCheckbox = document.getElementById(id);
+            
+            driveCheckbox = document.querySelector(`.${id}`);
+            driveCheckbox.classList.toggle('tag__inactive');
+            
             selector = `.card.${tag}`;
             driveCards = document.querySelectorAll(selector);
             driveCards.forEach(element => {
