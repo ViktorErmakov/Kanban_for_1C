@@ -76,7 +76,6 @@
             -moz-user-select: none;
             -ms-user-select: none;
             /* user-select: none; */
-            cursor: pointer;
         }
 
 
@@ -173,18 +172,19 @@
         }
 
         /* КАРТОЧКИ */
-
-        /* АНИМАЦИЯ */
-     
-        /* меняем курсор при наведении на тег */
         
+        label {
+            cursor: pointer;
+        }
         /* делаем тег чуть бледнее при наведении */
-        .tag:hover {
+        label:hover {
             opacity: 0.5;
         }
         
+        /* оставляем тег чуть бледнее при нажатии */
          .tag__inactive {
             opacity: 0.5;
+            background-color: rgb(233, 233, 233)!important;
         }
 
         /* АНИМАЦИЯ */
@@ -288,6 +288,12 @@
             driveCards.forEach(element => {
                 element.classList.toggle('card__active');
                 element.classList.toggle('card__inactive');
+            });
+            
+            dropZones.forEach(function (item) {
+                cardsActive = item.querySelectorAll('.card__active');
+                block__number = item.querySelector(".kanban-block__number");
+                block__number.textContent = cardsActive.length;
             });
         }
 

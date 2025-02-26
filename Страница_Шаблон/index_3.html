@@ -78,7 +78,6 @@
             -moz-user-select: none;
             -ms-user-select: none;
             /* user-select: none; */
-            cursor: pointer;
         }
 
 
@@ -176,17 +175,19 @@
 
         /* КАРТОЧКИ */
 
-        /* АНИМАЦИЯ */
-
-        /* меняем курсор при наведении на тег */
+        label {
+            cursor: pointer;
+        }
 
         /* делаем тег чуть бледнее при наведении */
-        .tag:hover {
+        label:hover {
             opacity: 0.5;
         }
 
+        /* оставляем тег чуть бледнее при нажатии */
         .tag__inactive {
             opacity: 0.5;
+            background-color: rgb(233, 233, 233) !important;
         }
 
         /* АНИМАЦИЯ */
@@ -218,7 +219,7 @@
         }
     </style>
     <base
-        href="v8config://93acadd017c86f315f0a403834dfe217b0a82a65/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://93178937b73d07fbb3832bf1138d99100115c133/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
@@ -261,7 +262,7 @@
             </Div>
             <Div class="kanban-block" id="a1ca3363-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
                     class="kanban-block__name">В процессе выполнения </strong><strong
-                    class="kanban-block__number">1</strong>
+                    class="kanban-block__number">2</strong>
                 <Div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
                     ondragstart="drag(event)" id="task26933748-db5e-11ef-94fc-107b4419808b">
                     <Div class="card__header"><a class="card__link"
@@ -272,9 +273,6 @@
                         class="changeStatus task26933748-db5e-11ef-94fc-107b4419808b"
                         style="visibility: hidden;"></button>
                 </Div>
-            </Div>
-            <Div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
-                    class="kanban-block__name">На тестировании </strong><strong class="kanban-block__number">1</strong>
                 <Div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
                     ondragstart="drag(event)" id="task0efde98b-dc1d-11ef-94fc-107b4419808b">
                     <Div class="card__header"><a class="card__link"
@@ -285,6 +283,9 @@
                         class="changeStatus task0efde98b-dc1d-11ef-94fc-107b4419808b"
                         style="visibility: hidden;"></button>
                 </Div>
+            </Div>
+            <Div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
+                    class="kanban-block__name">На тестировании </strong><strong class="kanban-block__number">0</strong>
             </Div>
             <Div class="kanban-block" id="a1ca3365-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
                     class="kanban-block__name">Запрос на добавление </strong><strong
@@ -346,7 +347,7 @@
         RecalculateKanbanBlock();
 
         function checkFluency(id, tag) {
-            
+
             driveCheckbox = document.querySelector(`.${id}`);
             driveCheckbox.classList.toggle('tag__inactive');
 
@@ -355,6 +356,12 @@
             driveCards.forEach(element => {
                 element.classList.toggle('card__active');
                 element.classList.toggle('card__inactive');
+            });
+
+            dropZones.forEach(function (item) {
+                cardsActive = item.querySelectorAll('.card__active');
+                block__number = item.querySelector(".kanban-block__number");
+                block__number.textContent = cardsActive.length;
             });
         }
 
