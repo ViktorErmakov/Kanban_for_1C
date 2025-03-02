@@ -63,9 +63,6 @@
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узПроекты</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
-  <enums>Enum.узОтображениеПисемПоЗадачамНаДоске</enums>
-  <enums>Enum.узОтображениеФайловЗадачНаДоске</enums>
-  <enums>Enum.узОтображениеЧеклистаЗадачНаДоске</enums>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеПроектыДоски</informationRegisters>
