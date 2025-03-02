@@ -293,12 +293,12 @@
       <excludedCommands>EndEdit</excludedCommands>
       <toolTip>
         <key>ru</key>
-        <value>Общая настройка для всех пользователей.</value>
+        <value>Персональная настройка пользователя</value>
       </toolTip>
       <toolTipRepresentation>ShowTop</toolTipRepresentation>
       <items xsi:type="form:FormField">
         <name>СтатусыЗадачНомерПоПорядку</name>
-        <id>45</id>
+        <id>89</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -309,7 +309,7 @@
         </dataPath>
         <extendedTooltip>
           <name>СтатусыЗадачНомерПоПорядкуРасширеннаяПодсказка</name>
-          <id>47</id>
+          <id>91</id>
           <type>Label</type>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -319,7 +319,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>СтатусыЗадачНомерПоПорядкуКонтекстноеМеню</name>
-          <id>46</id>
+          <id>90</id>
           <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -338,7 +338,7 @@
       </items>
       <items xsi:type="form:FormField">
         <name>СтатусыЗадачСтатусЗадачи</name>
-        <id>48</id>
+        <id>92</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -349,7 +349,7 @@
         </dataPath>
         <extendedTooltip>
           <name>СтатусыЗадачСтатусЗадачиРасширеннаяПодсказка</name>
-          <id>50</id>
+          <id>94</id>
           <type>Label</type>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -359,7 +359,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>СтатусыЗадачСтатусЗадачиКонтекстноеМеню</name>
-          <id>49</id>
+          <id>93</id>
           <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -673,6 +673,7 @@
       <verticalStretch>true</verticalStretch>
       <fileDragMode>AsFileRef</fileDragMode>
       <searchStringLocation>CommandBar</searchStringLocation>
+      <rowFilter xsi:type="core:UndefinedValue"/>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1253,41 +1254,6 @@
     <savedData>true</savedData>
   </attributes>
   <attributes>
-    <name>Объект</name>
-    <title>
-      <key>ru</key>
-      <value>Объект</value>
-    </title>
-    <id>5</id>
-    <valueType>
-      <types>DataProcessorObject.Канбан_Доска_HTML</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
-    <name>СтатусыЗадач</name>
-    <title>
-      <key>ru</key>
-      <value>Статусы задач</value>
-    </title>
-    <id>6</id>
-    <valueType>
-      <types>InformationRegisterRecordSet.канбан_ИспользуемыеСтатусыДоски</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <savedData>true</savedData>
-  </attributes>
-  <attributes>
     <name>ЗакрытьФормуБезПодтверждения</name>
     <title>
       <key>ru</key>
@@ -1303,6 +1269,61 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>СтатусыЗадач</name>
+    <title>
+      <key>ru</key>
+      <value>Статусы задач</value>
+    </title>
+    <id>20</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>НомерПоПорядку</name>
+      <title>
+        <key>ru</key>
+        <value>Номер по порядку</value>
+      </title>
+      <id>21</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>2</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>СтатусЗадачи</name>
+      <title>
+        <key>ru</key>
+        <value>Статус задачи</value>
+      </title>
+      <id>22</id>
+      <valueType>
+        <types>DefinedType.канбан_СтатусыЗадач</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>Записать</name>
