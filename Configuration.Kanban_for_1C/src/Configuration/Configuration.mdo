@@ -50,6 +50,7 @@
   <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
+  <roles>Role.канбан_ОсновнаяРоль</roles>
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаВызовСервера</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>

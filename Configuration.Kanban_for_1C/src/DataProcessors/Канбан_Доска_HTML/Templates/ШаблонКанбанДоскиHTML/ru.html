@@ -114,19 +114,13 @@
             align-items: center;
             margin-top: 15px;
             padding: 5px;
+            animation: fadeInOut 0.5s ease-in-out;
         }
 
         /* меняем цвет рамки карточки при наведении */
         .card:hover {
             border-color: rgb(155,155,155);
             border-width: .15rem;
-        }
-
-        /* если тег отмечен */
-        .card__active {
-            opacity: 1;
-            display: flex;
-            animation: fadeInOut 0.5s ease-in-out;
         }
 
         @keyframes fadeInOut {
@@ -148,9 +142,9 @@
 
         /* если тег не отмечен */
         .card__inactive {
+            animation: fadeIn 0.5s ease-in-out;
             opacity: 0;
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
         }
 
         @keyframes fadeIn {

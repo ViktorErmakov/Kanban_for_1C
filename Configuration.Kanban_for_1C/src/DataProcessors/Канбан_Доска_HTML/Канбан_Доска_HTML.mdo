@@ -37,6 +37,14 @@
     </synonym>
     <templateType>HTMLDocument</templateType>
   </templates>
+  <templates uuid="2366b4fb-2c29-41eb-9ccb-023c0d626043">
+    <name>ШаблонПустаяДоска</name>
+    <synonym>
+      <key>ru</key>
+      <value>Шаблон пустая доска</value>
+    </synonym>
+    <templateType>HTMLDocument</templateType>
+  </templates>
   <commands uuid="912029c4-f01e-4a72-9ee6-b07577612e99">
     <name>ОткрытьКанбанДоску</name>
     <synonym>

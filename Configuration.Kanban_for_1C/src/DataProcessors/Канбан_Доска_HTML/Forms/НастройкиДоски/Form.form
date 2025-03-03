@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+  <title>
+    <key>ru</key>
+    <value>Персональные настройки пользователя для доски HTML</value>
+  </title>
   <items xsi:type="form:FormGroup">
     <name>ГруппаОбщие</name>
     <id>5</id>
@@ -24,8 +28,8 @@
         <titleLocation>Right</titleLocation>
         <toolTip>
           <key>ru</key>
-          <value>Включает использование доски HTML вместо типовой.
-Персональная настройка пользователя.</value>
+          <value>Не обязательный флаг, 
+подменяет типовую канбан доску при открытии на HTML.</value>
         </toolTip>
         <toolTipRepresentation>ShowTop</toolTipRepresentation>
         <handlers>
@@ -293,7 +297,7 @@
       <excludedCommands>EndEdit</excludedCommands>
       <toolTip>
         <key>ru</key>
-        <value>Персональная настройка пользователя</value>
+        <value>На доске будут отображаться только выбранные статусы в указанном порядке следования.</value>
       </toolTip>
       <toolTipRepresentation>ShowTop</toolTipRepresentation>
       <items xsi:type="form:FormField">
@@ -407,9 +411,6 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
-          <picture xsi:type="core:PictureRef">
-            <picture>StdPicture.CreateListItem</picture>
-          </picture>
           <representationInContextMenu>Auto</representationInContextMenu>
           <shapeRepresentation>WhenActive</shapeRepresentation>
           <locationInCommandBar>InCommandBar</locationInCommandBar>
@@ -442,9 +443,6 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
-          <picture xsi:type="core:PictureRef">
-            <picture>StdPicture.Delete</picture>
-          </picture>
           <representationInContextMenu>Auto</representationInContextMenu>
           <shapeRepresentation>WhenActive</shapeRepresentation>
           <locationInCommandBar>InCommandBar</locationInCommandBar>
@@ -734,7 +732,8 @@
       <excludedCommands>MoveUp</excludedCommands>
       <toolTip>
         <key>ru</key>
-        <value>Персональная настройка пользователя</value>
+        <value>На доске будут отображаться задачи только по выбранным проектам.
+Каждому проекту можно определить персональный цвет.</value>
       </toolTip>
       <toolTipRepresentation>ShowTop</toolTipRepresentation>
       <items xsi:type="form:FormField">
@@ -769,6 +768,7 @@
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:InputFieldExtInfo">
+          <width>5</width>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <horizontalStretch>true</horizontalStretch>
@@ -1155,7 +1155,6 @@
     <name>ПередЗакрытием</name>
   </handlers>
   <saveWindowSettings>true</saveWindowSettings>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -1286,6 +1285,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <savedData>true</savedData>
     <columns>
       <name>НомерПоПорядку</name>
       <title>

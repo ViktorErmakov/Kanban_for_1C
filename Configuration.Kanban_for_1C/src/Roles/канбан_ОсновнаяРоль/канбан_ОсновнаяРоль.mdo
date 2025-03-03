@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4702c84b-a1ff-4643-bcca-a766f0f998d8">
+  <name>канбан_ОсновнаяРоль</name>
+  <synonym>
+    <key>ru</key>
+    <value>Канбан доска использование</value>
+  </synonym>
+</mdclass:Role>

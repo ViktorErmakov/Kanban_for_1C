@@ -16,4 +16,10 @@
   <content>DefinedType.канбан_Проекты</content>
   <content>InformationRegister.канбан_ИспользуемыеПроектыДоски</content>
   <content>DefinedType.канбан_Пользователь</content>
+  <content>CommonModule.канбан_КанбанДоскаВызовСервера</content>
+  <content>Role.канбан_ОсновнаяРоль</content>
+  <content>CommonPicture.ВыбратьВариантОтчета</content>
+  <content>CommonPicture.канбан_Доска</content>
+  <content>DataProcessor.Канбан_Доска_HTML</content>
+  <content>InformationRegister.канбан_ИспользуемыеСтатусыДоски</content>
 </mdclass:Subsystem>
