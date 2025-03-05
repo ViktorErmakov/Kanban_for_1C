@@ -116,19 +116,16 @@
             align-items: center;
             margin-top: 15px;
             padding: 5px;
+            animation: fadeInOut 0.5s ease-in-out;
         }
 
         /* меняем цвет рамки карточки при наведении */
         .card:hover {
-            border-color: rgb(155, 155, 155);
-            border-width: .15rem;
-        }
-
-        /* если тег отмечен */
-        .card__active {
-            opacity: 1;
-            display: flex;
-            animation: fadeInOut 0.5s ease-in-out;
+            /* border-color: rgb(155, 155, 155);
+            border-width: .15rem; */
+            /* outline: .15rem solid rgb(155, 155, 155); */
+            /* border-radius: .8rem; */
+            border: .12rem solid #2E9AFF;
         }
 
         @keyframes fadeInOut {
@@ -150,9 +147,9 @@
 
         /* если тег не отмечен */
         .card__inactive {
+            animation: fadeIn 0.5s ease-in-out;
             opacity: 0;
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -190,10 +187,14 @@
             background-color: rgb(233, 233, 233) !important;
         }
 
-        /* АНИМАЦИЯ */
-        .kanban-block__name,
-        .kanban-block__number {
+        .kanban-block__name {
             color: rgb(121, 121, 121);
+        }
+        
+        .kanban-block__number {
+            color: rgb(80, 80, 80);
+            font-weight: 800;
+            margin-right: .5rem;
         }
 
         .card__header {
@@ -219,7 +220,7 @@
         }
     </style>
     <base
-        href="v8config://93178937b73d07fbb3832bf1138d99100115c133/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://5d2a5a0928ff6c704818891c9910ede1b374488a/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
@@ -236,7 +237,7 @@
             <Div><input type="checkbox" id="project8d9f5c04-ea3a-11ef-9500-107b4419808b" checked="true"
                     onclick="checkFluency(id, id)"></input><label for="project8d9f5c04-ea3a-11ef-9500-107b4419808b">
                     <Div class="tag project8d9f5c04-ea3a-11ef-9500-107b4419808b"
-                        style="background-color: rgb(124,252,0);">Второй проект</Div>
+                        style="background-color: rgb(204,255,204);">Второй проект</Div>
                 </label></Div>
             <Div><input type="checkbox" id="project8d9f5c05-ea3a-11ef-9500-107b4419808b" checked="true"
                     onclick="checkFluency(id, id)"></input><label for="project8d9f5c05-ea3a-11ef-9500-107b4419808b">
@@ -247,49 +248,140 @@
 
         <div id="kanban-board">
 
-            <Div class="kanban-block" id="a1ca3361-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
-                    class="kanban-block__name">Backlog </strong><strong class="kanban-block__number">1</strong>
+            <Div class="kanban-block" id="a1ca3366-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
+                <strong
+                    class="kanban-block__number">10</strong>
+                <strong
+                    class="kanban-block__name">Зарегистрирована </strong>
+                    
                 <Div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
                     ondragstart="drag(event)" id="task8e7227e3-c296-11ee-93e4-107b4419808b">
                     <Div class="card__header"><a class="card__link"
                             href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=93e4107b4419808b11eec2968e7227e3">Задача
                             №1</a><img class="card__photo" alt="foto"></img></Div>
-                    <div class="card__text"><span>Первая задача</span></div>
+                    <div class="card__text"><span>Первый эпик</span></div>
                     <div class="tag" style="background-color: rgb(238,130,238);">Первый проект</div><button
                         class="changeStatus task8e7227e3-c296-11ee-93e4-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc3e-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc3e">Задача
+                            №5</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Вторая задача первого эпика</span></div>
+                    <div class="tag" style="background-color: rgb(238,130,238);">Первый проект</div><button
+                        class="changeStatus task6251cc3e-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc42-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc42">Задача
+                            №7</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Первая задача второго эпика</span></div>
+                    <div class="tag" style="background-color: rgb(204,255,204);">Второй проект</div><button
+                        class="changeStatus task6251cc42-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc43-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc43">Задача
+                            №8</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Вторая задача второго эпика</span></div>
+                    <div class="tag" style="background-color: rgb(204,255,204);">Второй проект</div><button
+                        class="changeStatus task6251cc43-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc45-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc45">Задача
+                            №10</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Первая задача третьего эпика</span></div>
+                    <div class="tag" style="background-color: rgb(251,224,224);">Третий проект</div><button
+                        class="changeStatus task6251cc45-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc49-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc49">Задача
+                            №12</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Третья задача третьего эпика</span></div>
+                    <div class="tag" style="background-color: rgb(251,224,224);">Третий проект</div><button
+                        class="changeStatus task6251cc49-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc40-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc40">Задача
+                            №6</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Третья задача первого эпика</span></div>
+                    <div class="tag" style="background-color: rgb(238,130,238);">Первый проект</div><button
+                        class="changeStatus task6251cc40-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="taskb5c689c0-f6d2-11ef-9503-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9503107b4419808b11eff6d2b5c689c0">Задача
+                            №13</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Четвертая задача первого эпика</span></div>
+                    <div class="tag" style="background-color: rgb(238,130,238);">Первый проект</div><button
+                        class="changeStatus taskb5c689c0-f6d2-11ef-9503-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc44-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc44">Задача
+                            №9</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Третья задача второго эпика</span></div>
+                    <div class="tag" style="background-color: rgb(204,255,204);">Второй проект</div><button
+                        class="changeStatus task6251cc44-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
+                <Div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc47-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc47">Задача
+                            №11</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Вторая задача третьего эпика</span></div>
+                    <div class="tag" style="background-color: rgb(251,224,224);">Третий проект</div><button
+                        class="changeStatus task6251cc47-f606-11ef-9500-107b4419808b"
                         style="visibility: hidden;"></button>
                 </Div>
             </Div>
             <Div class="kanban-block" id="a1ca3363-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
                     class="kanban-block__name">В процессе выполнения </strong><strong
-                    class="kanban-block__number">2</strong>
+                    class="kanban-block__number">1</strong>
                 <Div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
                     ondragstart="drag(event)" id="task26933748-db5e-11ef-94fc-107b4419808b">
                     <Div class="card__header"><a class="card__link"
                             href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=94fc107b4419808b11efdb5e26933748">Задача
                             №2</a><img class="card__photo" alt="foto"></img></Div>
-                    <div class="card__text"><span>Вторая задача</span></div>
-                    <div class="tag" style="background-color: rgb(124,252,0);">Второй проект</div><button
+                    <div class="card__text"><span>Второй эпик</span></div>
+                    <div class="tag" style="background-color: rgb(204,255,204);">Второй проект</div><button
                         class="changeStatus task26933748-db5e-11ef-94fc-107b4419808b"
-                        style="visibility: hidden;"></button>
-                </Div>
-                <Div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
-                    ondragstart="drag(event)" id="task0efde98b-dc1d-11ef-94fc-107b4419808b">
-                    <Div class="card__header"><a class="card__link"
-                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=94fc107b4419808b11efdc1d0efde98b">Задача
-                            №3</a><img class="card__photo" alt="foto"></img></Div>
-                    <div class="card__text"><span>Третья задача</span></div>
-                    <div class="tag" style="background-color: rgb(251,224,224);">Третий проект</div><button
-                        class="changeStatus task0efde98b-dc1d-11ef-94fc-107b4419808b"
                         style="visibility: hidden;"></button>
                 </Div>
             </Div>
             <Div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
-                    class="kanban-block__name">На тестировании </strong><strong class="kanban-block__number">0</strong>
+                    class="kanban-block__name">На тестировании </strong><strong class="kanban-block__number">1</strong>
+                <Div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                    ondragstart="drag(event)" id="task6251cc3c-f606-11ef-9500-107b4419808b">
+                    <Div class="card__header"><a class="card__link"
+                            href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc3c">Задача
+                            №4</a><img class="card__photo" alt="foto"></img></Div>
+                    <div class="card__text"><span>Первая задача первого эпика</span></div>
+                    <div class="tag" style="background-color: rgb(238,130,238);">Первый проект</div><button
+                        class="changeStatus task6251cc3c-f606-11ef-9500-107b4419808b"
+                        style="visibility: hidden;"></button>
+                </Div>
             </Div>
-            <Div class="kanban-block" id="a1ca3365-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
-                    class="kanban-block__name">Запрос на добавление </strong><strong
-                    class="kanban-block__number">0</strong></Div>
             <Div class="kanban-block" id="a1ca3367-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"><strong
                     class="kanban-block__name">К переносу в рабочую </strong><strong
                     class="kanban-block__number">0</strong></Div>

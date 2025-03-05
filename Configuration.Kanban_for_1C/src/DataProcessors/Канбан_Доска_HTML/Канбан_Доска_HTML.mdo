@@ -63,4 +63,13 @@
     <group>ActionsPanelTools</group>
     <representation>Auto</representation>
   </commands>
+  <commands uuid="69e65a81-9053-45f1-8220-f95edb1b2628">
+    <name>ОткрытьСтраницуРазработки</name>
+    <synonym>
+      <key>ru</key>
+      <value>Страница разработки</value>
+    </synonym>
+    <group>ActionsPanelTools</group>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:DataProcessor>

@@ -119,8 +119,7 @@
 
         /* меняем цвет рамки карточки при наведении */
         .card:hover {
-            border-color: rgb(155,155,155);
-            border-width: .15rem;
+            border: .12rem solid #2E9AFF;
         }
 
         @keyframes fadeInOut {
@@ -180,11 +179,15 @@
             opacity: 0.5;
             background-color: rgb(233, 233, 233)!important;
         }
-
-        /* АНИМАЦИЯ */
-        .kanban-block__name,
-        .kanban-block__number {
+        
+        .kanban-block__name {
             color: rgb(121, 121, 121);
+        }
+        
+        .kanban-block__number {
+            color: rgb(80, 80, 80);
+            font-weight: 800;
+            margin-right: .5rem;
         }
 
         .card__header {
