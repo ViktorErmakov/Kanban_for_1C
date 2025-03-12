@@ -14,8 +14,14 @@
         /*@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");*/
 		
         /* общие настройки для всего */
+         html {
+            font-size: 10px;
+            
+        }
+        
         body {
             margin: 0;
+            font-size: 1.7rem;
         }
 
         .wrapper {
@@ -27,32 +33,59 @@
 
         #kanban-board {
             display: flex;
+            flex-direction: column;
             position: absolute;
-            top: 65px;
+            top: 6rem;
             width: 100%;
+        }
+        
+         .kanban_header {
+            display: flex;
+            position: fixed;
+            width: calc(100% - 1.7rem);;
+            z-index: 101;
+            height: 4rem;
+            background-color: #FFFFFF;
+        }
+
+        .block_header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            margin-right: .5rem;
+            background-color: rgb(247, 246, 246);
+        }
+        
+        .block_header:first-child {
+            margin-left: .5rem;
+        }
+
+        .kanban_body {
+            display: flex;
+            position: absolute;
+            width: 100%;
+            top: 4rem;
         }
 
         .kanban-block {
             padding: 0.6rem;
             width: 30.5%;
-            min-width: 14rem;
             min-height: 91vh;
-            border-radius: 0.3rem;
             overflow: auto;
-            margin-right: 5px;
-            margin-right: 5px;
+            margin-right: .5rem;
             background-color: rgb(247, 246, 246);
+        }
+        
+        .kanban-block:first-child {
+            margin-left: .5rem;
         }
 
         /* чекбоксы */
         /* скрываем флажок у чекбокса */
         input[type="checkbox"] {
             display: none;
-        }
-
-        .pos-abs {
-            margin: 8px;
-            height: 20px !important;
         }
 
         .checkboxes {
@@ -67,17 +100,17 @@
         /* общие настройки для тегов */
         .tag {
             /* внешние отступы */
-            padding: 6px 12px;
-            height: 25px;
+            padding: .6rem 1.2rem;
+            height: 2.5rem;
             /* подгоняем размер блока под содержимое */
             width: -webkit-fit-content;
             width: -moz-fit-content;
             width: fit-content;
             /* радиус скругления */
-            border-radius: 9999px;
+            border-radius: 999rem;
             /* отступ сверху */
-            margin-top: 12px;
-            margin-bottom: 12px;
+            margin-top: 1.2rem;
+            margin-bottom: 1.2rem;
             /* запрещаем выделять мышкой этот элемент */
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -90,7 +123,7 @@
         .tag::before {
             /* добавляем текст, отступ и прозрачность */
             content: "#";
-            margin-right: 2px;
+            margin-right: .2rem;
             opacity: 0.3;
         }
 
@@ -107,7 +140,7 @@
             /* межстрочное расстояние */
             line-height: 1.5;
             /* радиус скругления */
-            border-radius: 8px;
+            border-radius: .8rem;
             /* рисуем тень */
             box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 4px;
             /* скрываем всё, что не помещается в блок */
@@ -119,8 +152,8 @@
             /* выравниваем карточки по центру друг относительно друга */
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            padding: 5px;
+            margin-top: 1rem;
+            padding: .5rem;
             animation: fadeInOut 0.5s ease-in-out;
         }
 
@@ -188,13 +221,13 @@
         }
         
         .kanban-block__name {
+            margin-left: 1rem;
             color: rgb(121, 121, 121);
         }
         
         .kanban-block__number {
+            margin-left: 1rem;
             color: rgb(80, 80, 80);
-            font-weight: 800;
-            margin-right: .5rem;
         }
 
         .card__header {
@@ -209,8 +242,8 @@
         }
 
         .card__photo {
-            width: 35px;
-            height: 40px;
+            width: 3.5rem;
+            height: 4rem;
             border: 1px solid rgb(184, 194, 196);
         }
 
@@ -272,12 +305,13 @@
         });
 
         function RecalculateKanbanBlock() {
-            let blocks = document.getElementsByClassName("kanban-block");
-            for (const item of blocks) {
-                let tasks = item.getElementsByClassName("card");
-                let number = item.getElementsByClassName("kanban-block__number");
-                number[0].textContent = tasks.length;
-            }
+            let blocks = document.querySelectorAll('.kanban-block');
+            blocks.forEach((item, index) => {
+                let tasks = item.querySelectorAll('.card');
+                let block_header = document.querySelectorAll('.block_header')[index];
+                let number = block_header.querySelector('.kanban-block__number');
+                number.innerHTML = tasks.length;
+            });
         }
 
         RecalculateKanbanBlock();
