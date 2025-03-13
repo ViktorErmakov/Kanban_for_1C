@@ -37,13 +37,14 @@
             flex-direction: column;
             position: absolute;
             top: 6rem;
-            width: 100%;
+            width: 99%;
+            margin-right: 5rem;
         }
 
         .kanban_header {
             display: flex;
             position: fixed;
-            width: 100%;
+            width: 99%;
             z-index: 100;
             height: 4rem;
         }
@@ -52,10 +53,12 @@
             display: flex;
             align-items: center;
             width: 30.5%;
+            /* min-width: 39rem; */
             border-top-left-radius: 1rem;
             border-top-right-radius: 1rem;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
+            padding: 0.6rem;
         }
 
         .block_header:first-child {
@@ -72,9 +75,9 @@
         .kanban-block {
             padding: 0.6rem;
             width: 30.5%;
+            /* min-width: 39rem; */
             min-height: 91vh;
             /* border-radius: 1rem; */
-            overflow: auto;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
         }

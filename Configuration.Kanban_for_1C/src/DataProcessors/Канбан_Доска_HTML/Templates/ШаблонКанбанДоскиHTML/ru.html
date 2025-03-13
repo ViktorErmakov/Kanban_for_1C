@@ -16,12 +16,18 @@
         /* общие настройки для всего */
          html {
             font-size: 10px;
-            
         }
         
         body {
             margin: 0;
             font-size: 1.7rem;
+            overflow: auto;
+        }
+        
+        /* Скрываем полосу прокрутки */
+        .scrollable-container::-webkit-scrollbar {
+            width: 0; /* Для вертикальной полосы */
+            /*height: 0;*/ /* Для горизонтальной полосы */
         }
 
         .wrapper {
@@ -42,8 +48,9 @@
          .kanban_header {
             display: flex;
             position: fixed;
-            width: calc(100% - 1.7rem);;
-            z-index: 101;
+            /*width: calc(100% - 1.7rem);*/
+            width: 100%;
+            z-index: 100;
             height: 4rem;
             background-color: #FFFFFF;
         }
@@ -51,11 +58,12 @@
         .block_header {
             display: flex;
             align-items: center;
-            width: 100%;
+            width: 30.5%;
             border-top-left-radius: 1rem;
             border-top-right-radius: 1rem;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
+            padding: 0.6rem;
         }
         
         .block_header:first-child {
@@ -73,7 +81,6 @@
             padding: 0.6rem;
             width: 30.5%;
             min-height: 91vh;
-            overflow: auto;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
         }
