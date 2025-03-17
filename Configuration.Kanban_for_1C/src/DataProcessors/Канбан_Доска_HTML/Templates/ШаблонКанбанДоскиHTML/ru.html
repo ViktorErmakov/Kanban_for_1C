@@ -51,7 +51,7 @@
             /*width: calc(100% - 1.7rem);*/
             width: 100%;
             z-index: 100;
-            height: 4rem;
+            min-height: 4rem;
             background-color: #FFFFFF;
         }
 
@@ -75,12 +75,12 @@
             position: absolute;
             width: 100%;
             top: 4rem;
+            min-height: 91vh;
         }
 
         .kanban-block {
             padding: 0.6rem;
             width: 30.5%;
-            min-height: 91vh;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
         }
@@ -101,15 +101,14 @@
              position: fixed;
             z-index: 100;
             width: 100%;
-            background-color: #FFFFFF;
             left: .5rem;
         }
-
+        
         /* общие настройки для тегов */
         .tag {
             /* внешние отступы */
             padding: .6rem 1.2rem;
-            height: 2.5rem;
+            max-height: 2.5rem;
             /* подгоняем размер блока под содержимое */
             width: -webkit-fit-content;
             width: -moz-fit-content;
@@ -124,6 +123,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             /* user-select: none; */
+            background-color: lightgrey;
         }
 
         /* добавляем хештег перед тегом */
@@ -259,10 +259,73 @@
             height: 4rem;
             border: 1px solid rgb(184, 194, 196);
         }
+        
+        .card__photo:hover {
+            background-color: lightgrey;
+            transform: scale(1.4);
+        }
 
         .card__text {
             display: flex;
             width: 100%;
+        }
+        
+        @media only screen and (max-width: 1450px) {
+            body {
+                font-size: 1.5rem;
+            }
+            .card__photo {
+                width: 2.5rem;
+                height: 3rem;
+            }
+        }
+
+        @media only screen and (max-width: 1280px) {
+            body {
+                font-size: 1.3rem;
+            }
+            .card__photo {
+                width: 2rem;
+                height: 2.5rem;
+            }
+        }
+
+        @media only screen and (max-width: 1150px) {
+            body {
+                font-size: 1.1rem;
+            }
+            .card__photo {
+                width: 1.5rem;
+                height: 2rem;
+            }
+        }
+
+        @media only screen and (max-width: 1010px) {
+            body {
+                font-size: .9rem;
+            }
+            .card__photo {
+                width: 1rem;
+                height: 1.5rem;
+            }
+            .tag_task {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            body {
+                font-size: .7rem;
+            }
+            .card__photo {
+                min-width: 0.5rem;
+                min-height: 1rem;
+            }
+            .tag_task {
+                width: 1rem;
+                height: 1rem;
+            }
         }
 
     </style>

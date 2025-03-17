@@ -55,7 +55,7 @@
             /*width: calc(100% - 1.7rem);*/
             width: 100%;
             z-index: 100;
-            height: 4rem;
+            min-height: 4rem;
             background-color: #FFFFFF;
         }
 
@@ -79,12 +79,12 @@
             position: absolute;
             width: 100%;
             top: 4rem;
+            min-height: 91vh;
         }
 
         .kanban-block {
             padding: 0.6rem;
             width: 30.5%;
-            min-height: 91vh;
             margin-right: .5rem;
             background-color: rgb(247, 246, 246);
         }
@@ -105,7 +105,6 @@
             position: fixed;
             z-index: 100;
             width: 100%;
-            background-color: #FFFFFF;
             left: .5rem;
         }
 
@@ -113,7 +112,7 @@
         .tag {
             /* внешние отступы */
             padding: .6rem 1.2rem;
-            height: 2.5rem;
+            max-height: 2.5rem;
             /* подгоняем размер блока под содержимое */
             width: -webkit-fit-content;
             width: -moz-fit-content;
@@ -128,6 +127,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             /* user-select: none; */
+            background-color: lightgrey;
         }
 
         /* добавляем хештег перед тегом */
@@ -175,7 +175,8 @@
 
         /* меняем цвет рамки карточки при наведении */
         .card:hover {
-            border: .12rem solid #2E9AFF;
+            /*border: .12rem solid #2E9AFF;*/
+            background-color: lightgrey;
         }
 
         @keyframes fadeInOut {
@@ -264,13 +265,83 @@
             border: 1px solid rgb(184, 194, 196);
         }
 
+        .card__photo:hover {
+            background-color: lightgrey;
+            transform: scale(1.4);
+        }
+
         .card__text {
             display: flex;
             width: 100%;
         }
+
+        @media only screen and (max-width: 1450px) {
+            body {
+                font-size: 1.5rem;
+            }
+
+            .card__photo {
+                width: 2.5rem;
+                height: 3rem;
+            }
+        }
+
+        @media only screen and (max-width: 1280px) {
+            body {
+                font-size: 1.3rem;
+            }
+
+            .card__photo {
+                width: 2rem;
+                height: 2.5rem;
+            }
+        }
+
+        @media only screen and (max-width: 1150px) {
+            body {
+                font-size: 1.1rem;
+            }
+
+            .card__photo {
+                width: 1.5rem;
+                height: 2rem;
+            }
+        }
+
+        @media only screen and (max-width: 1010px) {
+            body {
+                font-size: .9rem;
+            }
+
+            .card__photo {
+                width: 1rem;
+                height: 1.5rem;
+            }
+
+            .tag_task {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            body {
+                font-size: .7rem;
+            }
+
+            .card__photo {
+                min-width: 0.5rem;
+                min-height: 1rem;
+            }
+
+            .tag_task {
+                width: 1rem;
+                height: 1rem;
+            }
+        }
     </style>
     <base
-        href="v8config://18d6f96af439857175ee5cecaabe3606f48187ad/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://36d24ad662d36632ccc3913ab3fdbfb3013467c7/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
@@ -291,8 +362,7 @@
                 </label></div>
             <div><input type="checkbox" id="project8d9f5c05-ea3a-11ef-9500-107b4419808b" checked="true"
                     onclick="checkFluency(id, id)"></input><label for="project8d9f5c05-ea3a-11ef-9500-107b4419808b">
-                    <div class="tag project8d9f5c05-ea3a-11ef-9500-107b4419808b"
-                        style="background-color: rgb(251,224,224);">Третий проект</div>
+                    <div class="tag project8d9f5c05-ea3a-11ef-9500-107b4419808b">Третий проект</div>
                 </label></div>
         </div>
 
@@ -316,10 +386,8 @@
             </div>
             <div class="kanban_body">
                 <div class="kanban-block" id="a1ca3366-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(238,130,238)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task8e7227e3-c296-11ee-93e4-107b4419808b">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task8e7227e3-c296-11ee-93e4-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(238,130,238);"></div><a
                                 class="card__link"
@@ -330,10 +398,8 @@
                             class="changeStatus task8e7227e3-c296-11ee-93e4-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(204,255,204)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc42-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc42-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(204,255,204);"></div><a
                                 class="card__link"
@@ -344,10 +410,8 @@
                             class="changeStatus task6251cc42-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(204,255,204)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc43-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc43-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(204,255,204);"></div><a
                                 class="card__link"
@@ -358,13 +422,10 @@
                             class="changeStatus task6251cc43-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(251,224,224)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc45-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc45-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
-                            <div class="tag_task" style="background-color: rgb(251,224,224);"></div><a
-                                class="card__link"
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
                                 href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc45">Задача
                                 №10</a><img class="card__photo" alt="foto"></img>
                         </div>
@@ -372,13 +433,10 @@
                             class="changeStatus task6251cc45-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(251,224,224)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc49-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc49-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
-                            <div class="tag_task" style="background-color: rgb(251,224,224);"></div><a
-                                class="card__link"
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
                                 href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc49">Задача
                                 №12</a><img class="card__photo" alt="foto"></img>
                         </div>
@@ -386,10 +444,8 @@
                             class="changeStatus task6251cc49-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(238,130,238)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc40-f606-11ef-9500-107b4419808b">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc40-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(238,130,238);"></div><a
                                 class="card__link"
@@ -400,10 +456,8 @@
                             class="changeStatus task6251cc40-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(238,130,238)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="taskb5c689c0-f6d2-11ef-9503-107b4419808b">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="taskb5c689c0-f6d2-11ef-9503-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(238,130,238);"></div><a
                                 class="card__link"
@@ -414,10 +468,8 @@
                             class="changeStatus taskb5c689c0-f6d2-11ef-9503-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(204,255,204)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc44-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc44-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(204,255,204);"></div><a
                                 class="card__link"
@@ -428,13 +480,10 @@
                             class="changeStatus task6251cc44-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(251,224,224)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc47-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc47-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
-                            <div class="tag_task" style="background-color: rgb(251,224,224);"></div><a
-                                class="card__link"
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
                                 href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc47">Задача
                                 №11</a><img class="card__photo" alt="foto"></img>
                         </div>
@@ -444,10 +493,8 @@
                     </div>
                 </div>
                 <div class="kanban-block" id="a1ca3363-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(204,255,204)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task26933748-db5e-11ef-94fc-107b4419808b">
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task26933748-db5e-11ef-94fc-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(204,255,204);"></div><a
                                 class="card__link"
@@ -458,10 +505,8 @@
                             class="changeStatus task26933748-db5e-11ef-94fc-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(238,130,238)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc3e-f606-11ef-9500-107b4419808b">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc3e-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(238,130,238);"></div><a
                                 class="card__link"
@@ -474,10 +519,8 @@
                     </div>
                 </div>
                 <div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active"
-                        onmouseover="this.style.borderColor='rgb(238,130,238)';"
-                        onmouseout="this.style.borderColor='#ebebeb';" draggable="true" ondragstart="drag(event)"
-                        id="task6251cc3c-f606-11ef-9500-107b4419808b">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b card__active" draggable="true"
+                        ondragstart="drag(event)" id="task6251cc3c-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb(238,130,238);"></div><a
                                 class="card__link"
