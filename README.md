@@ -5,7 +5,8 @@
 после будет адаптирована для СППР.
 
 Вид доски на текущий момент
-![image](https://github.com/ViktorErmakov/Kanban_for_1C/assets/39617680/99d6f72b-0ab3-4353-b920-ffd2141cb18f)
+[ScreenRecorderProject6.webm](https://github.com/user-attachments/assets/995b7ba5-1bd7-424a-b7c0-f7f8ef00a463)
+
 
 Для того, что бы доска заработала в конфигурации, необходимо:
 1. Добавить в расширение справочник "Задача", "Проекты" - для того что бы расширение работало правильно
