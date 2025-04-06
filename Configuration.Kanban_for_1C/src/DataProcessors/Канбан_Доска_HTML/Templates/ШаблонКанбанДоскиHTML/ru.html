@@ -377,6 +377,45 @@
                 height: 1rem;
             }
         }
+        
+         /* Масштабирование страницы +++ */
+        .zoom-controls {
+            position: fixed;
+            right: 30px;
+            background: #8c8c8c ;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Фиксируем размер шрифта */
+            font-size: 1.6rem;
+        }
+        
+        .zoom-btn {
+            width: 20px;
+            height: 20px;
+            background: #8c8c8c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .zoom-btn:hover {
+            background: #555;
+        }
+        
+        .zoom-value {
+            min-width: 50px;
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -384,6 +423,13 @@
 <body>
     <div class="wrapper">
         <div class="command_panel">
+	        
+	         <!-- Элементы управления масштабом -->
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoom-out">-</button>
+                <span class="zoom-value" id="zoom-display">100%</span>
+                <button class="zoom-btn" id="zoom-in">+</button>
+            </div>
 	        
 	        <div id="checkboxes" class="checkboxes">
 				
@@ -519,6 +565,81 @@
             
             RecalculateKanbanBlock();
         }
+        
+        /* Масштабирование страницы +++ */
+        // Текущий масштаб (по умолчанию 100%)
+        let currentZoom = 100;
+        const minZoom = 60;
+        const maxZoom = 140;
+        const zoomStep = 10;
+
+        // Элементы управления
+        const zoomDisplay = document.getElementById('zoom-display');
+        const zoomInBtn = document.getElementById('zoom-in');
+        const zoomOutBtn = document.getElementById('zoom-out');
+
+        // Функция обновления масштаба страницы
+        function updatePageZoom() {
+            // Применяем zoom ко всему body
+            document.body.style.zoom = `${currentZoom}%`;
+            zoomDisplay.textContent = `${currentZoom}%`;
+            
+            // Отключаем кнопки при достижении границ
+            zoomInBtn.disabled = currentZoom >= maxZoom;
+            zoomOutBtn.disabled = currentZoom <= minZoom;
+        }
+
+        // Обработчики кнопок
+        zoomInBtn.addEventListener('click', () => {
+            if (currentZoom < maxZoom) {
+                currentZoom += zoomStep;
+                updatePageZoom();
+            }
+        });
+
+        zoomOutBtn.addEventListener('click', () => {
+            if (currentZoom > minZoom) {
+                currentZoom -= zoomStep;
+                updatePageZoom();
+            }
+        });
+
+        // Обработчик клавиатуры
+        document.addEventListener('keydown', function(e) {
+            
+            // Проверяем, что нажат Ctrl (или Cmd на Mac)
+            if (e.ctrlKey || e.metaKey) {
+                var key = e.keyCode || e.which; // Для максимальной совместимости
+                
+                // Обрабатываем "+" (и "=", так как это одна клавиша без Shift)
+                if (key === 187 || key === 61) { // 187 = '+', 61 = '=' (некоторые старые браузеры)
+                    e.preventDefault(); // Отменяем стандартное поведение браузера
+                    if (currentZoom < maxZoom) {
+                        currentZoom += zoomStep;
+                        updatePageZoom();
+                    }
+                } 
+                // Обрабатываем "-" (и "_", но без Shift)
+                else if (key === 189 || key === 173) { // 189 = '-', 173 = '_' (в некоторых браузерах)
+                    e.preventDefault();
+                    if (currentZoom > minZoom) {
+                        currentZoom -= zoomStep;
+                        updatePageZoom();
+                    }
+                } 
+                // Сброс масштаба по Ctrl+0 (код клавиши "0" = 48)
+                else if (key === 48) { 
+                    e.preventDefault();
+                    currentZoom = 100;
+                    updatePageZoom();
+                }
+            }
+            
+        });
+        
+        // Инициализация
+        updatePageZoom();
+        /* Масштабирование страницы --- */
 
     </script>
     
