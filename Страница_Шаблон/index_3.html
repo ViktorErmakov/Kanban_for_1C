@@ -102,6 +102,7 @@
         .checkboxes {
             display: flex;
             flex-direction: row;
+            gap: 1rem;
         }
 
         /* общие настройки для тегов */
@@ -114,7 +115,7 @@
             width: -moz-fit-content;
             width: fit-content;
             /* радиус скругления */
-            border-radius: 999rem;
+            border-radius: .4rem;
             /* отступ сверху */
             margin-top: 1.2rem;
             margin-bottom: 1.2rem;
@@ -253,6 +254,11 @@
 
         .card__link {
             color: rgb(17, 138, 236);
+            text-decoration: none;
+        }
+
+        .card__link:hover {
+            text-decoration: underline;
         }
 
         .card__photo {
@@ -290,6 +296,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            gap: 1rem;
         }
 
         #update_svg,
@@ -299,7 +306,6 @@
             align-items: center;
             width: 3rem;
             height: 3rem;
-            margin-left: 1rem;
             transition: transform 0.4s ease;
             /* Плавное изменение за 0.3 секунды */
         }
@@ -317,13 +323,29 @@
         }
 
         .my_tasks {
-            margin-left: 1rem;
+            color: rgb(17, 138, 236);
             text-decoration: none;
-            color: rgb(17, 50, 236);
+            font-family: 'Arial', sans-serif;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-left: 1rem;
+        }
+
+        .my_tasks:hover {
+            text-decoration: underline;
+            background-color: #f0f0f0;
+            color: rgb(17, 138, 236);
         }
 
         .my_tasks_active {
-            text-decoration: underline;
+            /* text-decoration: underline; */
+            transform: scale(0.98);
+            background-color: #8c8c8c;
+            /* background-color: #3498db; */
+            color: white;
+            /* font-weight: bold; */
         }
 
         @media only screen and (max-width: 1450px) {
@@ -472,6 +494,9 @@
             </div>
 
             <div class="command_panel_buttons">
+                
+                <a id="my_tasks" class="my_tasks user5127bf5c-9ae0-11ef-94b1-107b4419808b" href="">Только мои задачи</a>
+
                 <div id="update_svg">
                     <!--?xml version="1.0" encoding="UTF-8"?-->
                     <!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
@@ -506,7 +531,6 @@
                     </svg>
                 </div>
 
-                <a id="my_tasks" class="my_tasks user5127bf5c-9ae0-11ef-94b1-107b4419808b" href="">Только мои задачи</a>
 
             </div>
 
