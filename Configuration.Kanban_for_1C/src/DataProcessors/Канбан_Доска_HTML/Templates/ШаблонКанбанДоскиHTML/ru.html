@@ -448,6 +448,41 @@
             min-width: 50px;
             text-align: center;
         }
+        
+        /* кнопка добавления задач +++ */
+
+        .add_task {
+            min-width: 26px;
+            min-height: 26px;
+            border-radius: 50%;
+            /* background-color: #3498db; */
+            /* color: white; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* text-decoration: none; */
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            /* padding: 1rem; */
+            margin: 1rem;
+        }
+        
+        .add_task:hover {
+            background-color: #8c8c8c;
+            transform: rotate(90deg);
+        }
+        
+        .add_task:active {
+            transform: scale(0.9) rotate(90deg);
+        }
+
+        .add_task svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* кнопка добавления задач --- */
 
     </style>
 </head>

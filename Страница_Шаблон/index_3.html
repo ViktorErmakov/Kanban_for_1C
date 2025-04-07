@@ -417,7 +417,7 @@
         .zoom-controls {
             position: fixed;
             right: 30px;
-            background: #8c8c8c ;
+            background: #8c8c8c;
             color: white;
             padding: 5px;
             border-radius: 5px;
@@ -428,7 +428,7 @@
             /* Фиксируем размер шрифта */
             font-size: 1.6rem;
         }
-        
+
         .zoom-btn {
             width: 20px;
             height: 20px;
@@ -442,16 +442,51 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .zoom-btn:hover {
             background: #555;
         }
-        
+
         .zoom-value {
             min-width: 50px;
             text-align: center;
         }
+
+        /* кнопка добавления задач +++ */
+
+        .add_task {
+            min-width: 26px;
+            min-height: 26px;
+            border-radius: 50%;
+            /* background-color: #3498db; */
+            /* color: white; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* text-decoration: none; */
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            /* padding: 1rem; */
+            margin: 1rem;
+        }
         
+        .add_task:hover {
+            background-color: #8c8c8c;
+            transform: rotate(90deg);
+        }
+        
+        .add_task:active {
+            transform: scale(0.9) rotate(90deg);
+        }
+
+        .add_task svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* кнопка добавления задач --- */
+
     </style>
     <base
         href="v8config://0a8bb6729b7cce4d36611cfdabfaa6de6345db31/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
@@ -459,7 +494,7 @@
 </head>
 
 <body>
-    
+
     <div class="wrapper">
 
         <div class="command_panel">
@@ -494,7 +529,7 @@
             </div>
 
             <div class="command_panel_buttons">
-                
+
                 <a id="my_tasks" class="my_tasks user5127bf5c-9ae0-11ef-94b1-107b4419808b" href="">Только мои задачи</a>
 
                 <div id="update_svg">
@@ -539,22 +574,71 @@
         <div id="kanban-board">
 
             <div class="kanban_header">
-                <div class="block_header"><strong class="kanban-block__name">Зарегистрирована</strong><strong
-                        class="kanban-block__number">12</strong></div>
+                <div class="block_header">
+                    <strong class="kanban-block__name">Зарегистрирована</strong>
+                    <strong class="kanban-block__number">12</strong>
+                    <a href="#" class="add_task">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
                 <div class="block_header"><strong class="kanban-block__name">В процессе выполнения</strong><strong
-                        class="kanban-block__number">2</strong></div>
+                        class="kanban-block__number">2</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">На тестировании</strong><strong
-                        class="kanban-block__number">0</strong></div>
+                        class="kanban-block__number">0</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">К переносу в рабочую</strong><strong
-                        class="kanban-block__number">0</strong></div>
+                        class="kanban-block__number">0</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">Готово</strong><strong
-                        class="kanban-block__number">0</strong></div>
+                        class="kanban-block__number">0</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">Backlog</strong><strong
-                        class="kanban-block__number">0</strong></div>
+                        class="kanban-block__number">0</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">Отменена</strong><strong
-                        class="kanban-block__number">0</strong></div>
+                        class="kanban-block__number">0</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 <div class="block_header"><strong class="kanban-block__name">Запрос на добавление</strong><strong
-                        class="kanban-block__number">1</strong></div>
+                        class="kanban-block__number">1</strong>
+                        <a href="#" class="add_task">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
             </div>
             <div class="kanban_body">
                 <div class="kanban-block" id="a1ca3366-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
@@ -752,7 +836,7 @@
         </div>
 
     </div>
-    
+
     <script>
 
         let my_tasks = document.querySelector('#my_tasks');
@@ -854,7 +938,7 @@
             // Применяем zoom ко всему body
             document.body.style.zoom = `${currentZoom}%`;
             zoomDisplay.textContent = `${currentZoom}%`;
-            
+
             // Отключаем кнопки при достижении границ
             zoomInBtn.disabled = currentZoom >= maxZoom;
             zoomOutBtn.disabled = currentZoom <= minZoom;
@@ -876,12 +960,12 @@
         });
 
         // Обработчик клавиатуры
-        document.addEventListener('keydown', function(e) {
-            
+        document.addEventListener('keydown', function (e) {
+
             // Проверяем, что нажат Ctrl (или Cmd на Mac)
             if (e.ctrlKey || e.metaKey) {
                 var key = e.keyCode || e.which; // Для максимальной совместимости
-                
+
                 // console.log('fsdfsdfsd');
                 // console.log(e.key);
 
@@ -892,7 +976,7 @@
                         currentZoom += zoomStep;
                         updatePageZoom();
                     }
-                } 
+                }
                 // Обрабатываем "-" (и "_", но без Shift)
                 else if (key === 189 || key === 173) { // 189 = '-', 173 = '_' (в некоторых браузерах)
                     e.preventDefault();
@@ -900,9 +984,9 @@
                         currentZoom -= zoomStep;
                         updatePageZoom();
                     }
-                } 
+                }
                 // Сброс масштаба по Ctrl+0 (код клавиши "0" = 48)
-                else if (key === 48) { 
+                else if (key === 48) {
                     e.preventDefault();
                     currentZoom = 100;
                     updatePageZoom();
