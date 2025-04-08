@@ -450,7 +450,7 @@
         }
         
         /* кнопка добавления задач +++ */
-
+         
         .add_task {
             min-width: 26px;
             min-height: 26px;
@@ -463,14 +463,22 @@
             /* text-decoration: none; */
             transition: all 0.3s ease;
             border: none;
-            cursor: pointer;
+            /* cursor: pointer; */
             /* padding: 1rem; */
             margin: 1rem;
+        }
+        
+         .add_task * {
+            pointer-events: none;
         }
         
         .add_task:hover {
             background-color: #8c8c8c;
             transform: rotate(90deg);
+        }
+        
+         .add_task:hover svg path {
+            stroke: white;
         }
         
         .add_task:active {

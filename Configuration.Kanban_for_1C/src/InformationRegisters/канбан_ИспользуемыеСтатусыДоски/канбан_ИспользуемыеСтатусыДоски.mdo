@@ -32,6 +32,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <attributes uuid="94ae3b5d-8036-450a-b47c-8283b416fa8f">
+    <name>КнопкаДобавить</name>
+    <synonym>
+      <key>ru</key>
+      <value>Кнопка добавить</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <dimensions uuid="59997daa-2d58-46b5-86df-cfde008d6e3a">
     <name>Пользователь</name>
     <synonym>

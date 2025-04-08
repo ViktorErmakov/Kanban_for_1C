@@ -102,7 +102,16 @@
         .checkboxes {
             display: flex;
             flex-direction: row;
-            gap: 1rem;
+        }
+
+        .checkboxes>* {
+            margin-right: 1rem;
+            /* Отступ между элементами */
+        }
+
+        .checkboxes>*:last-child {
+            margin-right: 0;
+            /* Убираем отступ у последнего элемента */
         }
 
         /* общие настройки для тегов */
@@ -296,7 +305,16 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+        }
+
+        .command_panel_buttons>* {
+            margin-right: 1rem;
+            /* Отступ между элементами */
+        }
+
+        .command_panel_buttons>*:last-child {
+            margin-right: 0;
+            /* Убираем отступ у последнего элемента */
         }
 
         #update_svg,
@@ -340,12 +358,9 @@
         }
 
         .my_tasks_active {
-            /* text-decoration: underline; */
             transform: scale(0.98);
             background-color: #8c8c8c;
-            /* background-color: #3498db; */
             color: white;
-            /* font-weight: bold; */
         }
 
         @media only screen and (max-width: 1450px) {
@@ -424,7 +439,6 @@
             font-family: Arial, sans-serif;
             display: flex;
             align-items: center;
-            gap: 10px;
             /* Фиксируем размер шрифта */
             font-size: 1.6rem;
         }
@@ -466,16 +480,24 @@
             /* text-decoration: none; */
             transition: all 0.3s ease;
             border: none;
-            cursor: pointer;
+            /* cursor: pointer; */
             /* padding: 1rem; */
             margin: 1rem;
         }
-        
+
+        .add_task * {
+            pointer-events: none;
+        }
+
         .add_task:hover {
             background-color: #8c8c8c;
             transform: rotate(90deg);
         }
-        
+
+        .add_task:hover svg path {
+            stroke: white;
+        }
+
         .add_task:active {
             transform: scale(0.9) rotate(90deg);
         }
@@ -486,17 +508,14 @@
         }
 
         /* кнопка добавления задач --- */
-
     </style>
     <base
-        href="v8config://0a8bb6729b7cce4d36611cfdabfaa6de6345db31/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://2110465093032298cd3c9cb5eaae52bf41c45a53/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
 <body>
-
     <div class="wrapper">
-
         <div class="command_panel">
 
             <!-- Элементы управления масштабом -->
@@ -566,7 +585,6 @@
                     </svg>
                 </div>
 
-
             </div>
 
         </div>
@@ -574,71 +592,25 @@
         <div id="kanban-board">
 
             <div class="kanban_header">
-                <div class="block_header">
-                    <strong class="kanban-block__name">Зарегистрирована</strong>
-                    <strong class="kanban-block__number">12</strong>
-                    <a href="#" class="add_task">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
+                <div class="block_header"><strong class="kanban-block__name">Зарегистрирована</strong><strong
+                        class="kanban-block__number">12</strong><a href="#"
+                        class="add_task statusa1ca3366-c296-11ee-93e4-107b4419808b"><svg viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2"
+                                stroke-linecap="round"></path>
+                        </svg></a></div>
                 <div class="block_header"><strong class="kanban-block__name">В процессе выполнения</strong><strong
-                        class="kanban-block__number">2</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">2</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">На тестировании</strong><strong
-                        class="kanban-block__number">0</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">К переносу в рабочую</strong><strong
-                        class="kanban-block__number">0</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">Готово</strong><strong
-                        class="kanban-block__number">0</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">Backlog</strong><strong
-                        class="kanban-block__number">0</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">Отменена</strong><strong
-                        class="kanban-block__number">0</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                <div class="block_header"><strong class="kanban-block__name">Запрос на добавление</strong><strong
-                        class="kanban-block__number">1</strong>
-                        <a href="#" class="add_task">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </div>
+                        class="kanban-block__number">0</strong></div>
             </div>
             <div class="kanban_body">
                 <div class="kanban-block" id="a1ca3366-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
@@ -818,20 +790,6 @@
                 <div class="kanban-block" id="a1ca3364-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
                 <div class="kanban-block" id="a1ca3361-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
                 <div class="kanban-block" id="a1ca336b-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
-                <div class="kanban-block" id="a1ca3365-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user5127bf5c-9ae0-11ef-94b1-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task0efde98b-dc1d-11ef-94fc-107b4419808b">
-                        <div class="card__header">
-                            <div class="tag_task" style="background-color: rgb(251,224,224);"></div><a
-                                class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=94fc107b4419808b11efdc1d0efde98b">Задача
-                                №3</a><img class="card__photo" alt="foto"></img>
-                        </div>
-                        <div class="card__text"><span>Третий эпик</span></div><button
-                            class="changeStatus task0efde98b-dc1d-11ef-94fc-107b4419808b"
-                            style="visibility: hidden;"></button>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -965,9 +923,6 @@
             // Проверяем, что нажат Ctrl (или Cmd на Mac)
             if (e.ctrlKey || e.metaKey) {
                 var key = e.keyCode || e.which; // Для максимальной совместимости
-
-                // console.log('fsdfsdfsd');
-                // console.log(e.key);
 
                 // Обрабатываем "+" (и "=", так как это одна клавиша без Shift)
                 if (key === 187 || key === 61) { // 187 = '+', 61 = '=' (некоторые старые браузеры)
