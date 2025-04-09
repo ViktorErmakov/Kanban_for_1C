@@ -22,4 +22,6 @@
   <content>CommonPicture.канбан_Доска</content>
   <content>DataProcessor.Канбан_Доска_HTML</content>
   <content>InformationRegister.канбан_ИспользуемыеСтатусыДоски</content>
+  <content>DataProcessor.канбан_ТехПоддержка</content>
+  <content>CommandGroup.канбан_Информация</content>
 </mdclass:Subsystem>

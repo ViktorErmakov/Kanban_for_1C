@@ -5,5 +5,9 @@
       <command>DataProcessor.Канбан_Доска_HTML.StandardCommand.Open</command>
       <visible/>
     </visibilityFragments>
+    <visibilityFragments>
+      <command>DataProcessor.Канбан_Доска_HTML.Command.ОткрытьСтраницуРазработки</command>
+      <visible/>
+    </visibilityFragments>
   </commandsVisibility>
 </cmi:CommandInterface>
