@@ -284,6 +284,40 @@
   <items xsi:type="form:FormGroup">
     <name>ГруппаСтатусыЗадач</name>
     <id>20</id>
+    <items xsi:type="form:Decoration">
+      <name>ДекорацияСтатусы</name>
+      <id>101</id>
+      <title>
+        <key>ru</key>
+        <value>На доске будут отображаться только выбранные статусы в указанном порядке следования. 
+Рекомендуется использовать не более 6 статусов, с короткими представлениями.</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>ДекорацияСтатусыРасширеннаяПодсказка</name>
+        <id>103</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ДекорацияСтатусыКонтекстноеМеню</name>
+        <id>102</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>Label</type>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </items>
     <items xsi:type="form:Table">
       <name>СтатусыЗадач</name>
       <id>22</id>
@@ -301,9 +335,10 @@
       <excludedCommands>EndEdit</excludedCommands>
       <toolTip>
         <key>ru</key>
-        <value>На доске будут отображаться только выбранные статусы в указанном порядке следования.</value>
+        <value>На доске будут отображаться только выбранные статусы в указанном порядке следования. 
+Рекомендуется использовать не более 6 статусов, с короткими представлениями.</value>
       </toolTip>
-      <toolTipRepresentation>ShowTop</toolTipRepresentation>
+      <toolTipRepresentation>None</toolTipRepresentation>
       <items xsi:type="form:FormField">
         <name>СтатусыЗадачНомерПоПорядку</name>
         <id>89</id>
@@ -736,7 +771,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
+      <group>Vertical</group>
       <behavior>Collapsible</behavior>
       <controlRepresentation>Picture</controlRepresentation>
       <representation>WeakSeparation</representation>
@@ -750,6 +785,41 @@
   <items xsi:type="form:FormGroup">
     <name>ГруппаПроекты</name>
     <id>54</id>
+    <items xsi:type="form:Decoration">
+      <name>ДекорацияПроекты</name>
+      <id>98</id>
+      <title>
+        <key>ru</key>
+        <value>На доске отображаются задачи из выбранных проектов. Если проекты не выбраны, отображаются задачи из всех доступных пользователю проектов.
+Выбранные проекты включаются в быстрые фильтры доски.
+Каждому проекту можно определить персональный цвет.</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>ДекорацияПроектыРасширеннаяПодсказка</name>
+        <id>100</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ДекорацияПроектыКонтекстноеМеню</name>
+        <id>99</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>Label</type>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </items>
     <items xsi:type="form:Table">
       <name>ИспользуемыеПроектыДоски</name>
       <id>56</id>
@@ -769,10 +839,11 @@
       <excludedCommands>MoveUp</excludedCommands>
       <toolTip>
         <key>ru</key>
-        <value>На доске будут отображаться задачи только по выбранным проектам.
+        <value>На доске отображаются задачи из выбранных проектов. Если проекты не выбраны, отображаются задачи из всех доступных пользователю проектов.
+Выбранные проекты включаются в быстрые фильтры доски.
 Каждому проекту можно определить персональный цвет.</value>
       </toolTip>
-      <toolTipRepresentation>ShowTop</toolTipRepresentation>
+      <toolTipRepresentation>None</toolTipRepresentation>
       <items xsi:type="form:FormField">
         <name>ИспользуемыеПроектыДоскиПроект</name>
         <id>75</id>
@@ -1115,7 +1186,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
+      <group>Vertical</group>
       <behavior>Collapsible</behavior>
       <controlRepresentation>Picture</controlRepresentation>
       <representation>WeakSeparation</representation>

@@ -35,24 +35,6 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="5af1e3eb-1fd5-4adf-a6eb-0a4ff8f7dec5">
-    <name>ИдентификаторПроектаСтрока</name>
-    <synonym>
-      <key>ru</key>
-      <value>Идентификатор проекта строка</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>36</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
   <dimensions uuid="90a1b083-2819-45f0-9ccd-ad174b22e5f0">
     <name>Пользователь</name>
     <synonym>
