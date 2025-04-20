@@ -22,6 +22,7 @@
             margin: 0;
             font-size: 1.7rem;
             overflow: auto;
+            height: 100vh;
         }
         
         /* Скрываем полосу прокрутки */
@@ -36,23 +37,25 @@
             display: flex;
             flex-direction: column;
         }
+        
+         .sticky_blok {
+            display: flex;
+            position: fixed;
+            top: 0;
+            flex-direction: column;
+            z-index: 100;
+            width: 100%;
+        }
 
         #kanban-board {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 8rem;
             width: 100%;
         }
         
          .kanban_header {
             display: flex;
-            position: fixed;
-            /*width: calc(100% - 1.7rem);*/
             width: 100%;
-            z-index: 100;
-            min-height: 4rem;
-            background-color: #FFFFFF;
         }
 
         .block_header {
@@ -72,7 +75,6 @@
 
         .kanban_body {
             display: flex;
-            position: absolute;
             width: 100%;
             top: 4rem;
             min-height: 91vh;
@@ -87,10 +89,6 @@
         
         .kanban-block:first-child {
             margin-left: .5rem;
-        }
-        
-        .kanban-block .card:first-child {
-            margin-top: 20px;
         }
 
         /* чекбоксы */
@@ -125,9 +123,6 @@
             width: fit-content;
             /* радиус скругления */
             border-radius: .4rem;
-            /* отступ сверху */
-            margin-top: .5rem;
-            margin-bottom: .5rem;
             /* запрещаем выделять мышкой этот элемент */
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -292,15 +287,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            position: fixed;
-            z-index: 100;
-            width: 100%;
-            /*height: 6rem;*/
-            padding-left: .5rem;
-            padding-right: .5rem;
+            padding: .5rem;
             background-color: white;
             justify-content: start;
-            margin-top: .5rem;
         }
         
         .command_panel_buttons {
@@ -507,6 +496,9 @@
 
 <body>
     <div class="wrapper">
+    
+        <div id = "sticky_blok" class="sticky_blok">
+    
         <div class="command_panel">
 	        
 	         <!-- Элементы управления масштабом -->
@@ -562,6 +554,8 @@
             
         </div>
 
+        </div>
+
         <div id="kanban-board">
 
         </div>
@@ -592,7 +586,8 @@
         function allowDrop(event) {
             event.preventDefault();
         }
-
+        
+        // Перетаскивание задач по статусам +++
         dropZones = document.querySelectorAll(".kanban-block");
         dropZones.forEach(function (item) {
             item.addEventListener("drop", (event) => {
@@ -618,6 +613,7 @@
 
             });
         });
+        // Перетаскивание задач по статусам ---
 
         function RecalculateKanbanBlock() {
             // Рассчитываем количество задач в каждом блоке
@@ -726,6 +722,21 @@
         // Инициализация
         updatePageZoom();
         /* Масштабирование страницы --- */
+        
+        // Рассчет блока задач от высоты фиксированного блока +++
+        // Автоматический расчёт отступа
+        const sticky_blok = document.querySelector('.sticky_blok');
+        const kanban_board = document.querySelector('#kanban-board');
+
+        function updatePadding() {
+            const sticky_blok_Height = sticky_blok.offsetHeight;
+            kanban_board.style.paddingTop = `${sticky_blok_Height}px`;
+        }
+
+        // Обновляем при загрузке и изменении размера окна
+        window.addEventListener('load', updatePadding);
+        window.addEventListener('resize', updatePadding);
+        // Рассчет блока задач от высоты фиксированного блока ---
 
     </script>
     

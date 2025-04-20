@@ -24,6 +24,7 @@
             margin: 0;
             font-size: 1.7rem;
             overflow: auto;
+            height: 100vh;
         }
 
         /* Скрываем полосу прокрутки */
@@ -41,22 +42,24 @@
             flex-direction: column;
         }
 
+        .sticky_blok {
+            display: flex;
+            position: fixed;
+            top: 0;
+            flex-direction: column;
+            z-index: 100;
+            width: 100%;
+        }
+
         #kanban-board {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 9rem;
             width: 100%;
         }
 
         .kanban_header {
             display: flex;
-            position: fixed;
-            /*width: calc(100% - 1.7rem);*/
             width: 100%;
-            z-index: 100;
-            min-height: 4rem;
-            background-color: #FFFFFF;
         }
 
         .block_header {
@@ -76,7 +79,6 @@
 
         .kanban_body {
             display: flex;
-            position: absolute;
             width: 100%;
             top: 4rem;
             min-height: 91vh;
@@ -91,10 +93,6 @@
 
         .kanban-block:first-child {
             margin-left: .5rem;
-        }
-
-        .kanban-block .card:first-child {
-            margin-top: 20px;
         }
 
         /* чекбоксы */
@@ -132,9 +130,6 @@
             width: fit-content;
             /* радиус скругления */
             border-radius: .4rem;
-            /* отступ сверху */
-            /*margin-top: .5rem;*/
-            /*margin-bottom: .5rem;*/
             /* запрещаем выделять мышкой этот элемент */
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -300,15 +295,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            position: fixed;
-            z-index: 100;
-            width: 100%;
-            /*height: 6rem;*/
-            padding-left: .5rem;
-            padding-right: .5rem;
+            padding: .5rem;
             background-color: white;
             justify-content: start;
-            margin-top: .5rem;
         }
 
         .command_panel_buttons {
@@ -521,165 +510,196 @@
         /* кнопка добавления задач --- */
     </style>
     <base
-        href="v8config://89d6d638f84f1abbb41c735a5f6b175195089233/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://3b0d48bea07bd7cff6a7849e16789f52435c3206/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="command_panel">
 
-            <!-- Элементы управления масштабом -->
-            <div class="zoom-controls">
-                <button class="zoom-btn" id="zoom-out">-</button>
-                <span class="zoom-value" id="zoom-display">100%</span>
-                <button class="zoom-btn" id="zoom-in">+</button>
-            </div>
+        <div id="sticky_blok" class="sticky_blok">
 
-            <div id="checkboxes" class="checkboxes">
+            <div class="command_panel">
 
-                <div class="checkbox"><input type="checkbox" id="project8e7227e2-c296-11ee-93e4-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="project8e7227e2-c296-11ee-93e4-107b4419808b">
-                        <div class="tag project8e7227e2-c296-11ee-93e4-107b4419808b">Первый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="project8d9f5c04-ea3a-11ef-9500-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="project8d9f5c04-ea3a-11ef-9500-107b4419808b">
-                        <div class="tag project8d9f5c04-ea3a-11ef-9500-107b4419808b">Второй проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="project8d9f5c05-ea3a-11ef-9500-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="project8d9f5c05-ea3a-11ef-9500-107b4419808b">
-                        <div class="tag project8d9f5c05-ea3a-11ef-9500-107b4419808b">Третий проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2f9fb-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2f9fb-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2f9fb-1bb1-11f0-9517-107b4419808b">Четвертый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2f9fc-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2f9fc-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2f9fc-1bb1-11f0-9517-107b4419808b">Пятый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2f9fd-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2f9fd-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2f9fd-1bb1-11f0-9517-107b4419808b">Шестой проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2f9fe-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2f9fe-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2f9fe-1bb1-11f0-9517-107b4419808b">Седьмой проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2f9ff-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2f9ff-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2f9ff-1bb1-11f0-9517-107b4419808b">Восьмой проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2fa00-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2fa00-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2fa00-1bb1-11f0-9517-107b4419808b">Девятый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2fa01-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2fa01-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2fa01-1bb1-11f0-9517-107b4419808b">Десятый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2fa02-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2fa02-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2fa02-1bb1-11f0-9517-107b4419808b">Одиннадцатый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecte6f2fa03-1bb1-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecte6f2fa03-1bb1-11f0-9517-107b4419808b">
-                        <div class="tag projecte6f2fa03-1bb1-11f0-9517-107b4419808b">Двенадцатый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecta4366321-1bb4-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecta4366321-1bb4-11f0-9517-107b4419808b">
-                        <div class="tag projecta4366321-1bb4-11f0-9517-107b4419808b">Тренадцатый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecta4366322-1bb4-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecta4366322-1bb4-11f0-9517-107b4419808b">
-                        <div class="tag projecta4366322-1bb4-11f0-9517-107b4419808b">Четырнадцатый проект</div>
-                    </label></div>
-                <div class="checkbox"><input type="checkbox" id="projecta4366323-1bb4-11f0-9517-107b4419808b"
-                        checked="true" onclick="checkFluency(id, id)"></input><label
-                        for="projecta4366323-1bb4-11f0-9517-107b4419808b">
-                        <div class="tag projecta4366323-1bb4-11f0-9517-107b4419808b">Пятнадцатый проект</div>
-                    </label></div>
-            </div>
-
-            <div class="command_panel_buttons">
-
-                <a id="my_tasks" class="my_tasks user5127bf5c-9ae0-11ef-94b1-107b4419808b" href="">Только мои задачи</a>
-
-                <div id="update_svg">
-                    <!--?xml version="1.0" encoding="UTF-8"?-->
-                    <!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
-                    <svg fill="#8c8c8c" stroke="#8c8c8c" width="32" height="32" style="pointer-events: none; version="
-                        viewbox="144 144 512 512" xmlns="http://www.w3.org/2000/svg">
-                        <g id="IconSvg_bgCarrier" stroke-width="0"></g>
-                        <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
-                            stroke-width="0">
-                            <path xmlns="http://www.w3.org/2000/svg"
-                                d="m387.4 203.36c-96.539 0.89453-179.1 42.605-214.12 101.71 36.559-24.383 86.039-39.359 140.44-39.359 82.738 0 153.97 34.656 185.94 84.387l-30.547 23.457 157.6 48.492-6.4531-164.84-30.699 23.617c-62.805-50.465-113.38-78.281-202.16-77.461zm-214.12 174.6 6.4531 164.84 30.703-23.617c62.801 50.465 113.38 78.281 202.15 77.461 96.539-0.89453 179.1-42.605 214.12-101.71-36.559 24.383-86.039 39.359-140.44 39.359-82.738 0-153.97-34.656-185.94-84.387l30.547-23.457z"
-                                fill-rule="evenodd"></path>
-                        </g>
-                    </svg>
+                <!-- Элементы управления масштабом -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-out">-</button>
+                    <span class="zoom-value" id="zoom-display">100%</span>
+                    <button class="zoom-btn" id="zoom-in">+</button>
                 </div>
-                <div id="setup_svg">
-                    <!--?xml version="1.0" encoding="UTF-8"?-->
-                    <!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
-                    <svg fill="#7f7a7a" stroke="#7f7a7a" width="32" height="32" style="pointer-events: none; version="
-                        viewbox="144 144 512 512" xmlns="http://www.w3.org/2000/svg">
-                        <g id="IconSvg_bgCarrier" stroke-width="0"></g>
-                        <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
-                            stroke-width="0">
-                            <g xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m431.49 636.16h-62.977c-3.4219 0-6.75-1.1172-9.4805-3.1797-2.7344-2.0586-4.7188-4.9531-5.6562-8.2461l-18.973-66.375-60.348 33.516v0.003906c-2.9922 1.668-6.4414 2.3125-9.832 1.8359-3.3906-0.47266-6.5312-2.043-8.9492-4.4648l-44.52-44.527c-2.418-2.4141-3.9883-5.5547-4.4609-8.9453-0.47656-3.3867 0.16406-6.8359 1.8242-9.8281l33.523-60.363-66.387-18.957c-3.2891-0.94141-6.1836-2.9297-8.2422-5.6602-2.0586-2.7344-3.1719-6.0625-3.1758-9.4805v-62.977c0.003906-3.4219 1.1172-6.75 3.1758-9.4844 2.0586-2.7305 4.9531-4.7188 8.2422-5.6602l66.391-18.957-33.527-60.363c-1.6602-2.9922-2.3008-6.4414-1.8242-9.8281 0.47266-3.3867 2.043-6.5273 4.4609-8.9453l44.52-44.52c2.4141-2.4258 5.5586-3.9961 8.9492-4.4688 3.3906-0.47656 6.8438 0.17188 9.832 1.8398l60.348 33.516 18.973-66.375v0.003906c0.9375-3.293 2.9219-6.1875 5.6523-8.25 2.7305-2.0625 6.0586-3.1797 9.4844-3.1836h62.977c3.4219 0.003906 6.75 1.1172 9.4844 3.1797 2.7305 2.0625 4.7188 4.957 5.6562 8.2461l18.961 66.375 60.359-33.52c2.9922-1.6641 6.4414-2.3086 9.8281-1.832 3.3906 0.47266 6.5312 2.0391 8.9453 4.4609l44.527 44.527c2.418 2.418 3.9805 5.5586 4.457 8.9453 0.47266 3.3867-0.16797 6.8359-1.8281 9.8281l-33.516 60.363 66.375 18.957h-0.003906c3.293 0.94141 6.1875 2.9258 8.2461 5.6602 2.0625 2.7305 3.1797 6.0586 3.1797 9.4844v62.977c0 3.4219-1.1172 6.75-3.1797 9.4844-2.0586 2.7305-4.9531 4.7188-8.2461 5.6562l-66.371 18.961 33.516 60.359c1.6602 2.9922 2.3008 6.4414 1.8281 9.8281-0.47656 3.3867-2.0391 6.5273-4.457 8.9453l-44.527 44.527c-2.4141 2.4258-5.5547 3.9922-8.9453 4.4688-3.3867 0.47656-6.8398-0.17188-9.8281-1.8398l-60.363-33.516-18.957 66.375v-0.003906c-0.9375 3.293-2.9258 6.1875-5.6562 8.2461-2.7344 2.0625-6.0625 3.1797-9.4844 3.1797zm-51.098-31.488h39.23l21.141-74.031h-0.003907c1.3164-4.6211 4.6719-8.3867 9.1094-10.227 4.4414-1.8398 9.4766-1.5508 13.676 0.78125l67.312 37.391 27.734-27.734-37.391-67.312c-2.332-4.1992-2.6211-9.2383-0.78125-13.676 1.8398-4.4375 5.6094-7.793 10.227-9.1094l74.027-21.137v-39.238l-74.031-21.141c-4.6211-1.3164-8.3867-4.6719-10.227-9.1094-1.8398-4.4375-1.5508-9.4766 0.78125-13.676l37.391-67.312-27.73-27.734-67.312 37.391c-4.1992 2.332-9.2344 2.6211-13.676 0.78125-4.4375-1.8398-7.793-5.6055-9.1094-10.227l-21.141-74.027h-39.23l-21.156 74.031c-1.3164 4.6211-4.6719 8.3867-9.1094 10.227-4.4375 1.8398-9.4766 1.5547-13.676-0.78125l-67.305-37.395-27.734 27.734 37.391 67.312c2.332 4.1992 2.6211 9.2344 0.78516 13.672-1.8359 4.4375-5.6016 7.793-10.219 9.1133l-74.039 21.141v39.238l74.039 21.141c4.6172 1.3203 8.3828 4.6758 10.219 9.1133 1.8359 4.4414 1.5469 9.4727-0.78516 13.672l-37.391 67.312 27.734 27.734 67.305-37.391c4.1992-2.332 9.2383-2.6211 13.676-0.78125 4.4375 1.8398 7.793 5.6094 9.1094 10.227z">
-                                </path>
-                                <path
-                                    d="m400 478.72c-20.879 0-40.902-8.293-55.664-23.055-14.766-14.766-23.059-34.789-23.059-55.664 0-20.879 8.293-40.902 23.059-55.664 14.762-14.766 34.785-23.059 55.664-23.059 20.875 0 40.898 8.293 55.664 23.059 14.762 14.762 23.055 34.785 23.055 55.664-0.023438 20.867-8.3281 40.879-23.082 55.637-14.758 14.754-34.77 23.059-55.637 23.082zm0-125.95c-12.527 0-24.543 4.9766-33.398 13.836-8.8594 8.8555-13.836 20.871-13.836 33.398 0 12.523 4.9766 24.539 13.836 33.398 8.8555 8.8555 20.871 13.832 33.398 13.832 12.523 0 24.539-4.9766 33.398-13.832 8.8555-8.8594 13.832-20.875 13.832-33.398-0.011719-12.523-4.9961-24.531-13.848-33.383-8.8555-8.8555-20.863-13.836-33.383-13.852z">
-                                </path>
+
+                <div id="checkboxes" class="checkboxes">
+
+                    <div class="checkbox"><input type="checkbox" id="project8e7227e2-c296-11ee-93e4-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="project8e7227e2-c296-11ee-93e4-107b4419808b">
+                            <div class="tag project8e7227e2-c296-11ee-93e4-107b4419808b">Первый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="project8d9f5c04-ea3a-11ef-9500-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="project8d9f5c04-ea3a-11ef-9500-107b4419808b">
+                            <div class="tag project8d9f5c04-ea3a-11ef-9500-107b4419808b">Второй проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="project8d9f5c05-ea3a-11ef-9500-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="project8d9f5c05-ea3a-11ef-9500-107b4419808b">
+                            <div class="tag project8d9f5c05-ea3a-11ef-9500-107b4419808b">Третий проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2f9fc-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2f9fc-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2f9fc-1bb1-11f0-9517-107b4419808b">Пятый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2f9fd-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2f9fd-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2f9fd-1bb1-11f0-9517-107b4419808b">Шестой проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2f9fe-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2f9fe-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2f9fe-1bb1-11f0-9517-107b4419808b">Седьмой проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2f9ff-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2f9ff-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2f9ff-1bb1-11f0-9517-107b4419808b">Восьмой проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2fa00-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2fa00-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2fa00-1bb1-11f0-9517-107b4419808b">Девятый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2fa01-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2fa01-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2fa01-1bb1-11f0-9517-107b4419808b">Десятый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2fa02-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2fa02-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2fa02-1bb1-11f0-9517-107b4419808b">Одиннадцатый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecte6f2fa03-1bb1-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecte6f2fa03-1bb1-11f0-9517-107b4419808b">
+                            <div class="tag projecte6f2fa03-1bb1-11f0-9517-107b4419808b">Двенадцатый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecta4366321-1bb4-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecta4366321-1bb4-11f0-9517-107b4419808b">
+                            <div class="tag projecta4366321-1bb4-11f0-9517-107b4419808b">Тринадцатый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecta4366322-1bb4-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecta4366322-1bb4-11f0-9517-107b4419808b">
+                            <div class="tag projecta4366322-1bb4-11f0-9517-107b4419808b">Четырнадцатый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecta4366323-1bb4-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecta4366323-1bb4-11f0-9517-107b4419808b">
+                            <div class="tag projecta4366323-1bb4-11f0-9517-107b4419808b">Пятнадцатый проект</div>
+                        </label></div>
+                    <div class="checkbox"><input type="checkbox" id="projecta4366325-1bb4-11f0-9517-107b4419808b"
+                            checked="true" onclick="checkFluency(id, id)"></input><label
+                            for="projecta4366325-1bb4-11f0-9517-107b4419808b">
+                            <div class="tag projecta4366325-1bb4-11f0-9517-107b4419808b">Семнадцатый проект очень
+                                длинный блок</div>
+                        </label></div>
+                </div>
+
+                <div class="command_panel_buttons">
+
+                    <a id="my_tasks" class="my_tasks user5127bf5c-9ae0-11ef-94b1-107b4419808b" href="">Только мои
+                        задачи</a>
+
+                    <div id="update_svg">
+                        <!--?xml version="1.0" encoding="UTF-8"?-->
+                        <!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
+                        <svg fill="#8c8c8c" stroke="#8c8c8c" width="32" height="32"
+                            style="pointer-events: none; version=" viewbox="144 144 512 512"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="IconSvg_bgCarrier" stroke-width="0"></g>
+                            <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                stroke="#CCCCCC" stroke-width="0">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                    d="m387.4 203.36c-96.539 0.89453-179.1 42.605-214.12 101.71 36.559-24.383 86.039-39.359 140.44-39.359 82.738 0 153.97 34.656 185.94 84.387l-30.547 23.457 157.6 48.492-6.4531-164.84-30.699 23.617c-62.805-50.465-113.38-78.281-202.16-77.461zm-214.12 174.6 6.4531 164.84 30.703-23.617c62.801 50.465 113.38 78.281 202.15 77.461 96.539-0.89453 179.1-42.605 214.12-101.71-36.559 24.383-86.039 39.359-140.44 39.359-82.738 0-153.97-34.656-185.94-84.387l30.547-23.457z"
+                                    fill-rule="evenodd"></path>
                             </g>
-                        </g>
-                    </svg>
+                        </svg>
+                    </div>
+                    <div id="setup_svg">
+                        <!--?xml version="1.0" encoding="UTF-8"?-->
+                        <!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
+                        <svg fill="#7f7a7a" stroke="#7f7a7a" width="32" height="32"
+                            style="pointer-events: none; version=" viewbox="144 144 512 512"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="IconSvg_bgCarrier" stroke-width="0"></g>
+                            <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                stroke="#CCCCCC" stroke-width="0">
+                                <g xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m431.49 636.16h-62.977c-3.4219 0-6.75-1.1172-9.4805-3.1797-2.7344-2.0586-4.7188-4.9531-5.6562-8.2461l-18.973-66.375-60.348 33.516v0.003906c-2.9922 1.668-6.4414 2.3125-9.832 1.8359-3.3906-0.47266-6.5312-2.043-8.9492-4.4648l-44.52-44.527c-2.418-2.4141-3.9883-5.5547-4.4609-8.9453-0.47656-3.3867 0.16406-6.8359 1.8242-9.8281l33.523-60.363-66.387-18.957c-3.2891-0.94141-6.1836-2.9297-8.2422-5.6602-2.0586-2.7344-3.1719-6.0625-3.1758-9.4805v-62.977c0.003906-3.4219 1.1172-6.75 3.1758-9.4844 2.0586-2.7305 4.9531-4.7188 8.2422-5.6602l66.391-18.957-33.527-60.363c-1.6602-2.9922-2.3008-6.4414-1.8242-9.8281 0.47266-3.3867 2.043-6.5273 4.4609-8.9453l44.52-44.52c2.4141-2.4258 5.5586-3.9961 8.9492-4.4688 3.3906-0.47656 6.8438 0.17188 9.832 1.8398l60.348 33.516 18.973-66.375v0.003906c0.9375-3.293 2.9219-6.1875 5.6523-8.25 2.7305-2.0625 6.0586-3.1797 9.4844-3.1836h62.977c3.4219 0.003906 6.75 1.1172 9.4844 3.1797 2.7305 2.0625 4.7188 4.957 5.6562 8.2461l18.961 66.375 60.359-33.52c2.9922-1.6641 6.4414-2.3086 9.8281-1.832 3.3906 0.47266 6.5312 2.0391 8.9453 4.4609l44.527 44.527c2.418 2.418 3.9805 5.5586 4.457 8.9453 0.47266 3.3867-0.16797 6.8359-1.8281 9.8281l-33.516 60.363 66.375 18.957h-0.003906c3.293 0.94141 6.1875 2.9258 8.2461 5.6602 2.0625 2.7305 3.1797 6.0586 3.1797 9.4844v62.977c0 3.4219-1.1172 6.75-3.1797 9.4844-2.0586 2.7305-4.9531 4.7188-8.2461 5.6562l-66.371 18.961 33.516 60.359c1.6602 2.9922 2.3008 6.4414 1.8281 9.8281-0.47656 3.3867-2.0391 6.5273-4.457 8.9453l-44.527 44.527c-2.4141 2.4258-5.5547 3.9922-8.9453 4.4688-3.3867 0.47656-6.8398-0.17188-9.8281-1.8398l-60.363-33.516-18.957 66.375v-0.003906c-0.9375 3.293-2.9258 6.1875-5.6562 8.2461-2.7344 2.0625-6.0625 3.1797-9.4844 3.1797zm-51.098-31.488h39.23l21.141-74.031h-0.003907c1.3164-4.6211 4.6719-8.3867 9.1094-10.227 4.4414-1.8398 9.4766-1.5508 13.676 0.78125l67.312 37.391 27.734-27.734-37.391-67.312c-2.332-4.1992-2.6211-9.2383-0.78125-13.676 1.8398-4.4375 5.6094-7.793 10.227-9.1094l74.027-21.137v-39.238l-74.031-21.141c-4.6211-1.3164-8.3867-4.6719-10.227-9.1094-1.8398-4.4375-1.5508-9.4766 0.78125-13.676l37.391-67.312-27.73-27.734-67.312 37.391c-4.1992 2.332-9.2344 2.6211-13.676 0.78125-4.4375-1.8398-7.793-5.6055-9.1094-10.227l-21.141-74.027h-39.23l-21.156 74.031c-1.3164 4.6211-4.6719 8.3867-9.1094 10.227-4.4375 1.8398-9.4766 1.5547-13.676-0.78125l-67.305-37.395-27.734 27.734 37.391 67.312c2.332 4.1992 2.6211 9.2344 0.78516 13.672-1.8359 4.4375-5.6016 7.793-10.219 9.1133l-74.039 21.141v39.238l74.039 21.141c4.6172 1.3203 8.3828 4.6758 10.219 9.1133 1.8359 4.4414 1.5469 9.4727-0.78516 13.672l-37.391 67.312 27.734 27.734 67.305-37.391c4.1992-2.332 9.2383-2.6211 13.676-0.78125 4.4375 1.8398 7.793 5.6094 9.1094 10.227z">
+                                    </path>
+                                    <path
+                                        d="m400 478.72c-20.879 0-40.902-8.293-55.664-23.055-14.766-14.766-23.059-34.789-23.059-55.664 0-20.879 8.293-40.902 23.059-55.664 14.762-14.766 34.785-23.059 55.664-23.059 20.875 0 40.898 8.293 55.664 23.059 14.762 14.762 23.055 34.785 23.055 55.664-0.023438 20.867-8.3281 40.879-23.082 55.637-14.758 14.754-34.77 23.059-55.637 23.082zm0-125.95c-12.527 0-24.543 4.9766-33.398 13.836-8.8594 8.8555-13.836 20.871-13.836 33.398 0 12.523 4.9766 24.539 13.836 33.398 8.8555 8.8555 20.871 13.832 33.398 13.832 12.523 0 24.539-4.9766 33.398-13.832 8.8555-8.8594 13.832-20.875 13.832-33.398-0.011719-12.523-4.9961-24.531-13.848-33.383-8.8555-8.8555-20.863-13.836-33.383-13.852z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-
-        <div id="kanban-board">
 
             <div class="kanban_header">
                 <div class="block_header"><strong class="kanban-block__name">Зарегистрирована</strong><strong
-                        class="kanban-block__number">5</strong><a href="#"
+                        class="kanban-block__number">26</strong><a href="#"
                         class="add_task statusa1ca3366-c296-11ee-93e4-107b4419808b"><svg viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 4V20M4 12H20" stroke="rgb(121, 121, 121)" stroke-width="2"
                                 stroke-linecap="round"></path>
                         </svg></a></div>
                 <div class="block_header"><strong class="kanban-block__name">Ожидает ответа</strong><strong
-                        class="kanban-block__number">4</strong></div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">В процессе выполнения</strong><strong
-                        class="kanban-block__number">2</strong></div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">На тестировании</strong><strong
-                        class="kanban-block__number">1</strong></div>
+                        class="kanban-block__number">0</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">К переносу в рабочую</strong><strong
                         class="kanban-block__number">1</strong></div>
                 <div class="block_header"><strong class="kanban-block__name">Готово</strong><strong
-                        class="kanban-block__number">1</strong></div>
+                        class="kanban-block__number">0</strong></div>
             </div>
+        </div>
+
+        <div id="kanban-board">
+
             <div class="kanban_body">
                 <div class="kanban-block" id="a1ca3366-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task8e7227e3-c296-11ee-93e4-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=93e4107b4419808b11eec2968e7227e3">Задача
+                                №1</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первый эпик</span></div><button
+                            class="changeStatus task8e7227e3-c296-11ee-93e4-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task26933748-db5e-11ef-94fc-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=94fc107b4419808b11efdb5e26933748">Задача
+                                №2</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Второй эпик</span></div><button
+                            class="changeStatus task26933748-db5e-11ef-94fc-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
                     <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b " draggable="true"
                         ondragstart="drag(event)" id="task27c345a8-042a-11f0-9507-107b4419808b">
                         <div class="card__header">
@@ -691,61 +711,147 @@
                             class="changeStatus task27c345a8-042a-11f0-9507-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc45-f606-11ef-9500-107b4419808b">
+                    <div class="card projecte6f2f9fc-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deac-1df7-11f0-9519-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc45">Задача
-                                №10</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deac">Задача
+                                №17</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Первая задача третьего эпика</span></div><button
-                            class="changeStatus task6251cc45-f606-11ef-9500-107b4419808b"
+                        <div class="card__text"><span>Первая задача пятого блока</span></div><button
+                            class="changeStatus task83a7deac-1df7-11f0-9519-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc49-f606-11ef-9500-107b4419808b">
+                    <div class="card projecte6f2f9fd-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7dead-1df7-11f0-9519-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc49">Задача
-                                №12</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7dead">Задача
+                                №18</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Третья задача третьего эпика</span></div><button
-                            class="changeStatus task6251cc49-f606-11ef-9500-107b4419808b"
+                        <div class="card__text"><span>Первая задача шестого проекта</span></div><button
+                            class="changeStatus task83a7dead-1df7-11f0-9519-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc47-f606-11ef-9500-107b4419808b">
+                    <div class="card projecte6f2f9fe-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deae-1df7-11f0-9519-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc47">Задача
-                                №11</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deae">Задача
+                                №19</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Вторая задача третьего эпика</span></div><button
-                            class="changeStatus task6251cc47-f606-11ef-9500-107b4419808b"
+                        <div class="card__text"><span>Первая задача седьмого проекта</span></div><button
+                            class="changeStatus task83a7deae-1df7-11f0-9519-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task27c345a9-042a-11f0-9507-107b4419808b">
+                    <div class="card projecte6f2f9ff-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deaf-1df7-11f0-9519-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9507107b4419808b11f0042a27c345a9">Задача
-                                №15</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deaf">Задача
+                                №20</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Первая задача четвертого эпика</span></div><button
-                            class="changeStatus task27c345a9-042a-11f0-9507-107b4419808b"
+                        <div class="card__text"><span>Первая задача восьмого проекта</span></div><button
+                            class="changeStatus task83a7deaf-1df7-11f0-9519-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                </div>
-                <div class="kanban-block" id="a1ca3369-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task26933748-db5e-11ef-94fc-107b4419808b">
+                    <div class="card projecte6f2fa00-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deb0-1df7-11f0-9519-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=94fc107b4419808b11efdb5e26933748">Задача
-                                №2</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deb0">Задача
+                                №21</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Второй эпик</span></div><button
-                            class="changeStatus task26933748-db5e-11ef-94fc-107b4419808b"
+                        <div class="card__text"><span>Первая задача девятого проекта</span></div><button
+                            class="changeStatus task83a7deb0-1df7-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecte6f2fa01-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deb1-1df7-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deb1">Задача
+                                №22</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача десятого проекта</span></div><button
+                            class="changeStatus task83a7deb1-1df7-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecte6f2fa02-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deb2-1df7-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deb2">Задача
+                                №23</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача одинацдатого проекта</span></div><button
+                            class="changeStatus task83a7deb2-1df7-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecte6f2fa03-1bb1-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deb3-1df7-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deb3">Задача
+                                №24</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача двенадцатого проекта</span></div><button
+                            class="changeStatus task83a7deb3-1df7-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecta4366321-1bb4-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task83a7deb4-1df7-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deb4">Задача
+                                №25</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача тринадцатого проекта</span></div><button
+                            class="changeStatus task83a7deb4-1df7-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecta4366322-1bb4-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task2167226b-1e0a-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01e0a2167226b">Задача
+                                №26</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача четырнадцатого проекта</span></div><button
+                            class="changeStatus task2167226b-1e0a-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecta4366323-1bb4-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task2167226c-1e0a-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01e0a2167226c">Задача
+                                №27</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача пятнадцатого проекта</span></div><button
+                            class="changeStatus task2167226c-1e0a-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card projecta4366325-1bb4-11f0-9517-107b4419808b " draggable="true"
+                        ondragstart="drag(event)" id="task2167226d-1e0a-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01e0a2167226d">Задача
+                                №28</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача семнадцатого проекта</span></div><button
+                            class="changeStatus task2167226d-1e0a-11f0-9519-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc3e-f606-11ef-9500-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc3e">Задача
+                                №5</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Вторая задача первого эпика</span></div><button
+                            class="changeStatus task6251cc3e-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
                     <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b user5127bf5c-9ae0-11ef-94b1-107b4419808b"
@@ -770,28 +876,37 @@
                             class="changeStatus task6251cc43-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b user5127bf5c-9ae0-11ef-94b1-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc44-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc45-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc44">Задача
-                                №9</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc45">Задача
+                                №10</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Третья задача второго эпика</span></div><button
-                            class="changeStatus task6251cc44-f606-11ef-9500-107b4419808b"
+                        <div class="card__text"><span>Первая задача третьего эпика</span></div><button
+                            class="changeStatus task6251cc45-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                </div>
-                <div class="kanban-block" id="a1ca3363-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task8e7227e3-c296-11ee-93e4-107b4419808b">
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc49-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=93e4107b4419808b11eec2968e7227e3">Задача
-                                №1</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc49">Задача
+                                №12</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Первый эпик</span></div><button
-                            class="changeStatus task8e7227e3-c296-11ee-93e4-107b4419808b"
+                        <div class="card__text"><span>Третья задача третьего эпика</span></div><button
+                            class="changeStatus task6251cc49-f606-11ef-9500-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc40-f606-11ef-9500-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc40">Задача
+                                №6</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Третья задача первого эпика</span></div><button
+                            class="changeStatus task6251cc40-f606-11ef-9500-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
                     <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
@@ -805,34 +920,55 @@
                             class="changeStatus taskb5c689c0-f6d2-11ef-9503-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
-                </div>
-                <div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc3e-f606-11ef-9500-107b4419808b">
+                    <div class="card project8d9f5c04-ea3a-11ef-9500-107b4419808b user5127bf5c-9ae0-11ef-94b1-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc44-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
                             <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc3e">Задача
-                                №5</a><img class="card__photo" alt="foto"></img>
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc44">Задача
+                                №9</a><img class="card__photo" alt="foto"></img>
                         </div>
-                        <div class="card__text"><span>Вторая задача первого эпика</span></div><button
-                            class="changeStatus task6251cc3e-f606-11ef-9500-107b4419808b"
+                        <div class="card__text"><span>Третья задача второго эпика</span></div><button
+                            class="changeStatus task6251cc44-f606-11ef-9500-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task6251cc47-f606-11ef-9500-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc47">Задача
+                                №11</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Вторая задача третьего эпика</span></div><button
+                            class="changeStatus task6251cc47-f606-11ef-9500-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task27c345a9-042a-11f0-9507-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9507107b4419808b11f0042a27c345a9">Задача
+                                №15</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача четвертого эпика</span></div><button
+                            class="changeStatus task27c345a9-042a-11f0-9507-107b4419808b"
+                            style="visibility: hidden;"></button>
+                    </div>
+                    <div class="card project8d9f5c05-ea3a-11ef-9500-107b4419808b user5127bf5c-9ae0-11ef-94b1-107b4419808b"
+                        draggable="true" ondragstart="drag(event)" id="task83a7deab-1df7-11f0-9519-107b4419808b">
+                        <div class="card__header">
+                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
+                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9519107b4419808b11f01df783a7deab">Задача
+                                №16</a><img class="card__photo" alt="foto"></img>
+                        </div>
+                        <div class="card__text"><span>Первая задача пятого проекта</span></div><button
+                            class="changeStatus task83a7deab-1df7-11f0-9519-107b4419808b"
                             style="visibility: hidden;"></button>
                     </div>
                 </div>
+                <div class="kanban-block" id="a1ca3369-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
+                <div class="kanban-block" id="a1ca3363-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
+                <div class="kanban-block" id="a1ca3368-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
                 <div class="kanban-block" id="a1ca3367-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
-                    <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
-                        draggable="true" ondragstart="drag(event)" id="task6251cc40-f606-11ef-9500-107b4419808b">
-                        <div class="card__header">
-                            <div class="tag_task" style="background-color: rgb();"></div><a class="card__link"
-                                href="e1c://filev/D/1С/_1C_BASE/Управление задачами#e1cib/data/Справочник.узЗадачи?ref=9500107b4419808b11eff6066251cc40">Задача
-                                №6</a><img class="card__photo" alt="foto"></img>
-                        </div>
-                        <div class="card__text"><span>Третья задача первого эпика</span></div><button
-                            class="changeStatus task6251cc40-f606-11ef-9500-107b4419808b"
-                            style="visibility: hidden;"></button>
-                    </div>
-                </div>
-                <div class="kanban-block" id="a1ca3364-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)">
                     <div class="card project8e7227e2-c296-11ee-93e4-107b4419808b user8e7227e4-c296-11ee-93e4-107b4419808b"
                         draggable="true" ondragstart="drag(event)" id="task6251cc3c-f606-11ef-9500-107b4419808b">
                         <div class="card__header">
@@ -845,6 +981,7 @@
                             style="visibility: hidden;"></button>
                     </div>
                 </div>
+                <div class="kanban-block" id="a1ca3364-c296-11ee-93e4-107b4419808b" ondragover="allowDrop(event)"></div>
             </div>
         </div>
 
@@ -875,6 +1012,7 @@
             event.preventDefault();
         }
 
+        // Перетаскивание задач по статусам +++
         dropZones = document.querySelectorAll(".kanban-block");
         dropZones.forEach(function (item) {
             item.addEventListener("drop", (event) => {
@@ -900,6 +1038,7 @@
 
             });
         });
+        // Перетаскивание задач по статусам ---
 
         function RecalculateKanbanBlock() {
             // Рассчитываем количество задач в каждом блоке
@@ -1008,6 +1147,21 @@
         // Инициализация
         updatePageZoom();
         /* Масштабирование страницы --- */
+
+        // Рассчет блока задач от высоты фиксированного блока +++
+        // Автоматический расчёт отступа
+        const sticky_blok = document.querySelector('.sticky_blok');
+        const kanban_board = document.querySelector('#kanban-board');
+
+        function updatePadding() {
+            const sticky_blok_Height = sticky_blok.offsetHeight;
+            kanban_board.style.paddingTop = `${sticky_blok_Height}px`;
+        }
+
+        // Обновляем при загрузке и изменении размера окна
+        window.addEventListener('load', updatePadding);
+        window.addEventListener('resize', updatePadding);
+        // Рассчет блока задач от высоты фиксированного блока ---
 
     </script>
 </body>
