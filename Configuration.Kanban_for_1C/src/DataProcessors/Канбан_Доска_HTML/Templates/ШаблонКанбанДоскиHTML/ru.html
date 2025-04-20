@@ -90,6 +90,10 @@
         .kanban-block:first-child {
             margin-left: .5rem;
         }
+        
+        .kanban-block:hover {
+            background-color: aliceblue;
+        }
 
         /* чекбоксы */
         /* скрываем флажок у чекбокса */
@@ -102,14 +106,12 @@
             flex-direction: row;
             max-width: 170rem;
             overflow-x: auto; /* Показывает прокрутку только при необходимости */
+            border: 2px solid #ebebeb;
+            border-radius: .4rem;
         }
         
-        .checkboxes > * {
-            margin-right: 1rem; /* Отступ между элементами */
-        }
-
-        .checkboxes > *:last-child {
-            margin-right: 0; /* Убираем отступ у последнего элемента */
+        .checkbox {
+            padding: .5rem;
         }
         
         /* общие настройки для тегов */
