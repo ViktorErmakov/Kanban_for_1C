@@ -104,7 +104,7 @@
         .checkboxes {
             display: flex;
             flex-direction: row;
-            max-width: 170rem;
+            max-width: 250rem;
             overflow-x: auto; /* Показывает прокрутку только при необходимости */
             border: 2px solid #ebebeb;
             border-radius: .4rem;
@@ -291,7 +291,7 @@
             align-items: center;
             padding: .5rem;
             background-color: white;
-            justify-content: start;
+            justify-content: space-between;
         }
         
         .command_panel_buttons {
@@ -299,10 +299,11 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            margin-left: 2rem;
         }
         
         .command_panel_buttons > * {
-            margin-right: 1rem; /* Отступ между элементами */
+            margin-right: 2rem; /* Отступ между элементами */
         }
 
         .command_panel_buttons > *:last-child {
@@ -339,7 +340,7 @@
             border-radius: 4px;
             transition: all 0.3s ease;
             display: inline-block;
-            margin-left: 1rem;
+            border: 2px solid #ebebeb;
         }
         
         .my_tasks:hover {
@@ -414,8 +415,6 @@
         
          /* Масштабирование страницы +++ */
         .zoom-controls {
-            position: fixed;
-            right: 30px;
             background: #8c8c8c ;
             color: white;
             padding: 5px;
@@ -423,8 +422,8 @@
             font-family: Arial, sans-serif;
             display: flex;
             align-items: center;
-            /* Фиксируем размер шрифта */
             font-size: 1.6rem;
+            margin-left: 2rem;
         }
         
         .zoom-btn {
@@ -456,16 +455,11 @@
             min-width: 26px;
             min-height: 26px;
             border-radius: 50%;
-            /* background-color: #3498db; */
-            /* color: white; */
             display: flex;
             align-items: center;
             justify-content: center;
-            /* text-decoration: none; */
             transition: all 0.3s ease;
             border: none;
-            /* cursor: pointer; */
-            /* padding: 1rem; */
             margin: 1rem;
         }
         
@@ -502,13 +496,6 @@
         <div id = "sticky_blok" class="sticky_blok">
     
         <div class="command_panel">
-	        
-	         <!-- Элементы управления масштабом -->
-            <div class="zoom-controls">
-                <button class="zoom-btn" id="zoom-out">-</button>
-                <span class="zoom-value" id="zoom-display">100%</span>
-                <button class="zoom-btn" id="zoom-in">+</button>
-            </div>
 	        
 	        <div id="checkboxes" class="checkboxes">
 				
@@ -553,6 +540,13 @@
                 </div>
                 
             </div>
+            
+                <!-- Элементы управления масштабом -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-out">-</button>
+                    <span class="zoom-value" id="zoom-display">100%</span>
+                    <button class="zoom-btn" id="zoom-in">+</button>
+                </div>
             
         </div>
 

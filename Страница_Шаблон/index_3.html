@@ -108,7 +108,7 @@
         .checkboxes {
             display: flex;
             flex-direction: row;
-            max-width: 170rem;
+            max-width: 250rem;
             overflow-x: auto;
             /* Показывает прокрутку только при необходимости */
             border: 2px solid #ebebeb;
@@ -297,7 +297,7 @@
             align-items: center;
             padding: .5rem;
             background-color: white;
-            justify-content: start;
+            justify-content: space-between;
         }
 
         .command_panel_buttons {
@@ -305,10 +305,11 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            margin-left: 2rem;
         }
 
         .command_panel_buttons>* {
-            margin-right: 1rem;
+            margin-right: 2rem;
             /* Отступ между элементами */
         }
 
@@ -348,7 +349,7 @@
             border-radius: 4px;
             transition: all 0.3s ease;
             display: inline-block;
-            margin-left: 1rem;
+            border: 2px solid #ebebeb;
         }
 
         .my_tasks:hover {
@@ -430,8 +431,6 @@
 
         /* Масштабирование страницы +++ */
         .zoom-controls {
-            position: fixed;
-            right: 30px;
             background: #8c8c8c;
             color: white;
             padding: 5px;
@@ -439,8 +438,8 @@
             font-family: Arial, sans-serif;
             display: flex;
             align-items: center;
-            /* Фиксируем размер шрифта */
             font-size: 1.6rem;
+            margin-left: 2rem;
         }
 
         .zoom-btn {
@@ -472,16 +471,11 @@
             min-width: 26px;
             min-height: 26px;
             border-radius: 50%;
-            /* background-color: #3498db; */
-            /* color: white; */
             display: flex;
             align-items: center;
             justify-content: center;
-            /* text-decoration: none; */
             transition: all 0.3s ease;
             border: none;
-            /* cursor: pointer; */
-            /* padding: 1rem; */
             margin: 1rem;
         }
 
@@ -510,7 +504,7 @@
         /* кнопка добавления задач --- */
     </style>
     <base
-        href="v8config://512e40f29e1328987010356d77447d71bc73937c/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
+        href="v8config://ef5238292b72e1e81235025fe697db97c5f83d3d/mdobject/idd2e72251-d28f-4ee6-983a-a99008a98bd1/8eb4fad1-1fa6-403e-970f-2c12dbb43e23">
     </base>
 </head>
 
@@ -520,13 +514,6 @@
         <div id="sticky_blok" class="sticky_blok">
 
             <div class="command_panel">
-
-                <!-- Элементы управления масштабом -->
-                <div class="zoom-controls">
-                    <button class="zoom-btn" id="zoom-out">-</button>
-                    <span class="zoom-value" id="zoom-display">100%</span>
-                    <button class="zoom-btn" id="zoom-in">+</button>
-                </div>
 
                 <div id="checkboxes" class="checkboxes">
 
@@ -649,6 +636,13 @@
                         </svg>
                     </div>
 
+                </div>
+
+                <!-- Элементы управления масштабом -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-out">-</button>
+                    <span class="zoom-value" id="zoom-display">100%</span>
+                    <button class="zoom-btn" id="zoom-in">+</button>
                 </div>
 
             </div>
