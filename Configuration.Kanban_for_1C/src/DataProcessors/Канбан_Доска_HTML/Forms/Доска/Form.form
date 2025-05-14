@@ -87,7 +87,6 @@
   <excludedCommands>SaveValues</excludedCommands>
   <excludedCommands>OpenFromMainServer</excludedCommands>
   <excludedCommands>CustomizeForm</excludedCommands>
-  <excludedCommands>Close</excludedCommands>
   <excludedCommands>OpenFromStandaloneServer</excludedCommands>
   <excludedCommands>OK</excludedCommands>
   <excludedCommands>No</excludedCommands>
@@ -96,6 +95,7 @@
   <excludedCommands>RestoreValues</excludedCommands>
   <excludedCommands>Cancel</excludedCommands>
   <excludedCommands>Abort</excludedCommands>
+  <excludedCommands>Close</excludedCommands>
   <saveWindowSettings>true</saveWindowSettings>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
