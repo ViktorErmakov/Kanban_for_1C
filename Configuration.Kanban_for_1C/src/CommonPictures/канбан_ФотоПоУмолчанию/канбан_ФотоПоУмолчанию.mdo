@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fa30774a-118e-4955-859c-9a44c5be1986">
-  <name>канбан_ФотоПоУмолчанию</name>
-  <synonym>
-    <key>ru</key>
-    <value>Фото по умолчанию</value>
-  </synonym>
-</mdclass:CommonPicture>

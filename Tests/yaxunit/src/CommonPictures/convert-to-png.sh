@@ -1,1 +1,0 @@
-inkscape --export-type="png" **/*.svg
