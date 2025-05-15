@@ -12,13 +12,13 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'OneKanban',
   tagline: 'Канбан доска для платформы 1С',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/Kanban-favicon',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://viktorermakov.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/Kanban_for_1C',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
