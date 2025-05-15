@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocumentation=self.webpackChunkdocumentation||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/Kanban_for_1C/blog","blogTitle":"Blog","authorsListPath":"/Kanban_for_1C/blog/authors"}')}}]);
