@@ -8,7 +8,7 @@ const FeatureList = [
     Svg: require('@site/static/img/picture_1.svg').default,
     description: (
       <>
-        OneKanban это расширение для платформы 1С, достаточно его просто установить
+        OneKanban это библиотека/расширение для платформы 1С, достаточно его просто установить
         и указать используемые статусы
       </>
     ),

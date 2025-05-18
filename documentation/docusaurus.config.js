@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OneKanban',
-  tagline: 'Канбан доска для платформы 1С',
+  tagline: 'Канбан доска для платформы 1С на чистом HTML, написанная в стиле библиотеки для возможности внедрения в любые конфигурации',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
