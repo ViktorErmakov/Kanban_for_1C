@@ -4,32 +4,57 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Легко начать использовать',
+    Svg: require('@site/static/img/picture_1.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        OneKanban это расширение для платформы 1С, достаточно его просто установить
+        и указать используемые статусы
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Простота настройки',
+    Svg: require('@site/static/img/picture_2.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Можно настроить используемые статусы, с указаннием порядка, используемые проекты с выбором цвета.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: "Быстрые отборы",
+    Svg: require('@site/static/img/picture_5.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Быстрые отборы позволяют быстро отобрать проекты и задачи, без перестроения страницы
+      </>
+    ),
+  },
+  {
+    title: "Drag'n drop",
+    Svg: require('@site/static/img/picture_3.svg').default,
+    description: (
+      <>
+        Перетаскиванием мышки можно изменить статус задачи
+      </>
+    ),
+  },
+  {
+    title: "Фотография исполнителя",
+    Svg: require('@site/static/img/picture_4.svg').default,
+    description: (
+      <>
+        На карточках задач есть фотография исполнителя
+      </>
+    ),
+  },
+  {
+    title: "HTML/CSS",
+    Svg: require('@site/static/img/picture_6.svg').default,
+    description: (
+      <>
+        OneKanban написан на чистом HTML/CSS/js, без использования
       </>
     ),
   },

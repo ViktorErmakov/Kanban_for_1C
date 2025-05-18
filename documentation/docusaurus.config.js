@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'OneKanban',
   tagline: 'Канбан доска для платформы 1С',
-  favicon: 'img/Kanban-favicon.ico',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://viktorermakov.github.io/',
@@ -46,7 +46,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ViktorErmakov/Kanban_for_1C/blob/main/documentation/',
         },
         blog: {
           showReadingTime: true,
@@ -57,7 +57,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ViktorErmakov/Kanban_for_1C/blob/main/documentation/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -74,21 +74,21 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/OneKanban_logo.jpg',
       navbar: {
         title: 'OneKanban',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/Kanban_logo.svg',
+          src: 'img/OneKanban_logo.jpg',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Документация',
+            label: 'Описание',
           },
-          // {to: '/blog', label: 'Блог', position: 'left'},
+          {to: '/blog', label: 'Блог', position: 'left'},
         ],
       },
       footer: {
@@ -98,7 +98,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Документация',
+                label: 'Описание',
                 to: '/docs/intro',
               },
             ],
