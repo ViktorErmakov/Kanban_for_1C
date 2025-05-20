@@ -8,7 +8,7 @@ const FeatureList = [
     Svg: require('@site/static/img/picture_1.svg').default,
     description: (
       <>
-        OneKanban это библиотека/расширение для платформы 1С, достаточно его просто установить
+        OneKanban это библиотека/расширение для платформы 1С, достаточно его установить
         и указать используемые статусы
       </>
     ),
@@ -18,7 +18,7 @@ const FeatureList = [
     Svg: require('@site/static/img/picture_2.svg').default,
     description: (
       <>
-        Можно настроить используемые статусы, с указаннием порядка, используемые проекты с выбором цвета.
+        Можно настроить используемые проекты с выбором цвета.
       </>
     ),
   },
@@ -27,7 +27,7 @@ const FeatureList = [
     Svg: require('@site/static/img/picture_5.svg').default,
     description: (
       <>
-        Быстрые отборы позволяют быстро отобрать проекты и задачи, без перестроения страницы
+        Быстрые отборы позволяют установить отборы задач без перерисовки страницы
       </>
     ),
   },
@@ -54,7 +54,7 @@ const FeatureList = [
     Svg: require('@site/static/img/picture_6.svg').default,
     description: (
       <>
-        OneKanban написан на чистом HTML/CSS/js, без использования
+        OneKanban написан на чистом HTML/CSS/js, без использования фреймворков
       </>
     ),
   },
