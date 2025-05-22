@@ -4,7 +4,11 @@ sidebar_position: 1
 
 # Первый запуск
 
+:::info
+
 При первом запуске после установки будет показано окно
+
+:::
 
 ![No settings](/img/NoSettings.png)
 
