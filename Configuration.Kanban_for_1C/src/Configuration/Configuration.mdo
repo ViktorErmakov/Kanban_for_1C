@@ -36,7 +36,7 @@
   <scriptVariant>Russian</scriptVariant>
   <defaultRoles>Role.канбан_ОбщиеПрава</defaultRoles>
   <vendor>@ViktorErmakov</vendor>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <defaultLanguage>Language.Русский</defaultLanguage>
   <interfaceCompatibilityMode>TaxiEnableVersion8_2</interfaceCompatibilityMode>
   <compatibilityMode>8.3.21</compatibilityMode>
