@@ -34,6 +34,7 @@
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <scriptVariant>Russian</scriptVariant>
+  <defaultRoles>Role.канбан_ОбщиеПрава</defaultRoles>
   <vendor>@ViktorErmakov</vendor>
   <version>1.0.1</version>
   <defaultLanguage>Language.Русский</defaultLanguage>
@@ -52,7 +53,7 @@
   <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
-  <roles>Role.канбан_ОсновнаяРоль</roles>
+  <roles>Role.канбан_ОбщиеПрава</roles>
   <commonModules>CommonModule.канбан_КанбанДоска</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаВызовСервера</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
