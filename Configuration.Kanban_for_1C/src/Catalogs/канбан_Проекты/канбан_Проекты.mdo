@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3641b24f-c022-4787-a228-e275526d411e">
+  <producedTypes>
+    <objectType typeId="2519c0e6-d797-4dac-9af8-ee05a110a0d0" valueTypeId="424b21a8-0f29-4227-a833-551f5129cad9"/>
+    <refType typeId="888167bd-9347-41d1-99db-b1e4a1080060" valueTypeId="eea2d128-03c5-460a-a5d8-cd02a3e78d14"/>
+    <selectionType typeId="0d272b88-22c5-4fbb-9c10-b830283c995d" valueTypeId="93d973b4-06da-4ab8-959d-e0745b45ec8a"/>
+    <listType typeId="742c4437-7a37-43ef-905a-a4abe86561a3" valueTypeId="316de09c-0514-4ef2-9efa-a5c27a621784"/>
+    <managerType typeId="32106b6f-ab9d-4cd5-a28a-fcbfe3c1f695" valueTypeId="a65c0efe-d4cd-4771-971b-195387caf45a"/>
+  </producedTypes>
+  <name>канбан_Проекты</name>
+  <synonym>
+    <key>ru</key>
+    <value>Проекты (по умолчанию)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.канбан_Проекты.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.канбан_Проекты.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>11</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+</mdclass:Catalog>

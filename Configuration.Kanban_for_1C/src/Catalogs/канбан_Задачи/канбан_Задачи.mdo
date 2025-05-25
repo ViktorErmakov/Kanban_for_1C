@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cb805c5c-04d1-4e8b-8109-32bf04db2a02">
+  <producedTypes>
+    <objectType typeId="353fb29f-df34-40c6-b44d-44f6192bfbeb" valueTypeId="98b4af85-bc70-46d8-827f-4c19fecf42af"/>
+    <refType typeId="d844370d-c008-4682-8784-e7818d28d2b0" valueTypeId="8d93a8d6-35ca-4a7c-845b-73376297c795"/>
+    <selectionType typeId="63147c6b-6c49-483f-9947-55e2db36ac12" valueTypeId="a5c77f33-ade3-4cd2-a5b4-50d579b2d565"/>
+    <listType typeId="c89f1b4a-28fc-4d59-a4d1-290d9a790d4a" valueTypeId="352dba2f-c82f-4513-89d0-cc55a1b7474e"/>
+    <managerType typeId="18b91af2-6e83-4e0b-960c-95dcd546ce88" valueTypeId="f02bf7e3-0ede-4f2b-904b-8e55cfaed2e0"/>
+  </producedTypes>
+  <name>канбан_Задачи</name>
+  <synonym>
+    <key>ru</key>
+    <value>Задачи (по умолчанию)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.канбан_Задачи.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.канбан_Задачи.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>11</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="27840d93-a431-48bb-8fa8-51f14333e5ac">
+    <name>СтатусЗадачи</name>
+    <synonym>
+      <key>ru</key>
+      <value>Статус задачи</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_СтатусыЗадач</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="39e9f48a-5bf7-4fcd-82c7-3dec3a84486f">
+    <name>Проект</name>
+    <synonym>
+      <key>ru</key>
+      <value>Проект</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_Проекты</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2a2ef1ba-2364-4d9c-8940-d08c8a53dc9a">
+    <name>Исполнитель</name>
+    <synonym>
+      <key>ru</key>
+      <value>Исполнитель</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_Пользователь</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ee82ed7c-6623-4a2c-9043-4637e181a645">
+    <name>ОсновнаяЗадача</name>
+    <synonym>
+      <key>ru</key>
+      <value>Основная задача</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_Задачи</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fca55d4b-b1c0-4b61-a789-6cc01beb95a1">
+    <name>ПоказыватьВОтчетахИКанбанДоске</name>
+    <synonym>
+      <key>ru</key>
+      <value>Показывать в отчетах и канбан доске</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

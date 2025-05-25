@@ -63,14 +63,19 @@
   <definedTypes>DefinedType.канбан_Пользователь</definedTypes>
   <definedTypes>DefinedType.канбан_Проекты</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
+  <commonCommands>CommonCommand.канбан_Задачи</commonCommands>
+  <commonCommands>CommonCommand.канбан_Проекты</commonCommands>
+  <commonCommands>CommonCommand.канбан_СтатусыЗадач</commonCommands>
   <commandGroups>CommandGroup.канбан_Информация</commandGroups>
+  <catalogs>Catalog.канбан_Задачи</catalogs>
+  <catalogs>Catalog.канбан_Проекты</catalogs>
+  <catalogs>Catalog.канбан_СтатусыЗадач</catalogs>
   <catalogs>Catalog.Пользователи</catalogs>
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узПроекты</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.канбан_ТехПоддержка</dataProcessors>
-  <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеПроектыДоски</informationRegisters>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеСтатусыДоски</informationRegisters>
 </mdclass:Configuration>
