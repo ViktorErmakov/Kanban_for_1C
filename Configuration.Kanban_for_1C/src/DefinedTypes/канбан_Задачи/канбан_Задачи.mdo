@@ -9,6 +9,6 @@
     <value>Задачи</value>
   </synonym>
   <type>
-    <types>CatalogRef.узЗадачи</types>
+    <types>CatalogRef.канбан_Задачи</types>
   </type>
 </mdclass:DefinedType>

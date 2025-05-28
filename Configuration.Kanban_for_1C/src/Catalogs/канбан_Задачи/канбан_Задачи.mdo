@@ -30,10 +30,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <attributes uuid="27840d93-a431-48bb-8fa8-51f14333e5ac">
-    <name>СтатусЗадачи</name>
+    <name>Статус</name>
     <synonym>
       <key>ru</key>
-      <value>Статус задачи</value>
+      <value>Статус</value>
     </synonym>
     <type>
       <types>DefinedType.канбан_СтатусыЗадач</types>

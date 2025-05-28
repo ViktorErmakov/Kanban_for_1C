@@ -6,7 +6,7 @@
   <name>канбан_Пользователь</name>
   <synonym>
     <key>ru</key>
-    <value>Пользователь</value>
+    <value>Пользователи</value>
   </synonym>
   <type>
     <types>CatalogRef.Пользователи</types>
