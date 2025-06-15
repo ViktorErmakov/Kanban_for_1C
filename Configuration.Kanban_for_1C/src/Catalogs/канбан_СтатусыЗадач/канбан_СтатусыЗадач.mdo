@@ -27,6 +27,50 @@
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="d376db6f-a83b-4edb-aaa0-3315f8db85ca">
+      <name>Зарегистрирована</name>
+      <description>Зарегистрирована</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000001</value>
+      </code>
+    </items>
+    <items id="53ba3f22-cbb5-45fb-ae67-9e1bdaa6e96c">
+      <name>ОжидаетОтвета</name>
+      <description>Ожидает ответа</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000002</value>
+      </code>
+    </items>
+    <items id="418a9b10-791b-41cf-a295-74308d4e2e76">
+      <name>ВПроцессеВыполнения</name>
+      <description>В процессе выполнения</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000003</value>
+      </code>
+    </items>
+    <items id="52435bcb-20a3-44f2-ac3e-1fbca81a51ea">
+      <name>НаТестированииПоказПользователям</name>
+      <description>На тестировании показ пользователям</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000004</value>
+      </code>
+    </items>
+    <items id="a21d56a5-eb48-4553-b410-2d1fed5debae">
+      <name>КПереносуВРабочую</name>
+      <description>К переносу в рабочую</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000005</value>
+      </code>
+    </items>
+    <items id="7c76e6ad-11ee-48c8-a1bf-c603398c5cae">
+      <name>Готово</name>
+      <description>Готово</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000006</value>
+      </code>
+    </items>
+  </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <attributes uuid="7fb7aeba-2746-4b98-ba21-8f6b358f98b6">

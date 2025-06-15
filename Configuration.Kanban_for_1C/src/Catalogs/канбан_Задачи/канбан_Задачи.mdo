@@ -18,11 +18,12 @@
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <hierarchical>true</hierarchical>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>11</codeLength>
   <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
@@ -94,6 +95,21 @@
     <synonym>
       <key>ru</key>
       <value>Показывать в отчетах и канбан доске</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a4d0b8e2-bd22-41b5-868a-1a037b39cdf8">
+    <name>ЭтоОсновнаяЗадача</name>
+    <synonym>
+      <key>ru</key>
+      <value>Это основная задача</value>
     </synonym>
     <type>
       <types>Boolean</types>
