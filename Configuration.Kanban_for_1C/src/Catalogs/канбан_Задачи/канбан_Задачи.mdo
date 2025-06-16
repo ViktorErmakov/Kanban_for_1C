@@ -30,6 +30,8 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.канбан_Задачи.Form.ФормаЭлемента</defaultObjectForm>
+  <defaultListForm>Catalog.канбан_Задачи.Form.ФормаСписка</defaultListForm>
   <attributes uuid="27840d93-a431-48bb-8fa8-51f14333e5ac">
     <name>Статус</name>
     <synonym>
@@ -120,4 +122,46 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="20f458b7-3b70-4e35-8d6e-868181c9b257">
+    <name>Содержание</name>
+    <synonym>
+      <key>ru</key>
+      <value>Содержание</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="9a066aae-60a1-419b-bcc3-4028d5ec4b2f">
+    <name>ФормаЭлемента</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма элемента</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0b49d44c-5c89-4318-bd3e-fd64ddccde08">
+    <name>ФормаСписка</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма списка</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="8c1c8812-964c-4e1e-99d0-b2d21f2fafcf">
+    <name>РедакторЗадач</name>
+    <synonym>
+      <key>ru</key>
+      <value>Редактор задач</value>
+    </synonym>
+    <templateType>HTMLDocument</templateType>
+  </templates>
 </mdclass:Catalog>
