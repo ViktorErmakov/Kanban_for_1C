@@ -125,12 +125,14 @@
 
         .task-content {
             margin-right: 3rem;
+            max-width: calc(100% - 3rem);
+            word-wrap: break-word;
         }
 
         .task-actions {
             position: absolute;
             top: 1.5rem;
-            right: 1.5rem;
+            right: .5rem;
             display: flex;
         }
 
@@ -146,6 +148,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .edit-btn {
+            width: 4rem; 
         }
 
         .edit-btn:hover, .save-btn:hover {
@@ -206,28 +212,7 @@
         }
 
         .import-export {
-            display: flex;
-            margin-top: 1.5rem;
-            width: calc(100% - 2rem);
-        }
-        
-        .import-export button {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 0.4rem;
-            cursor: pointer;
-            flex-grow: 1;
-            margin-right: 1rem;
-        }
-        
-        .import-export button:last-child {
-            margin-right: 0;
-        }
-        
-        .import-export button:hover {
-            background-color: var(--secondary-color);
+            display: none;
         }
         
         #fileInput {
@@ -237,11 +222,6 @@
         .send-icon {
             width: 1.6rem;
             height: 1.6rem;
-        }
-
-        #exportTasks,
-        #importTasks {
-            visibility: hidden;
         }
 
     </style>
@@ -296,6 +276,9 @@
     </div>
 
     <script>
+        
+        let UserName = "";
+        
         // Форматирование текста в редакторе
         function formatText(command, value = null) {
             document.execCommand(command, false, value);
@@ -308,6 +291,7 @@
         function addTask() {
             const taskInput = document.getElementById('taskInput');
             const taskContent = taskInput.innerHTML.trim();
+            const importTasks = document.querySelector('#importTasks');
             
             if (!taskContent) return;
             
@@ -330,7 +314,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="timestamp">Создано: ${timestamp}</div>
+                <div class="timestamp">Создано: ${timestamp} ${importTasks.name}</div>
                 <div class="edit-toolbar hidden">
                     <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
                     <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
@@ -403,6 +387,7 @@
             const taskCard = document.getElementById(taskId);
             const editInput = taskCard.querySelector('.edit-input');
             const newContent = editInput.value.trim();
+            const importTasks = document.querySelector('#importTasks');
             
             if (!newContent) return;
             
@@ -418,7 +403,7 @@
             
             // Обновляем временную метку
             const now = new Date();
-            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)}`;
+            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${importTasks.name}`;
         }
 
         // Форматирование даты в русском формате
@@ -450,7 +435,7 @@
         function exportTasks() {
             const tasks = [];
             const taskCards = document.querySelectorAll('.task-card');
-            
+
             taskCards.forEach(card => {
                 tasks.push({
                     content: card.querySelector('.task-content').innerHTML,
@@ -473,24 +458,24 @@
         // Импорт задач из JSON
         function importTasks() {
             
+            
             const importTasks = document.querySelector('#importTasks');
 
             // importTasks.textContent = 
             // `[
             //     {
             //         "content": "новый комментарий",
-            //         "created": "16.06.2025 21:23",
+            //         "created": "16.06.2025 21:23 Ermakov Viktor",
             //         "updated": null
             //     },
             //     {
             //         "content": "второй комментарий",
-            //         "created": "16.06.2025 21:23",
-            //         "updated": null
+            //         "created": "16.06.2025 21:23 Ermakov Viktor",
+            //         "updated": null,
             //     }
             // ]`;
 
             const tasks = JSON.parse(importTasks.textContent);
-            clearTasks();
             
             tasks.forEach(task => {
                 const taskId = 'task-' + Date.now();
@@ -507,7 +492,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated : 'Создано: ' + task.created}</div>
+                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
                     <div class="edit-toolbar hidden">
                         <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
                         <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
@@ -542,15 +527,8 @@
                 
                 document.getElementById('tasksContainer').appendChild(taskCard);
             });
-                
         };
-            
         
-        
-        // Очистка всех задач
-        function clearTasks() {
-            document.getElementById('tasksContainer').innerHTML = '';
-        }
     </script>
 </body>
 </html>

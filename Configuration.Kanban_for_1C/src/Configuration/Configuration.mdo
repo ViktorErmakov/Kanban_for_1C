@@ -50,7 +50,6 @@
   </languages>
   <subsystems>Subsystem.канбан_Доска</subsystems>
   <subsystems>Subsystem.канбан_ДоскаИнтерфейс</subsystems>
-  <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
   <roles>Role.канбан_ОбщиеПрава</roles>

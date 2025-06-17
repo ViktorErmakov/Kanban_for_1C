@@ -574,6 +574,41 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>ТекущийПользователь</name>
+    <title>
+      <key>ru</key>
+      <value>Текущий пользователь</value>
+    </title>
+    <id>3</id>
+    <valueType>
+      <types>DefinedType.канбан_Пользователь</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ИмяПользователя</name>
+    <title>
+      <key>ru</key>
+      <value>Имя пользователя</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

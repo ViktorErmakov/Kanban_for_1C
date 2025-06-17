@@ -18,6 +18,7 @@
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
   <hierarchical>true</hierarchical>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
