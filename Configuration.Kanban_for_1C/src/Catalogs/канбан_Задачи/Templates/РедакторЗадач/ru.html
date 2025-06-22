@@ -40,7 +40,8 @@
             width: calc(100% - 3rem);
         }
 
-        .toolbar {
+/* Общие стили для всех панелей инструментов */
+        .common-toolbar {
             display: flex;
             flex-wrap: wrap;
             margin-bottom: 1rem;
@@ -48,7 +49,7 @@
             border-bottom: 0.1rem solid var(--border-color);
         }
 
-        .toolbar button {
+        .common-toolbar button {
             background-color: var(--background-color);
             border: 0.1rem solid var(--border-color);
             border-radius: 0.4rem;
@@ -60,12 +61,17 @@
             margin-bottom: 0.5rem;
         }
 
-        .toolbar button:hover {
+        .common-toolbar button:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .common-toolbar button.active-format {
             background-color: var(--secondary-color);
             color: white;
         }
 
-        .toolbar select {
+        .common-toolbar select {
             padding: 0.5rem;
             border-radius: 0.4rem;
             border: 0.1rem solid var(--border-color);
@@ -136,7 +142,7 @@
             display: flex;
         }
 
-        .edit-btn, .save-btn {
+        .edit-btn, .save-btn, .cancel-btn {
             background: none;
             border: none;
             cursor: pointer;
@@ -154,7 +160,7 @@
             width: 4rem; 
         }
 
-        .edit-btn:hover, .save-btn:hover {
+        .edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
             color: var(--primary-color);
         }
 
@@ -168,37 +174,6 @@
             font-size: 1.4rem;
             resize: vertical;
             margin-bottom: 1rem;
-        }
-
-        .edit-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .edit-toolbar button {
-            background-color: var(--background-color);
-            border: 0.1rem solid var(--border-color);
-            border-radius: 0.4rem;
-            padding: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .edit-toolbar button:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .edit-toolbar select {
-            padding: 0.5rem;
-            border-radius: 0.4rem;
-            border: 0.1rem solid var(--border-color);
-            background-color: var(--background-color);
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
         }
 
         .timestamp {
@@ -223,13 +198,12 @@
             width: 1.6rem;
             height: 1.6rem;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
         <div class="editor-container">
-            <div class="toolbar">
+            <div class="toolbar common-toolbar">
                 <button onclick="formatText('bold')"><b>Ж</b></button>
                 <button onclick="formatText('italic')"><i>К</i></button>
                 <button onclick="formatText('underline')"><u>Ч</u></button>
@@ -270,8 +244,8 @@
         <div class="tasks-container" id="tasksContainer"></div>
         
         <div class="import-export">
-            <button id = "exportTasks">Экспорт задач</button>
-            <button id = "importTasks" onclick="importTasks()">Импорт задач</button>
+            <button id="exportTasks">Экспорт задач</button>
+            <button id="importTasks" onclick="importTasks()">Импорт задач</button>
         </div>
     </div>
 
@@ -279,13 +253,46 @@
         
         let UserName = "";
         
+        let currentFormatState = {
+            bold: false,
+            italic: false,
+            underline: false,
+            strikeThrough: false
+        };
+        
         // Форматирование текста в редакторе
         function formatText(command, value = null) {
-            document.execCommand(command, false, value);
-            document.getElementById('taskInput').focus();
+            const editor = document.getElementById('taskInput');
+            const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
+            
+            if (isFormatCommand) {
+                const isActive = document.queryCommandState(command);
+                
+                // Для надежного снятия форматирования
+                if (isActive) {
+                    document.execCommand(command, false, false);
+                    currentFormatState[command] = false;
+                } else {
+                    document.execCommand(command, false, true);
+                    currentFormatState[command] = true;
+                }
+            } else if (command === 'removeFormat') {
+                // Полная очистка всех стилей
+                document.execCommand('removeFormat', false, null);
+                // Сбрасываем все состояния
+                currentFormatState = {
+                    bold: false,
+                    italic: false,
+                    underline: false,
+                    strikeThrough: false
+                };
+            } else {
+                document.execCommand(command, false, value);
+            }
+            
+            editor.focus();
+            updateFormatButtons();
         }
-
-        // let DiscriptionTask = "";
 
         // Добавление новой задачи
         function addTask() {
@@ -309,13 +316,13 @@
                 <div class="task-content">${taskContent}</div>
                 <div class="task-actions">
                     <button class="edit-btn" onclick="enableEdit('${taskId}')">
-                        <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </div>
                 <div class="timestamp">Создано: ${timestamp} ${importTasks.name}</div>
-                <div class="edit-toolbar hidden">
+                <div class="edit-toolbar common-toolbar hidden">
                     <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
                     <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
                     <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
@@ -343,12 +350,24 @@
                     <button onclick="editFormatText('${taskId}', 'justifyRight')">Справа</button>
                     <button onclick="editFormatText('${taskId}', 'removeFormat')">Очистить</button>
                 </div>
-                <textarea class="edit-input hidden"></textarea>
-                <button class="save-btn hidden" onclick="saveTask('${taskId}')">Сохранить</button>
+                <div class="edit-input hidden" contenteditable="true"></div>
+                <div class="edit-buttons hidden">
+                    <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
+                    <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
+                </div>
             `;
             
             tasksContainer.appendChild(taskCard);
             taskInput.innerHTML = '';
+            
+             // Сбрасываем состояние форматирования после добавления задачи
+            currentFormatState = {
+                bold: false,
+                italic: false,
+                underline: false,
+                strikeThrough: false
+            };
+            updateFormatButtons();
             
             // вызываем код для получения JSON
             exportTasks();
@@ -358,8 +377,35 @@
         // Форматирование текста при редактировании
         function editFormatText(taskId, command, value = null) {
             const editInput = document.getElementById(taskId).querySelector('.edit-input');
+            const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
+            
             editInput.focus();
-            document.execCommand(command, false, value);
+            
+            if (isFormatCommand) {
+                const isActive = document.queryCommandState(command);
+                
+                if (isActive) {
+                    document.execCommand(command, false, false);
+                    currentFormatState[command] = false;
+                } else {
+                    document.execCommand(command, false, true);
+                    currentFormatState[command] = true;
+                }
+            } else if (command === 'removeFormat') {
+                // Полная очистка всех стилей
+                document.execCommand('removeFormat', false, null);
+                // Сбрасываем все состояния
+                currentFormatState = {
+                    bold: false,
+                    italic: false,
+                    underline: false,
+                    strikeThrough: false
+                };
+            } else {
+                document.execCommand(command, false, value);
+            }
+            
+            updateEditFormatButtons(taskId);
         }
 
         // Включение режима редактирования для задачи
@@ -367,26 +413,43 @@
             const taskCard = document.getElementById(taskId);
             const taskContent = taskCard.querySelector('.task-content').innerHTML;
             const editInput = taskCard.querySelector('.edit-input');
-            const saveBtn = taskCard.querySelector('.save-btn');
+            const editButtons = taskCard.querySelector('.edit-buttons');
             const editToolbar = taskCard.querySelector('.edit-toolbar');
+            
+            editInput.dataset.originalContent = taskContent;
             
             // Скрываем отображаемый контент и показываем элементы редактирования
             taskCard.querySelector('.task-content').classList.add('hidden');
             taskCard.querySelector('.edit-btn').classList.add('hidden');
             
-            editInput.value = stripHtmlFormatting(taskContent);
+            editInput.innerHTML = taskContent;
             editInput.classList.remove('hidden');
-            saveBtn.classList.remove('hidden');
+            editButtons.classList.remove('hidden');
             editToolbar.classList.remove('hidden');
             
             editInput.focus();
+            setTimeout(() => updateEditFormatButtons(taskId), 100);
+        }
+        
+        // Отмена редактирования
+        function cancelEdit(taskId) {
+            const taskCard = document.getElementById(taskId);
+            const editInput = taskCard.querySelector('.edit-input');
+            
+            editInput.innerHTML = editInput.dataset.originalContent;
+            
+            taskCard.querySelector('.task-content').classList.remove('hidden');
+            taskCard.querySelector('.edit-btn').classList.remove('hidden');
+            editInput.classList.add('hidden');
+            taskCard.querySelector('.edit-buttons').classList.add('hidden');
+            taskCard.querySelector('.edit-toolbar').classList.add('hidden');
         }
 
         // Сохранение отредактированной задачи
         function saveTask(taskId) {
             const taskCard = document.getElementById(taskId);
             const editInput = taskCard.querySelector('.edit-input');
-            const newContent = editInput.value.trim();
+            const newContent = editInput.innerHTML.trim();
             const importTasks = document.querySelector('#importTasks');
             
             if (!newContent) return;
@@ -398,12 +461,40 @@
             taskCard.querySelector('.task-content').classList.remove('hidden');
             taskCard.querySelector('.edit-btn').classList.remove('hidden');
             editInput.classList.add('hidden');
+            taskCard.querySelector('.edit-buttons').classList.add('hidden');
             taskCard.querySelector('.edit-toolbar').classList.add('hidden');
-            taskCard.querySelector('.save-btn').classList.add('hidden');
             
             // Обновляем временную метку
             const now = new Date();
             taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${importTasks.name}`;
+        }
+        
+        // Обновление состояния кнопок форматирования
+        function updateFormatButtons() {
+            const editor = document.getElementById('taskInput');
+            if (!editor) return;
+            
+            const toolbar = editor.closest('.editor-container').querySelector('.toolbar');
+            
+            // Обновляем кнопки на основе сохраненного состояния
+            toolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
+            toolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
+            toolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
+            toolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
+        }
+
+        // Обновление состояния кнопок форматирования в редакторе задачи
+        function updateEditFormatButtons(taskId) {
+            const taskCard = document.getElementById(taskId);
+            if (!taskCard) return;
+            
+            const editToolbar = taskCard.querySelector('.edit-toolbar');
+            
+            // Обновляем кнопки на основе сохраненного состояния
+            editToolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
+            editToolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
+            editToolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
+            editToolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
         }
 
         // Форматирование даты в русском формате
@@ -417,18 +508,38 @@
             return `${day}.${month}.${year} ${hours}:${minutes}`;
         }
 
-        // Удаление HTML-форматирования (упрощенное)
-        function stripHtmlFormatting(html) {
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            return doc.body.textContent || "";
-        }
-
         // Добавление задачи по нажатию Enter (Shift+Enter для новой строки)
         document.getElementById('taskInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 addTask();
             }
+        });
+        
+        // Обновление кнопок при клике
+        document.addEventListener('mouseup', function() {
+            const activeElement = document.activeElement;
+            if (activeElement.id === 'taskInput') {
+                // Обновляем состояние на основе текущего выделения
+                currentFormatState.bold = document.queryCommandState('bold');
+                currentFormatState.italic = document.queryCommandState('italic');
+                currentFormatState.underline = document.queryCommandState('underline');
+                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
+                updateFormatButtons();
+            } else if (activeElement.classList.contains('edit-input')) {
+                const taskId = activeElement.closest('.task-card').id;
+                // Обновляем состояние на основе текущего выделения
+                currentFormatState.bold = document.queryCommandState('bold');
+                currentFormatState.italic = document.queryCommandState('italic');
+                currentFormatState.underline = document.queryCommandState('underline');
+                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
+                updateEditFormatButtons(taskId);
+            }
+        });
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('taskInput').focus();
         });
 
         // Экспорт задач в JSON
@@ -487,13 +598,13 @@
                     <div class="task-content">${task.content}</div>
                     <div class="task-actions">
                         <button class="edit-btn" onclick="enableEdit('${taskId}')">
-                            <svg width="2rem" height="2rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
                     <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
-                    <div class="edit-toolbar hidden">
+                    <div class="edit-toolbar common-toolbar hidden">
                         <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
                         <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
                         <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
