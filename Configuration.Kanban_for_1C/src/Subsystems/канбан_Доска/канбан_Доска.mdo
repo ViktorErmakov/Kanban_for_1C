@@ -29,4 +29,5 @@
   <content>CommonCommand.канбан_Задачи</content>
   <content>CommonCommand.канбан_Проекты</content>
   <content>CommonCommand.канбан_СтатусыЗадач</content>
+  <content>EventSubscription.ОпределитьФормуПрисоединенногоФайлаКанбан</content>
 </mdclass:Subsystem>

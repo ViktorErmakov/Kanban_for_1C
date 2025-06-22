@@ -58,6 +58,12 @@
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
+  <commonModules>CommonModule.РаботаСФайламиКлиентСервер</commonModules>
+  <commonModules>CommonModule.узОбщийМодульСервер</commonModules>
+  <eventSubscriptions>EventSubscription.ОпределитьФормуПрисоединенногоФайлаКанбан</eventSubscriptions>
+  <definedTypes>DefinedType.ВладелецПрисоединенныхФайлов</definedTypes>
+  <definedTypes>DefinedType.ВладелецПрисоединенныхФайловОбъект</definedTypes>
+  <definedTypes>DefinedType.ВладелецФайлов</definedTypes>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_Пользователь</definedTypes>
   <definedTypes>DefinedType.канбан_Проекты</definedTypes>
@@ -73,6 +79,7 @@
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узПроекты</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
+  <catalogs>Catalog.Файлы</catalogs>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.канбан_ТехПоддержка</dataProcessors>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеПроектыДоски</informationRegisters>
