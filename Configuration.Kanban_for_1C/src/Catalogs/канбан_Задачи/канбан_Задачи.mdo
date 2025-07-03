@@ -157,12 +157,12 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <templates uuid="8c1c8812-964c-4e1e-99d0-b2d21f2fafcf">
+  <templates uuid="75dc2b2d-b19c-43ee-9116-06e2accc9f14">
     <name>РедакторЗадач</name>
     <synonym>
       <key>ru</key>
       <value>Редактор задач</value>
     </synonym>
-    <templateType>HTMLDocument</templateType>
+    <templateType>BinaryData</templateType>
   </templates>
 </mdclass:Catalog>

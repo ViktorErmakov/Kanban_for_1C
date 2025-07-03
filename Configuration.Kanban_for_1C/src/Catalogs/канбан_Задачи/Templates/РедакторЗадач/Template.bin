@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cae;
+            --background-color: #f5f7fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e4e8;
+            --search-highlight: #fff9c4;
+            font-size: 10px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .container {
+            width: calc(100% - 2rem);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Стили для поиска */
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #searchInput {
+            flex-grow: 1;
+            padding: 0.8rem 3rem 0.8rem 1rem;
+            border: 0.1rem solid var(--border-color);
+            border-radius: 0.4rem;
+            font-size: 1.4rem;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            font-size: 1.6rem;
+            padding: 0;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .clear-search:hover {
+            color: #666;
+        }
+
+        .clear-search.visible {
+            opacity: 1;
+        }
+
+        #searchBtn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        #searchBtn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .search-info {
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Остальные стили остаются без изменений */
+        .highlight {
+            background-color: var(--search-highlight);
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.2rem;
+        }
+
+        .editor-container {
+            background-color: var(--card-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: calc(100% - 3rem);
+        }
+
+/* Общие стили для всех панелей инструментов */
+        
+        /* Стили для иконок */
+        .common-toolbar button.format-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .common-toolbar button.format-icon {
+            min-width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .common-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 0.1rem solid var(--border-color);
+        }
+
+        .common-toolbar button {
+            background-color: var(--background-color);
+            border: 0.1rem solid var(--border-color);
+            border-radius: 0.4rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.2s;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .common-toolbar button:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .common-toolbar button.active-format {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .common-toolbar select {
+            padding: 0.5rem;
+            border-radius: 0.4rem;
+            border: 0.1rem solid var(--border-color);
+            background-color: var(--background-color);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #taskInput {
+            width: calc(100% - 2rem);
+            min-height: 10rem;
+            padding: 1rem;
+            border: 0.1rem solid var(--border-color);
+            border-radius: 0.4rem;
+            font-family: inherit;
+            font-size: 1.4rem;
+            resize: vertical;
+        }
+
+        #addTaskBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 11.5rem;
+            height: 2.8rem;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.4rem;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #addTaskBtn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .tasks-container {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 2rem);
+        }
+
+        .task-card {
+            background-color: var(--card-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            position: relative;
+            width: calc(100% - 3rem);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-0.2rem);
+            box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+        }
+
+        .task-content {
+            margin-right: 3rem;
+            max-width: calc(100% - 3rem);
+            word-wrap: break-word;
+        }
+
+        .task-actions {
+            position: absolute;
+            top: 1.5rem;
+            right: .5rem;
+            display: flex;
+        }
+
+        .edit-btn, .save-btn, .cancel-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            padding: 0;
+            width: 7rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .edit-btn {
+            width: 4rem; 
+        }
+
+        .edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .edit-input {
+            width: calc(100% - 2rem);
+            min-height: 8rem;
+            padding: 1rem;
+            border: 0.1rem solid var(--border-color);
+            border-radius: 0.4rem;
+            font-family: inherit;
+            font-size: 1.4rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+
+        .timestamp {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .import-export {
+            display: none;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+
+        .send-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+        
+        .no-tasks {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Модальное окно для вставки ссылок */
+        #linkModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-content input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .modal-content button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .close-modal {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск по содержимому...">
+            <button class="clear-search" id="clearSearchBtn" title="Очистить поиск">×</button>
+            <button id="searchBtn">Найти</button>
+        </div>
+        <div class="search-info" id="searchInfo"></div>
+        
+        <div class="editor-container">
+            <div class="toolbar common-toolbar">
+                <button onclick="formatText('bold')"><b>Ж</b></button>
+                <button onclick="formatText('italic')"><i>К</i></button>
+                <button onclick="formatText('underline')"><u>Ч</u></button>
+                <button onclick="formatText('strikeThrough')"><s>З</s></button>
+                <select onchange="formatText('fontSize', this.value)">
+                    <option value="">Размер</option>
+                    <option value="1">Мелкий</option>
+                    <option value="3">Обычный</option>
+                    <option value="5">Крупный</option>
+                    <option value="7">Огромный</option>
+                </select>
+                <select onchange="formatText('fontName', this.value)">
+                    <option value="">Шрифт</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+                <button class="format-icon" onclick="formatText('insertUnorderedList')" title="Маркированный список">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14M5 6h14M5 18h14"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="formatText('insertOrderedList')" title="Нумерованный список">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="showLinkModal()" title="Вставить ссылку">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="formatText('justifyLeft')" title="Выравнивание по левому краю">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 6H3M15 12H3M17 18H3"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="formatText('justifyCenter')" title="Выравнивание по центру">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 6H3M19 12H5M17 18H7"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="formatText('justifyRight')" title="Выравнивание по правому краю">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 6H3M21 12H9M21 18H7"/>
+                    </svg>
+                </button>
+                <button class="format-icon" onclick="formatText('removeFormat')" title="Очистить форматирование">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="taskInput" contenteditable="true" placeholder="Введите вашу задачу здесь..."></div>
+            <button id="addTaskBtn" onclick="addTask()">
+                <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Отправить
+            </button>
+        </div>
+        
+        <div class="tasks-container" id="tasksContainer"></div>
+        
+        <div class="import-export">
+            <button id="exportTasks">Экспорт задач</button>
+            <button id="importTasks" onclick="importTasks()">Импорт задач</button>
+        </div>
+    </div>
+        
+    <!-- Модальное окно для вставки ссылок -->
+    <div id="linkModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="hideLinkModal()">&times;</span>
+            <h3>Вставка ссылки</h3>
+            <input type="text" id="linkUrl" placeholder="https://example.com">
+            <button id="insertLinkBtn">Вставить</button>
+        </div>
+    </div>
+
+    <script>
+        
+        let UserName = "";
+        let currentSelection = null;
+        let currentTaskIdForLink = null;
+        
+        let currentFormatState = {
+            bold: false,
+            italic: false,
+            underline: false,
+            strikeThrough: false
+        };
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('taskInput').focus();
+            
+            // Добавляем обработчики для поиска
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            
+            document.getElementById('searchBtn').addEventListener('click', searchTasks);
+            
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    searchTasks();
+                }
+                
+                // Показываем/скрываем кнопку очистки
+                if (this.value.trim() !== '') {
+                    clearSearchBtn.classList.add('visible');
+                } else {
+                    clearSearchBtn.classList.remove('visible');
+                }
+            });
+            
+            // Обработчик для кнопки очистки
+            clearSearchBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                this.classList.remove('visible');
+                clearSearch();
+            });
+            
+            // Обработчик для кнопки вставки ссылки
+            document.getElementById('insertLinkBtn').addEventListener('click', function() {
+                const url = document.getElementById('linkUrl').value.trim();
+                if (url && currentSelection) {
+                    // Восстанавливаем выделение
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(currentSelection);
+                    
+                    // Применяем ссылку
+                    if (currentTaskIdForLink) {
+                        // Для редактируемой задачи
+                        const editInput = document.getElementById(currentTaskIdForLink).querySelector('.edit-input');
+                        editInput.focus();
+                        document.execCommand('createLink', false, url);
+                    } else {
+                        // Для основного редактора
+                        document.getElementById('taskInput').focus();
+                        document.execCommand('createLink', false, url);
+                    }
+                    
+                    // Сбрасываем сохраненное выделение
+                    currentSelection = null;
+                }
+                hideLinkModal();
+            });
+        });
+
+        // Функция очистки поиска
+        function clearSearch() {
+            const tasks = document.querySelectorAll('.task-card');
+            
+            tasks.forEach(task => {
+                task.style.display = '';
+                const content = task.querySelector('.task-content');
+                // Удаляем подсветку
+                content.innerHTML = content.innerHTML.replace(/<span class="highlight">([^<]*)<\/span>/gi, '$1');
+            });
+            
+            document.getElementById('searchInfo').textContent = '';
+        }
+
+        // Поиск задач
+        function searchTasks() {
+            const searchText = document.getElementById('searchInput').value.trim().toLowerCase();
+            const tasks = document.querySelectorAll('.task-card');
+            let foundCount = 0;
+            
+            if (!searchText) {
+                clearSearch();
+                return;
+            }
+            
+            tasks.forEach(task => {
+                const content = task.querySelector('.task-content');
+                const text = content.textContent.toLowerCase();
+                const originalHtml = content.innerHTML;
+                
+                // Удаляем предыдущую подсветку
+                content.innerHTML = originalHtml.replace(/<span class="highlight">([^<]*)<\/span>/gi, '$1');
+                
+                if (text.includes(searchText)) {
+                    task.style.display = '';
+                    foundCount++;
+                    
+                    // Подсвечиваем найденный текст
+                    const regex = new RegExp(searchText, 'gi');
+                    content.innerHTML = originalHtml.replace(regex, match => 
+                        `<span class="highlight">${match}</span>`
+                    );
+                } else {
+                    task.style.display = 'none';
+                }
+            });
+            
+            // Показываем информацию о результатах поиска
+            const searchInfo = document.getElementById('searchInfo');
+            if (foundCount === 0) {
+                searchInfo.textContent = 'Задачи не найдены';
+            } else {
+                searchInfo.textContent = `Найдено задач: ${foundCount}`;
+            }
+        }
+        
+        // Форматирование текста в редакторе
+        function formatText(command, value = null) {
+            const editor = document.getElementById('taskInput');
+            const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
+            
+            if (command === 'removeFormat') {
+                // Полностью очищаем форматирование
+                const selection = window.getSelection();
+                const range = selection.getRangeAt(0);
+                
+                // Создаем новый элемент без форматирования
+                const span = document.createElement('span');
+                span.textContent = range.toString();
+                
+                // Удаляем выделенный текст и вставляем чистый
+                range.deleteContents();
+                range.insertNode(span);
+                
+                // Сбрасываем состояние кнопок
+                currentFormatState = {
+                    bold: false,
+                    italic: false,
+                    underline: false,
+                    strikeThrough: false
+                };
+                updateFormatButtons();
+            } else if (isFormatCommand) {
+                const isActive = document.queryCommandState(command);
+                
+                // Для надежного снятия форматирования
+                if (isActive) {
+                    document.execCommand(command, false, false);
+                    currentFormatState[command] = false;
+                } else {
+                    document.execCommand(command, false, true);
+                    currentFormatState[command] = true;
+                }
+            } else {
+                document.execCommand(command, false, value);
+            }
+            
+            editor.focus();
+            updateFormatButtons();
+        }
+
+        // Добавление новой задачи
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskContent = taskInput.innerHTML.trim();
+            const importTasks = document.querySelector('#importTasks');
+            
+            if (!taskContent) return;
+            
+            const tasksContainer = document.getElementById('tasksContainer');
+            const now = new Date();
+            const timestamp = formatDate(now);
+            
+            const taskId = 'task-' + Date.now();
+            
+            const taskCard = document.createElement('div');
+            taskCard.className = 'task-card';
+            taskCard.id = taskId;
+            
+            taskCard.innerHTML = `
+                <div class="task-content">${taskContent}</div>
+                <div class="task-actions">
+                    <button class="edit-btn" onclick="enableEdit('${taskId}')">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="timestamp">Создано: ${timestamp} ${importTasks.name}</div>
+                <div class="edit-toolbar common-toolbar hidden">
+                    <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
+                    <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
+                    <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
+                    <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
+                    <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
+                        <option value="">Размер</option>
+                        <option value="1">Мелкий</option>
+                        <option value="3">Обычный</option>
+                        <option value="5">Крупный</option>
+                        <option value="7">Огромный</option>
+                    </select>
+                    <select onchange="editFormatText('${taskId}', 'fontName', this.value)">
+                        <option value="">Шрифт</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'insertUnorderedList')" title="Маркированный список">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M5 6h14M5 18h14"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'insertOrderedList')" title="Нумерованный список">
+                        <svg viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="showLinkModal('${taskId}')" title="Вставить ссылку">
+                        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyLeft')" title="Выравнивание по левому краю">
+                        <svg viewBox="0 0 24 24"><path d="M21 6H3M15 12H3M17 18H3"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyCenter')" title="Выравнивание по центру">
+                        <svg viewBox="0 0 24 24"><path d="M21 6H3M19 12H5M17 18H7"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
+                        <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
+                    </button>
+                    <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <div class="edit-input hidden" contenteditable="true"></div>
+                <div class="edit-buttons hidden">
+                    <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
+                    <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
+                </div>
+            `;
+            
+            tasksContainer.appendChild(taskCard);
+            taskInput.innerHTML = '';
+            
+             // Сбрасываем состояние форматирования после добавления задачи
+            currentFormatState = {
+                bold: false,
+                italic: false,
+                underline: false,
+                strikeThrough: false
+            };
+            updateFormatButtons();
+            
+            // вызываем код для получения JSON
+            exportTasks();
+            
+        }
+
+        // Форматирование текста при редактировании
+        function editFormatText(taskId, command, value = null) {
+            const editInput = document.getElementById(taskId).querySelector('.edit-input');
+            
+            if (command === 'removeFormat') {
+                // Полностью очищаем форматирование
+                const selection = window.getSelection();
+                const range = selection.getRangeAt(0);
+                
+                // Создаем новый элемент без форматирования
+                const span = document.createElement('span');
+                span.textContent = range.toString();
+                
+                // Удаляем выделенный текст и вставляем чистый
+                range.deleteContents();
+                range.insertNode(span);
+                
+                // Сбрасываем состояние кнопок
+                currentFormatState = {
+                    bold: false,
+                    italic: false,
+                    underline: false,
+                    strikeThrough: false
+                };
+                updateEditFormatButtons(taskId);
+            } else {
+                document.execCommand(command, false, value);
+            }
+            
+            editInput.focus();
+        }
+
+        // Включение режима редактирования для задачи
+        function enableEdit(taskId) {
+            const taskCard = document.getElementById(taskId);
+            const taskContent = taskCard.querySelector('.task-content').innerHTML;
+            const editInput = taskCard.querySelector('.edit-input');
+            const editButtons = taskCard.querySelector('.edit-buttons');
+            const editToolbar = taskCard.querySelector('.edit-toolbar');
+            
+            editInput.dataset.originalContent = taskContent;
+            
+            // Скрываем отображаемый контент и показываем элементы редактирования
+            taskCard.querySelector('.task-content').classList.add('hidden');
+            taskCard.querySelector('.edit-btn').classList.add('hidden');
+            
+            editInput.innerHTML = taskContent;
+            editInput.classList.remove('hidden');
+            editButtons.classList.remove('hidden');
+            editToolbar.classList.remove('hidden');
+            
+            editInput.focus();
+            setTimeout(() => updateEditFormatButtons(taskId), 100);
+        }
+        
+        // Отмена редактирования
+        function cancelEdit(taskId) {
+            const taskCard = document.getElementById(taskId);
+            const editInput = taskCard.querySelector('.edit-input');
+            
+            editInput.innerHTML = editInput.dataset.originalContent;
+            
+            taskCard.querySelector('.task-content').classList.remove('hidden');
+            taskCard.querySelector('.edit-btn').classList.remove('hidden');
+            editInput.classList.add('hidden');
+            taskCard.querySelector('.edit-buttons').classList.add('hidden');
+            taskCard.querySelector('.edit-toolbar').classList.add('hidden');
+        }
+
+        // Сохранение отредактированной задачи
+        function saveTask(taskId) {
+            const taskCard = document.getElementById(taskId);
+            const editInput = taskCard.querySelector('.edit-input');
+            const newContent = editInput.innerHTML.trim();
+            const importTasks = document.querySelector('#importTasks');
+            
+            if (!newContent) return;
+            
+            // Обновляем содержимое задачи
+            taskCard.querySelector('.task-content').innerHTML = newContent;
+            
+            // Скрываем элементы редактирования и показываем контент
+            taskCard.querySelector('.task-content').classList.remove('hidden');
+            taskCard.querySelector('.edit-btn').classList.remove('hidden');
+            editInput.classList.add('hidden');
+            taskCard.querySelector('.edit-buttons').classList.add('hidden');
+            taskCard.querySelector('.edit-toolbar').classList.add('hidden');
+            
+            // Обновляем временную метку
+            const now = new Date();
+            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${importTasks.name}`;
+        }
+        
+        // Обновление состояния кнопок форматирования
+        function updateFormatButtons() {
+            const editor = document.getElementById('taskInput');
+            if (!editor) return;
+            
+            const toolbar = editor.closest('.editor-container').querySelector('.toolbar');
+            
+            // Обновляем кнопки на основе сохраненного состояния
+            toolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
+            toolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
+            toolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
+            toolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
+        }
+
+        // Обновление состояния кнопок форматирования в редакторе задачи
+        function updateEditFormatButtons(taskId) {
+            const taskCard = document.getElementById(taskId);
+            if (!taskCard) return;
+            
+            const editToolbar = taskCard.querySelector('.edit-toolbar');
+            
+            // Обновляем кнопки на основе сохраненного состояния
+            editToolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
+            editToolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
+            editToolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
+            editToolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
+        }
+
+        // Форматирование даты в русском формате
+        function formatDate(date) {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            
+            return `${day}.${month}.${year} ${hours}:${minutes}`;
+        }
+
+        // Добавление задачи по нажатию Enter (Shift+Enter для новой строки)
+        document.getElementById('taskInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addTask();
+            }
+        });
+        
+        // Обновление кнопок при клике
+        document.addEventListener('mouseup', function() {
+            const activeElement = document.activeElement;
+            if (activeElement.id === 'taskInput') {
+                // Обновляем состояние на основе текущего выделения
+                currentFormatState.bold = document.queryCommandState('bold');
+                currentFormatState.italic = document.queryCommandState('italic');
+                currentFormatState.underline = document.queryCommandState('underline');
+                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
+                updateFormatButtons();
+            } else if (activeElement.classList.contains('edit-input')) {
+                const taskId = activeElement.closest('.task-card').id;
+                // Обновляем состояние на основе текущего выделения
+                currentFormatState.bold = document.queryCommandState('bold');
+                currentFormatState.italic = document.queryCommandState('italic');
+                currentFormatState.underline = document.queryCommandState('underline');
+                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
+                updateEditFormatButtons(taskId);
+            }
+        });
+        
+        // Показ модального окна для ссылок
+        function showLinkModal(taskId = null) {
+            // Сохраняем текущее выделение
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0 && !selection.isCollapsed) {
+                currentSelection = selection.getRangeAt(0).cloneRange();
+                currentTaskIdForLink = taskId;
+                
+                const modal = document.getElementById('linkModal');
+                modal.style.display = 'flex';
+                document.getElementById('linkUrl').value = '';
+                document.getElementById('linkUrl').focus();
+            } else {
+                alert('Пожалуйста, выделите текст, который должен стать ссылкой');
+            }
+        }
+
+        // Скрытие модального окна
+        function hideLinkModal() {
+            document.getElementById('linkModal').style.display = 'none';
+            currentSelection = null;
+            currentTaskIdForLink = null;
+        }
+        
+        // Экспорт задач в JSON
+        function exportTasks() {
+            const tasks = [];
+            const taskCards = document.querySelectorAll('.task-card');
+
+            taskCards.forEach(card => {
+                tasks.push({
+                    content: card.querySelector('.task-content').innerHTML,
+                    created: card.querySelector('.timestamp').textContent.replace('Создано: ', ''),
+                    updated: card.querySelector('.timestamp').textContent.includes('Обновлено: ') 
+                        ? card.querySelector('.timestamp').textContent.replace('Обновлено: ', '')
+                        : null
+                });
+            });
+            
+            const dataStr = JSON.stringify(tasks, null, 2);
+
+            // сохраняем полученный текст в текст кнопки и нажимаем ее
+            const exportTask = document.querySelector('#exportTasks');
+            exportTask.textContent = dataStr;
+            exportTask.click();
+            
+        }
+        
+        // Импорт задач из JSON
+        function importTasks() {
+            
+            
+            const importTasks = document.querySelector('#importTasks');
+
+            // importTasks.textContent = 
+            // `[
+            //     {
+            //         "content": "новый комментарий",
+            //         "created": "16.06.2025 21:23 Ermakov Viktor",
+            //         "updated": null
+            //     },
+            //     {
+            //         "content": "второй комментарий",
+            //         "created": "16.06.2025 21:23 Ermakov Viktor",
+            //         "updated": null,
+            //     }
+            // ]`;
+
+            const tasks = JSON.parse(importTasks.textContent);
+            
+            tasks.forEach(task => {
+                const taskId = 'task-' + Date.now();
+                const taskCard = document.createElement('div');
+                taskCard.className = 'task-card';
+                taskCard.id = taskId;
+                
+                taskCard.innerHTML = `
+                    <div class="task-content">${task.content}</div>
+                    <div class="task-actions">
+                        <button class="edit-btn" onclick="enableEdit('${taskId}')">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
+                    <div class="edit-toolbar common-toolbar hidden">
+                        <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
+                        <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
+                        <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
+                        <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
+                        <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
+                            <option value="">Размер</option>
+                            <option value="1">Мелкий</option>
+                            <option value="3">Обычный</option>
+                            <option value="5">Крупный</option>
+                            <option value="7">Огромный</option>
+                        </select>
+                        <select onchange="editFormatText('${taskId}', 'fontName', this.value)">
+                            <option value="">Шрифт</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Verdana">Verdana</option>
+                        </select>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'insertUnorderedList')" title="Маркированный список">
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M5 6h14M5 18h14"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'insertOrderedList')" title="Нумерованный список">
+                            <svg viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="showLinkModal('${taskId}')" title="Вставить ссылку">
+                            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyLeft')" title="Выравнивание по левому краю">
+                            <svg viewBox="0 0 24 24"><path d="M21 6H3M15 12H3M17 18H3"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyCenter')" title="Выравнивание по центру">
+                            <svg viewBox="0 0 24 24"><path d="M21 6H3M19 12H5M17 18H7"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
+                            <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
+                        </button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
+                            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <div class="edit-input hidden" contenteditable="true"></div>
+                    <div class="edit-buttons hidden">
+                        <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
+                        <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
+                    </div>
+                `;
+                
+                document.getElementById('tasksContainer').appendChild(taskCard);
+            });
+        };
+        
+    </script>
+</body>
+</html>

@@ -29,21 +29,21 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <templates uuid="d2e72251-d28f-4ee6-983a-a99008a98bd1">
-    <name>ШаблонКанбанДоскиHTML</name>
+  <templates uuid="a75f4506-8b3a-425c-a073-c157cf4abac5">
+    <name>ШаблонКанбанДоскаHTML</name>
     <synonym>
       <key>ru</key>
-      <value>Шаблон канбан доски HTML</value>
+      <value>Шаблон канбан доска HTML</value>
     </synonym>
-    <templateType>HTMLDocument</templateType>
+    <templateType>BinaryData</templateType>
   </templates>
-  <templates uuid="2366b4fb-2c29-41eb-9ccb-023c0d626043">
-    <name>ШаблонПустаяДоска</name>
+  <templates uuid="87cad90c-a3cf-465b-83d9-5c1284b92619">
+    <name>ШаблонПустаяДоскаHTML</name>
     <synonym>
       <key>ru</key>
-      <value>Шаблон пустая доска</value>
+      <value>Шаблон пустая доска HTML</value>
     </synonym>
-    <templateType>HTMLDocument</templateType>
+    <templateType>BinaryData</templateType>
   </templates>
   <commands uuid="912029c4-f01e-4a72-9ee6-b07577612e99">
     <name>ОткрытьКанбанДоску</name>
