@@ -145,6 +145,12 @@
             opacity: 0.3;
         }
 
+        /* оставляем тег чуть бледнее при нажатии */
+        .tag__inactive {
+            opacity: 0.5;
+            background-color: rgb(233, 233, 233);
+        }
+
         .tag_task {
             width: 2rem;
             height: 2rem;
@@ -177,7 +183,11 @@
             align-items: center;
             margin-top: 1rem;
             padding: .5rem;
-            animation: fadeInOut 0.5s ease-in-out;
+
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
         }
 
         /* меняем цвет рамки карточки при наведении */
@@ -186,46 +196,13 @@
             background-color: lightgrey;
         }
 
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-                display: none;
-            }
-
-            50% {
-                opacity: 0.5;
-                display: flex;
-            }
-
-            100% {
-                opacity: 1;
-                display: flex;
-            }
-        }
-
         /* если тег не отмечен */
         .card__inactive {
-            /*animation: fadeIn 0.5s ease-in-out;*/
+
             opacity: 0;
-            display: none;
-        }
-
-        @keyframes fadeIn {
-
-            0% {
-                opacity: 1;
-                display: flex;
-            }
-
-            50% {
-                opacity: 0.5;
-                display: flex;
-            }
-
-            100% {
-                opacity: 0;
-                display: none;
-            }
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            
         }
 
         /* КАРТОЧКИ */
@@ -237,12 +214,6 @@
         /* делаем тег чуть бледнее при наведении */
         label:hover {
             opacity: 0.5;
-        }
-
-        /* оставляем тег чуть бледнее при нажатии */
-        .tag__inactive {
-            opacity: 0.5;
-            background-color: rgb(233, 233, 233) !important;
         }
 
         .kanban-block__name {
