@@ -184,9 +184,9 @@
             margin-top: 1rem;
             padding: .5rem;
 
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            /* Обеспечиваем плавный переход для opacity и height */
+            transition: opacity 0.3s ease-out, height 0.3s ease-out; /* Время и тип анимации */
+            overflow: hidden; /* Важно! Скрывает контент, когда высота уменьшается */
 
         }
 
@@ -198,15 +198,16 @@
 
         /* если тег не отмечен */
         .card__inactive {
-
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-            
+            opacity: 0; /* Делаем невидимым */
+            height: 0 !important; /* Устанавливаем высоту в 0, чтобы элемент не занимал место */
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            border-width: 0 !important;
         }
 
         /* КАРТОЧКИ */
-
         label {
             cursor: pointer;
         }
@@ -296,7 +297,6 @@
             width: 3rem;
             height: 3rem;
             transition: transform 0.4s ease;
-            /* Плавное изменение за 0.3 секунды */
         }
 
         /*Вращаем кнопку обновления на 180 градусов*/
@@ -436,7 +436,6 @@
         }
 
         /* кнопка добавления задач +++ */
-
         .add_task {
             min-width: 26px;
             min-height: 26px;
@@ -471,7 +470,6 @@
             width: 16px;
             height: 16px;
         }
-
         /* кнопка добавления задач --- */
     </style>
 </head>
@@ -555,37 +553,183 @@
                 console.log(param1);
                 console.log(param2);
             }
-
         }
 
-        // Кнопка мои задачи отрабатывает без вызова 1С
-        let my_tasks = document.querySelector('#my_tasks');
-        let actualUserId = my_tasks.classList[1];
-        my_tasks.addEventListener('click', function () {
-            my_tasks.classList.toggle('my_tasks_active');
-            let tasks = document.querySelectorAll('.card');
-            tasks.forEach(function (item) {
-                let tag = document.querySelector(`.tag.${item.classList[1]}`);
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Кнопка мои задачи отрабатывает без вызова 1С
+            let my_tasks = document.getElementById('my_tasks');
+            let actualUserId = my_tasks.classList[1];
+            my_tasks.addEventListener('click', function () {
+                my_tasks.classList.toggle('my_tasks_active');
+                let tasks = document.querySelectorAll('.card');
+                tasks.forEach(function (taskCard) {
+                    let tag = document.querySelector(`.tag.${taskCard.classList[1]}`);
 
-                if (!item.classList.contains(actualUserId) && !tag.classList.contains('tag__inactive')) {
-                    item.classList.toggle('card__inactive');
+                    if (!taskCard.classList.contains(actualUserId) && !tag.classList.contains('tag__inactive')) {
+                        taskCard.classList.toggle('card__inactive');
+                    }
+                });
+                RecalculateKanbanBlock();
+            });
+            
+            // Обработчики для чекбоксов
+            document.querySelectorAll('.checkbox input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    const id = event.target.id;
+                    // Быстрый фильтр по проектам без вызова 1С
+                    driveCheckbox = document.querySelector(`.${id}`);
+                    driveCheckbox.classList.toggle('tag__inactive');
+
+                    selector = `.card.${id}`;
+                    driveCards = document.querySelectorAll(selector);
+                    driveCards.forEach(my_tasks_card => {
+                        if (my_tasks.classList.contains('my_tasks_active')) {
+                            if (my_tasks_card.classList.contains(actualUserId)) {
+                                my_tasks_card.classList.toggle('card__inactive');
+                            }
+                        } else {
+                            my_tasks_card.classList.toggle('card__inactive');
+                        }
+                    });
+
+                    RecalculateKanbanBlock();
+                });
+            });
+
+            // Обработчики для drag & drop
+            document.querySelectorAll('.kanban-block').forEach(block => {
+                block.addEventListener('dragover', (event) => {
+                    event.preventDefault(); // Необходимо для разрешения drop
+                });
+            });
+
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('dragstart', (event) => {
+                    event.dataTransfer.setData("text", event.target.id);
+                });
+            });
+
+            let currentZoom = 100;
+            const minZoom = 60;
+            const maxZoom = 140;
+            const zoomStep = 10;
+
+            // Обработчики для кнопок управления
+            const zoomOutBtn = document.getElementById('zoom-out');
+            zoomOutBtn.addEventListener('click', () => {
+                if (currentZoom > minZoom) {
+                    currentZoom -= zoomStep;
+                    updatePageZoom(3.5);
                 }
             });
-            RecalculateKanbanBlock();
+
+            const zoomInBtn = document.getElementById('zoom-in');
+            zoomInBtn.addEventListener('click', () => {
+                if (currentZoom < maxZoom) {
+                    currentZoom += zoomStep;
+                    updatePageZoom(1);
+                }
+            });
+            
+            // Функция обновления масштаба страницы
+            function updatePageZoom(num = 0) {
+                
+                // Элементы управления
+                const zoomDisplay = document.getElementById('zoom-display');
+                
+                // Применяем zoom ко всему body
+                document.body.style.zoom = `${currentZoom}%`;
+                zoomDisplay.textContent = `${currentZoom}%`;
+
+                // Отключаем кнопки при достижении границ
+                zoomInBtn.disabled = currentZoom >= maxZoom;
+                zoomOutBtn.disabled = currentZoom <= minZoom;
+                
+                updatePadding(num);
+            }
+            
+            document.querySelectorAll('.add_task').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    // Ваша логика добавления задачи, возможно, с извлечением ID статуса из класса
+                    // const statusClass = Array.from(event.currentTarget.classList).find(cls => cls.startsWith('status'));
+                    // const statusId = statusClass ? statusClass.replace('status', '') : null;
+                    // console.log('Добавить задачу в статус:', statusId);
+                   
+                });
+            });
+
+            // Обработчик клавиатуры
+            document.addEventListener('keydown', function (e) {
+                
+                // не хватает обработки ctrl + колесико мышки
+
+                // Проверяем, что нажат Ctrl (или Cmd на Mac)
+                if (e.ctrlKey || e.metaKey) {
+                    var key = e.keyCode || e.which; // Для максимальной совместимости
+
+                    // Обрабатываем "+" (и "=", так как это одна клавиша без Shift)
+                    if (key === 187 || key === 61) { // 187 = '+', 61 = '=' (некоторые старые браузеры)
+                        e.preventDefault(); // Отменяем стандартное поведение браузера
+                        if (currentZoom < maxZoom) {
+                            currentZoom += zoomStep;
+                            updatePageZoom(1);
+                        }
+                    }
+                    // Обрабатываем "-" (и "_", но без Shift)
+                    else if (key === 189 || key === 173) { // 189 = '-', 173 = '_' (в некоторых браузерах)
+                        e.preventDefault();
+                        if (currentZoom > minZoom) {
+                            currentZoom -= zoomStep;
+                            updatePageZoom(3.5);
+                        }
+                    }
+                    // Сброс масштаба по Ctrl+0 (код клавиши "0" = 48)
+                    else if (key === 48) {
+                        e.preventDefault();
+                        currentZoom = 100;
+                        updatePageZoom(0);
+                    }
+                }
+
+            });
+
+            // Инициализация
+            updatePageZoom(0);
+            /* Масштабирование страницы --- */
+
         });
 
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
+        // Рассчет блока задач от высоты фиксированного блока +++
+        // Автоматический расчёт отступа
+        const sticky_blok = document.querySelector('.sticky_blok');
+        let kanban_board = document.querySelector('#kanban-board');
+
+        function updatePadding(num = 0) {
+            sticky_blok_Height = sticky_blok.offsetHeight;
+            
+            console.log(num);
+            console.log(kanban_board.style.paddingTop);
+            console.log(sticky_blok_Height);
+
+            // if (num == 1) {
+                kanban_board.style.paddingTop = `${sticky_blok_Height - num}px`;
+            // } else {
+                // kanban_board.style.paddingTop = `${sticky_blok_Height}px`;
+            // }
+                
+            console.log(kanban_board.style.paddingTop);
         }
 
-        function allowDrop(event) {
-            event.preventDefault();
-        }
+        // Обновляем при загрузке и изменении размера окна
+        window.addEventListener('load', updatePadding(0));
+        window.addEventListener('resize', updatePadding(0));
+        // Рассчет блока задач от высоты фиксированного блока ---
 
         // Перетаскивание задач по статусам +++
         dropZones = document.querySelectorAll(".kanban-block");
-        dropZones.forEach(function (item) {
-            item.addEventListener("drop", (event) => {
+        dropZones.forEach(function (kanbanBlock) {
+            kanbanBlock.addEventListener("drop", (event) => {
 
                 event.preventDefault();
 
@@ -593,146 +737,35 @@
                 const idTask = event.dataTransfer.getData("text");
                 const draggedElement = document.getElementById(idTask);
                 const lastStatus = draggedElement.parentElement;
-                if (item == lastStatus) {
+                if (kanbanBlock == lastStatus) {
                     return;
                 }
-                item.appendChild(draggedElement);
+                kanbanBlock.appendChild(draggedElement);
 
                 // Вызываем событие в платформе 1С
                 idNewStatus = event.currentTarget.id;
                 V8Proxy.fetch('changeStatus', idTask, idNewStatus);
 
                 // Возвращаем элемент в исходную колонку статуса
-                item.removeChild(draggedElement);
-                lastStatus.appendChild(draggedElement);
+                // kanbanBlock.removeChild(draggedElement);
+                // lastStatus.appendChild(draggedElement);
 
             });
         });
         // Перетаскивание задач по статусам ---
 
         function RecalculateKanbanBlock() {
+            let block_headers = document.querySelectorAll('.block_header');
             // Рассчитываем количество задач в каждом блоке
-            let blocks = document.querySelectorAll('.kanban-block');
-            blocks.forEach((item, index) => {
-                let tasks = item.querySelectorAll('.card:not(.card__inactive)');
-                let block_header = document.querySelectorAll('.block_header')[index];
+            dropZones.forEach((kanbanBlock, index) => {
+                let tasks = kanbanBlock.querySelectorAll('.card:not(.card__inactive)');
+                let block_header = block_headers[index];
                 let number = block_header.querySelector('.kanban-block__number');
-                number.innerHTML = tasks.length;
+                number.textContent = tasks.length;
             });
         }
 
         RecalculateKanbanBlock();
-
-        // Быстрый фильтр по проектам без вызова 1С
-        function checkFluency(id, tag) {
-
-            driveCheckbox = document.querySelector(`.${id}`);
-            driveCheckbox.classList.toggle('tag__inactive');
-
-            selector = `.card.${tag}`;
-            driveCards = document.querySelectorAll(selector);
-            driveCards.forEach(element => {
-                if (my_tasks.classList.contains('my_tasks_active')) {
-                    if (element.classList.contains(actualUserId)) {
-                        element.classList.toggle('card__inactive');
-                    }
-                } else {
-                    element.classList.toggle('card__inactive');
-                }
-            });
-
-            RecalculateKanbanBlock();
-        }
-
-        /* Масштабирование страницы +++ */
-        // Текущий масштаб (по умолчанию 100%)
-        let currentZoom = 100;
-        const minZoom = 60;
-        const maxZoom = 140;
-        const zoomStep = 10;
-
-        // Элементы управления
-        const zoomDisplay = document.getElementById('zoom-display');
-        const zoomInBtn = document.getElementById('zoom-in');
-        const zoomOutBtn = document.getElementById('zoom-out');
-
-        // Функция обновления масштаба страницы
-        function updatePageZoom() {
-            // Применяем zoom ко всему body
-            document.body.style.zoom = `${currentZoom}%`;
-            zoomDisplay.textContent = `${currentZoom}%`;
-
-            // Отключаем кнопки при достижении границ
-            zoomInBtn.disabled = currentZoom >= maxZoom;
-            zoomOutBtn.disabled = currentZoom <= minZoom;
-        }
-
-        // Обработчики кнопок
-        zoomInBtn.addEventListener('click', () => {
-            if (currentZoom < maxZoom) {
-                currentZoom += zoomStep;
-                updatePageZoom();
-            }
-        });
-
-        zoomOutBtn.addEventListener('click', () => {
-            if (currentZoom > minZoom) {
-                currentZoom -= zoomStep;
-                updatePageZoom();
-            }
-        });
-
-        // Обработчик клавиатуры
-        document.addEventListener('keydown', function (e) {
-
-            // Проверяем, что нажат Ctrl (или Cmd на Mac)
-            if (e.ctrlKey || e.metaKey) {
-                var key = e.keyCode || e.which; // Для максимальной совместимости
-
-                // Обрабатываем "+" (и "=", так как это одна клавиша без Shift)
-                if (key === 187 || key === 61) { // 187 = '+', 61 = '=' (некоторые старые браузеры)
-                    e.preventDefault(); // Отменяем стандартное поведение браузера
-                    if (currentZoom < maxZoom) {
-                        currentZoom += zoomStep;
-                        updatePageZoom();
-                    }
-                }
-                // Обрабатываем "-" (и "_", но без Shift)
-                else if (key === 189 || key === 173) { // 189 = '-', 173 = '_' (в некоторых браузерах)
-                    e.preventDefault();
-                    if (currentZoom > minZoom) {
-                        currentZoom -= zoomStep;
-                        updatePageZoom();
-                    }
-                }
-                // Сброс масштаба по Ctrl+0 (код клавиши "0" = 48)
-                else if (key === 48) {
-                    e.preventDefault();
-                    currentZoom = 100;
-                    updatePageZoom();
-                }
-            }
-
-        });
-
-        // Инициализация
-        updatePageZoom();
-        /* Масштабирование страницы --- */
-
-        // Рассчет блока задач от высоты фиксированного блока +++
-        // Автоматический расчёт отступа
-        const sticky_blok = document.querySelector('.sticky_blok');
-        const kanban_board = document.querySelector('#kanban-board');
-
-        function updatePadding() {
-            const sticky_blok_Height = sticky_blok.offsetHeight;
-            kanban_board.style.paddingTop = `${sticky_blok_Height}px`;
-        }
-
-        // Обновляем при загрузке и изменении размера окна
-        window.addEventListener('load', updatePadding);
-        window.addEventListener('resize', updatePadding);
-        // Рассчет блока задач от высоты фиксированного блока ---
 
     </script>
 
