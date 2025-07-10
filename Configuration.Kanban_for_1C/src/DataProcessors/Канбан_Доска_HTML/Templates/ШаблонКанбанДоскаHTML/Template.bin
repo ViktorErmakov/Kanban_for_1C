@@ -321,6 +321,7 @@
             display: inline-block;
             border: 2px solid #ebebeb;
             cursor: pointer;
+            -webkit-user-select: none;
         }
 
         .my_tasks:hover {
@@ -662,8 +663,6 @@
             // Обработчик клавиатуры
             document.addEventListener('keydown', function (e) {
                 
-                // не хватает обработки ctrl + колесико мышки
-
                 // Проверяем, что нажат Ctrl (или Cmd на Mac)
                 if (e.ctrlKey || e.metaKey) {
                     var key = e.keyCode || e.which; // Для максимальной совместимости
@@ -698,6 +697,17 @@
             updatePageZoom(0);
             /* Масштабирование страницы --- */
 
+            document.addEventListener('wheel', function(event) {
+                // Этот обработчик не работает в платформе 1С, с нажатым ctrl + колесико не ловиться.
+                // Блокируем ТОЛЬКО если нажат Ctrl и не нажаты другие модификаторы (Shift, Alt, Meta)
+                // console.log("попал в событие wheel");
+                // console.log(event.ctrlKey);
+                // console.log(event);
+                if (event.ctrlKey || event.metaKey) {
+                    event.preventDefault(); // Отменяем только стандартное действие браузера для этого события wheel
+                }
+            }, { passive: false });
+
         });
 
         // Рассчет блока задач от высоты фиксированного блока +++
@@ -707,18 +717,7 @@
 
         function updatePadding(num = 0) {
             sticky_blok_Height = sticky_blok.offsetHeight;
-            
-            console.log(num);
-            console.log(kanban_board.style.paddingTop);
-            console.log(sticky_blok_Height);
-
-            // if (num == 1) {
-                kanban_board.style.paddingTop = `${sticky_blok_Height - num}px`;
-            // } else {
-                // kanban_board.style.paddingTop = `${sticky_blok_Height}px`;
-            // }
-                
-            console.log(kanban_board.style.paddingTop);
+            kanban_board.style.paddingTop = `${sticky_blok_Height - num}px`;
         }
 
         // Обновляем при загрузке и изменении размера окна
@@ -745,10 +744,6 @@
                 // Вызываем событие в платформе 1С
                 idNewStatus = event.currentTarget.id;
                 V8Proxy.fetch('changeStatus', idTask, idNewStatus);
-
-                // Возвращаем элемент в исходную колонку статуса
-                // kanbanBlock.removeChild(draggedElement);
-                // lastStatus.appendChild(draggedElement);
 
             });
         });

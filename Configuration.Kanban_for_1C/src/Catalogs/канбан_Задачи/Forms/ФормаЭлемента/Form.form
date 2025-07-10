@@ -647,6 +647,12 @@
       <common>true</common>
     </edit>
   </attributes>
+  <parameters>
+    <name>Статус</name>
+    <valueType>
+      <types>CatalogRef.канбан_СтатусыЗадач</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
