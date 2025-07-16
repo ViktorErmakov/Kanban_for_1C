@@ -17,6 +17,7 @@
         html {
             /* font-size: 10px; */
             font-size: 62.5%; /* Это делает 1rem = 10px по умолчанию (16px * 0.625 = 10px) */
+            box-sizing: border-box;
         }
 
         body {
@@ -88,6 +89,7 @@
             padding: 0.6rem;
             background-color: rgb(247, 246, 246);
             margin-right: .5rem;
+            /* box-sizing: border-box; */
         }
 
         .kanban-block:first-child {
@@ -96,6 +98,13 @@
 
         .kanban-block:hover {
             background-color: aliceblue;
+        }
+
+        /* Пример стилей для подсветки */
+        .block_header--hovered {
+            background-color: aliceblue; /* Более светлый фон */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Небольшая тень */
+            transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Плавный переход */
         }
 
         /* чекбоксы */
@@ -185,7 +194,7 @@
             padding: .5rem;
 
             /* Обеспечиваем плавный переход для opacity и height */
-            transition: opacity 0.3s ease-out, height 0.3s ease-out; /* Время и тип анимации */
+            transition: opacity 0.5s ease-out, height 0.5s ease-out; /* Время и тип анимации */
             overflow: hidden; /* Важно! Скрывает контент, когда высота уменьшается */
 
         }
@@ -199,12 +208,12 @@
         /* если тег не отмечен */
         .card__inactive {
             opacity: 0; /* Делаем невидимым */
-            height: 0 !important; /* Устанавливаем высоту в 0, чтобы элемент не занимал место */
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-            border-width: 0 !important;
+            height: 0; /* Устанавливаем высоту в 0, чтобы элемент не занимал место */
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-width: 0;
         }
 
         /* КАРТОЧКИ */
@@ -472,6 +481,16 @@
             height: 16px;
         }
         /* кнопка добавления задач --- */
+
+        /* Стили для Drag & Drop подсветки */
+        .kanban-block--dragover {
+            background-color: #e6f7ff; /* Например, светло-голубой фон */
+            /* border: 2px dashed #91d5ff; Пунктирная граница */
+            outline: 2px dashed #91d5ff; /* Используем outline вместо border */
+            outline-offset: -2px; /* Опционально: сдвигает контур внутрь, чтобы он был внутри padding */
+            transition: background-color 0.2s ease, border-color 0.2s ease; /* Плавный переход */
+        }
+
     </style>
 </head>
 
@@ -600,8 +619,48 @@
 
             // Обработчики для drag & drop
             document.querySelectorAll('.kanban-block').forEach(block => {
+                
+                // Убедимся, что dragover все еще работает для всей колонки
                 block.addEventListener('dragover', (event) => {
-                    event.preventDefault(); // Необходимо для разрешения drop
+                    event.preventDefault();
+                    // Добавляем класс подсветки, когда элемент находится над колонкой (включая карточки)
+                    block.classList.add('kanban-block--dragover');
+                });
+
+                // Добавляем универсальный обработчик для удаления подсветки,
+                // когда перетаскивание завершается или отменяется в любом месте
+                block.addEventListener('dragleave', (event) => {
+                    // Убедитесь, что курсор действительно покинул блок, а не перешел на дочерний элемент
+                    // relatedTarget - элемент, на который перешел курсор
+                    if (!block.contains(event.relatedTarget)) {
+                        block.classList.remove('kanban-block--dragover');
+                    }
+                });
+
+                // Обработчик события 'drop' должен удалять подсветку
+                block.addEventListener('drop', (event) => {
+                    event.preventDefault();
+                    block.classList.remove('kanban-block--dragover'); // Удаляем подсветку после успешного сброса
+
+                    const idTask = event.dataTransfer.getData("text");
+                    const draggedElement = document.getElementById(idTask);
+                    const lastStatus = draggedElement.parentElement;
+                    if (block === lastStatus) { // Используйте === для строгого сравнения
+                        return;
+                    }
+                    block.appendChild(draggedElement);
+
+                    const idNewStatus = event.currentTarget.id; // Correctly get the ID of the drop target
+                    window.V8Proxy.fetch('changeStatus', idTask, idNewStatus); // Убедитесь, что V8Proxy доступен
+                });
+            });
+
+            // Обработчик для события 'dragend' (когда перетаскивание завершено, независимо от сброса)
+            // Добавьте его в конец вашего блока DOMContentLoaded
+            document.addEventListener('dragend', (event) => {
+                // Удаляем подсветку со всех колонок после завершения перетаскивания
+                kanbanBlocks.forEach(block => {
+                    block.classList.remove('kanban-block--dragover');
                 });
             });
 
@@ -708,6 +767,27 @@
                 }
             }, { passive: false });
 
+            const kanbanBlocks = document.querySelectorAll('.kanban-block');
+            const blockHeaders = document.querySelectorAll('.block_header');
+
+            kanbanBlocks.forEach((kanbanBlock, index) => {
+                const correspondingHeader = blockHeaders[index];
+
+                // Добавляем обработчик события 'mouseenter' (наведение курсора)
+                kanbanBlock.addEventListener('mouseenter', () => {
+                    if (correspondingHeader) { // Проверяем, что заголовок существует
+                        correspondingHeader.classList.add('block_header--hovered');
+                    }
+                });
+
+                // Добавляем обработчик события 'mouseleave' (уход курсора)
+                kanbanBlock.addEventListener('mouseleave', () => {
+                    if (correspondingHeader) {
+                        correspondingHeader.classList.remove('block_header--hovered');
+                    }
+                });
+            });
+
         });
 
         // Рассчет блока задач от высоты фиксированного блока +++
@@ -726,33 +806,33 @@
         // Рассчет блока задач от высоты фиксированного блока ---
 
         // Перетаскивание задач по статусам +++
-        dropZones = document.querySelectorAll(".kanban-block");
-        dropZones.forEach(function (kanbanBlock) {
-            kanbanBlock.addEventListener("drop", (event) => {
+        // dropZones = document.querySelectorAll(".kanban-block");
+        // dropZones.forEach(function (kanbanBlock) {
+        //     kanbanBlock.addEventListener("drop", (event) => {
 
-                event.preventDefault();
+        //         event.preventDefault();
 
-                // Перетаскиваем элемент в другую колонку статуса, что бы получить его в платформе 1С
-                const idTask = event.dataTransfer.getData("text");
-                const draggedElement = document.getElementById(idTask);
-                const lastStatus = draggedElement.parentElement;
-                if (kanbanBlock == lastStatus) {
-                    return;
-                }
-                kanbanBlock.appendChild(draggedElement);
+        //         // Перетаскиваем элемент в другую колонку статуса, что бы получить его в платформе 1С
+        //         const idTask = event.dataTransfer.getData("text");
+        //         const draggedElement = document.getElementById(idTask);
+        //         const lastStatus = draggedElement.parentElement;
+        //         if (kanbanBlock == lastStatus) {
+        //             return;
+        //         }
+        //         kanbanBlock.appendChild(draggedElement);
 
-                // Вызываем событие в платформе 1С
-                idNewStatus = event.currentTarget.id;
-                V8Proxy.fetch('changeStatus', idTask, idNewStatus);
+        //         // Вызываем событие в платформе 1С
+        //         idNewStatus = event.currentTarget.id;
+        //         V8Proxy.fetch('changeStatus', idTask, idNewStatus);
 
-            });
-        });
+        //     });
+        // });
         // Перетаскивание задач по статусам ---
 
         function RecalculateKanbanBlock() {
             let block_headers = document.querySelectorAll('.block_header');
             // Рассчитываем количество задач в каждом блоке
-            dropZones.forEach((kanbanBlock, index) => {
+            kanbanBlocks.forEach((kanbanBlock, index) => {
                 let tasks = kanbanBlock.querySelectorAll('.card:not(.card__inactive)');
                 let block_header = block_headers[index];
                 let number = block_header.querySelector('.kanban-block__number');
