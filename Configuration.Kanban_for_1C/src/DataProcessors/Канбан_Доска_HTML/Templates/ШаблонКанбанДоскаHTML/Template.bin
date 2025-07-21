@@ -128,7 +128,7 @@
             display: flex;
             flex-direction: row;
             max-width: 250rem;
-            overflow-x: scroll;
+            overflow-x: auto;
             /* Показывает прокрутку только при необходимости */
             border: 2px solid #ebebeb;
             border-radius: .4rem;
@@ -290,6 +290,7 @@
             padding: .5rem;
             background-color: white;
             justify-content: space-between;
+            height: 10.3rem;
         }
 
         .command_panel_buttons {
@@ -542,9 +543,10 @@
                 V8_request.click();
             },
             // Для отправки из 1С в JS
-            sendResponse: (param1, param2) => {
-                console.log(param1);
-                console.log(param2);
+            sendResponse: (eventName, value, userName1C) => {
+                // console.log(eventName);
+                // console.log(value);
+                // console.log(userName1C);
             }
         }
 

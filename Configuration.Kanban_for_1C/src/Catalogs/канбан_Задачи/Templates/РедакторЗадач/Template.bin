@@ -434,10 +434,6 @@
         
         <div class="tasks-container" id="tasksContainer"></div>
         
-        <div class="import-export">
-            <button id="exportTasks">Экспорт задач</button>
-            <button id="importTasks" onclick="importTasks()">Импорт задач</button>
-        </div>
     </div>
         
     <!-- Модальное окно для вставки ссылок -->
@@ -450,12 +446,40 @@
         </div>
     </div>
 
+    <button id='V8_request' style="display: none;"></button>
+    <button id='V8_response' style="display: none;"></button>
+
     <script>
         
         let UserName = "";
         let currentSelection = null;
         let currentTaskIdForLink = null;
-        
+
+        window['V8Proxy'] = {
+
+            // Для запроса из JS в 1С
+            fetch: (eventName, value) => {
+
+                // const taskButton = document.querySelector(`.${value}`);
+                const V8_request = document.querySelector(`#V8_request`);
+                V8_request.value = eventName;
+                V8_request.textContent = value;
+                V8_request.click();
+            },
+            // Для отправки из 1С в JS
+            sendResponse: (eventName, value, userName1C) => {
+                
+                // console.log(eventName);
+                // console.log(value);
+                // console.log(userName1C);
+
+                UserName = userName1C;
+
+                importTasks(value);
+
+            }
+        }
+
         let currentFormatState = {
             bold: false,
             italic: false,
@@ -465,60 +489,64 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
+            
             document.getElementById('taskInput').focus();
+
+            window.V8Proxy.fetch('importTasks');
             
-            // Добавляем обработчики для поиска
-            const searchInput = document.getElementById('searchInput');
-            const clearSearchBtn = document.getElementById('clearSearchBtn');
+        });
+
+        // Добавляем обработчики для поиска
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        
+        document.getElementById('searchBtn').addEventListener('click', searchTasks);
+        
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                searchTasks();
+            }
             
-            document.getElementById('searchBtn').addEventListener('click', searchTasks);
-            
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
-                    searchTasks();
+            // Показываем/скрываем кнопку очистки
+            if (this.value.trim() !== '') {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
+            }
+        });
+        
+        // Обработчик для кнопки очистки
+        clearSearchBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.classList.remove('visible');
+            clearSearch();
+        });
+        
+        // Обработчик для кнопки вставки ссылки
+        document.getElementById('insertLinkBtn').addEventListener('click', function() {
+            const url = document.getElementById('linkUrl').value.trim();
+            if (url && currentSelection) {
+                // Восстанавливаем выделение
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(currentSelection);
+                
+                // Применяем ссылку
+                if (currentTaskIdForLink) {
+                    // Для редактируемой задачи
+                    const editInput = document.getElementById(currentTaskIdForLink).querySelector('.edit-input');
+                    editInput.focus();
+                    document.execCommand('createLink', false, url);
+                } else {
+                    // Для основного редактора
+                    document.getElementById('taskInput').focus();
+                    document.execCommand('createLink', false, url);
                 }
                 
-                // Показываем/скрываем кнопку очистки
-                if (this.value.trim() !== '') {
-                    clearSearchBtn.classList.add('visible');
-                } else {
-                    clearSearchBtn.classList.remove('visible');
-                }
-            });
-            
-            // Обработчик для кнопки очистки
-            clearSearchBtn.addEventListener('click', function() {
-                searchInput.value = '';
-                this.classList.remove('visible');
-                clearSearch();
-            });
-            
-            // Обработчик для кнопки вставки ссылки
-            document.getElementById('insertLinkBtn').addEventListener('click', function() {
-                const url = document.getElementById('linkUrl').value.trim();
-                if (url && currentSelection) {
-                    // Восстанавливаем выделение
-                    const selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(currentSelection);
-                    
-                    // Применяем ссылку
-                    if (currentTaskIdForLink) {
-                        // Для редактируемой задачи
-                        const editInput = document.getElementById(currentTaskIdForLink).querySelector('.edit-input');
-                        editInput.focus();
-                        document.execCommand('createLink', false, url);
-                    } else {
-                        // Для основного редактора
-                        document.getElementById('taskInput').focus();
-                        document.execCommand('createLink', false, url);
-                    }
-                    
-                    // Сбрасываем сохраненное выделение
-                    currentSelection = null;
-                }
-                hideLinkModal();
-            });
+                // Сбрасываем сохраненное выделение
+                currentSelection = null;
+            }
+            hideLinkModal();
         });
 
         // Функция очистки поиска
@@ -626,7 +654,7 @@
         function addTask() {
             const taskInput = document.getElementById('taskInput');
             const taskContent = taskInput.innerHTML.trim();
-            const importTasks = document.querySelector('#importTasks');
+            
             
             if (!taskContent) return;
             
@@ -649,7 +677,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="timestamp">Создано: ${timestamp} ${importTasks.name}</div>
+                <div class="timestamp">Создано: ${timestamp} ${UserName}</div>
                 <div class="edit-toolbar common-toolbar hidden">
                     <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
                     <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
@@ -702,7 +730,7 @@
             tasksContainer.appendChild(taskCard);
             taskInput.innerHTML = '';
             
-             // Сбрасываем состояние форматирования после добавления задачи
+            // Сбрасываем состояние форматирования после добавления задачи
             currentFormatState = {
                 bold: false,
                 italic: false,
@@ -790,7 +818,6 @@
             const taskCard = document.getElementById(taskId);
             const editInput = taskCard.querySelector('.edit-input');
             const newContent = editInput.innerHTML.trim();
-            const importTasks = document.querySelector('#importTasks');
             
             if (!newContent) return;
             
@@ -806,7 +833,7 @@
             
             // Обновляем временную метку
             const now = new Date();
-            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${importTasks.name}`;
+            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${UserName}`;
         }
         
         // Обновление состояния кнопок форматирования
@@ -918,35 +945,31 @@
             
             const dataStr = JSON.stringify(tasks, null, 2);
 
-            // сохраняем полученный текст в текст кнопки и нажимаем ее
-            const exportTask = document.querySelector('#exportTasks');
-            exportTask.textContent = dataStr;
-            exportTask.click();
+            window.V8Proxy.fetch('exportTasks', dataStr);
             
         }
+
+        // Для отладки
+        // value = 
+        // `[
+        //     {
+        //         "content": "новый комментарий",
+        //         "created": "16.06.2025 21:23 Ermakov Viktor",
+        //         "updated": null
+        //     },
+        //     {
+        //         "content": "второй комментарий",
+        //         "created": "16.06.2025 21:23 Ermakov Viktor",
+        //         "updated": null
+        //     }
+        // ]`;
+        // importTasks(value);
         
         // Импорт задач из JSON
-        function importTasks() {
+        function importTasks(value) {
             
-            
-            const importTasks = document.querySelector('#importTasks');
+            const tasks = JSON.parse(value); // Это будет работать без ошибок
 
-            // importTasks.textContent = 
-            // `[
-            //     {
-            //         "content": "новый комментарий",
-            //         "created": "16.06.2025 21:23 Ermakov Viktor",
-            //         "updated": null
-            //     },
-            //     {
-            //         "content": "второй комментарий",
-            //         "created": "16.06.2025 21:23 Ermakov Viktor",
-            //         "updated": null,
-            //     }
-            // ]`;
-
-            const tasks = JSON.parse(importTasks.textContent);
-            
             tasks.forEach(task => {
                 const taskId = 'task-' + Date.now();
                 const taskCard = document.createElement('div');
@@ -1015,7 +1038,7 @@
                 document.getElementById('tasksContainer').appendChild(taskCard);
             });
         };
-        
+
     </script>
 </body>
 </html>
