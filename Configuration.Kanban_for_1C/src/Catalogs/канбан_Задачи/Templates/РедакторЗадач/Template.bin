@@ -370,6 +370,11 @@
                 <button onclick="formatText('italic')"><i>К</i></button>
                 <button onclick="formatText('underline')"><u>Ч</u></button>
                 <button onclick="formatText('strikeThrough')"><s>З</s></button>
+                <button class="format-icon" onclick="formatText('removeFormat')" title="Очистить форматирование">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
                 <select onchange="formatText('fontSize', this.value)">
                     <option value="">Размер</option>
                     <option value="1">Мелкий</option>
@@ -416,11 +421,7 @@
                         <path d="M21 6H3M21 12H9M21 18H7"/>
                     </svg>
                 </button>
-                <button class="format-icon" onclick="formatText('removeFormat')" title="Очистить форматирование">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
+                
             </div>
             <div id="taskInput" contenteditable="true" placeholder="Введите вашу задачу здесь..."></div>
             <button id="addTaskBtn" onclick="addTask()">
@@ -434,6 +435,9 @@
         
         <div class="tasks-container" id="tasksContainer"></div>
         
+        <div class="import-export">
+            <button id="exportTasks">Экспорт задач</button>
+        </div>
     </div>
         
     <!-- Модальное окно для вставки ссылок -->
@@ -481,6 +485,13 @@
         }
 
         let currentFormatState = {
+            bold: false,
+            italic: false,
+            underline: false,
+            strikeThrough: false
+        };
+
+        let currentFormatStateEditor = {
             bold: false,
             italic: false,
             underline: false,
@@ -608,29 +619,17 @@
         // Форматирование текста в редакторе
         function formatText(command, value = null) {
             const editor = document.getElementById('taskInput');
-            const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
+            // const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
+            const isFormatCommand = currentFormatState.hasOwnProperty(command);
             
             if (command === 'removeFormat') {
-                // Полностью очищаем форматирование
-                const selection = window.getSelection();
-                const range = selection.getRangeAt(0);
                 
-                // Создаем новый элемент без форматирования
-                const span = document.createElement('span');
-                span.textContent = range.toString();
-                
-                // Удаляем выделенный текст и вставляем чистый
-                range.deleteContents();
-                range.insertNode(span);
-                
-                // Сбрасываем состояние кнопок
-                currentFormatState = {
-                    bold: false,
-                    italic: false,
-                    underline: false,
-                    strikeThrough: false
-                };
-                updateFormatButtons();
+                for (var key in currentFormatState) {
+                    if (currentFormatState[key]) {
+                        formatText(key);
+                    }
+                }
+
             } else if (isFormatCommand) {
                 const isActive = document.queryCommandState(command);
                 
@@ -683,6 +682,9 @@
                     <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
                     <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
                     <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
+                     <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
                     <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
                         <option value="">Размер</option>
                         <option value="1">Мелкий</option>
@@ -716,9 +718,6 @@
                     <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
                         <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
                     </button>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
-                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                    </button>
                 </div>
                 <div class="edit-input hidden" contenteditable="true"></div>
                 <div class="edit-buttons hidden">
@@ -747,33 +746,33 @@
         // Форматирование текста при редактировании
         function editFormatText(taskId, command, value = null) {
             const editInput = document.getElementById(taskId).querySelector('.edit-input');
+            const isFormatCommand = currentFormatStateEditor.hasOwnProperty(command);
             
             if (command === 'removeFormat') {
-                // Полностью очищаем форматирование
-                const selection = window.getSelection();
-                const range = selection.getRangeAt(0);
                 
-                // Создаем новый элемент без форматирования
-                const span = document.createElement('span');
-                span.textContent = range.toString();
+                for (var key in currentFormatStateEditor) {
+                    if (currentFormatStateEditor[key]) {
+                        document.execCommand(key, false, false);
+                        currentFormatStateEditor[key] = false;
+                    }
+                }
+            } else if (isFormatCommand) {
+                const isActive = document.queryCommandState(command);
                 
-                // Удаляем выделенный текст и вставляем чистый
-                range.deleteContents();
-                range.insertNode(span);
-                
-                // Сбрасываем состояние кнопок
-                currentFormatState = {
-                    bold: false,
-                    italic: false,
-                    underline: false,
-                    strikeThrough: false
-                };
-                updateEditFormatButtons(taskId);
+                // Для надежного снятия форматирования
+                if (isActive) {
+                    document.execCommand(command, false, false);
+                    currentFormatStateEditor[command] = false;
+                } else {
+                    document.execCommand(command, false, true);
+                    currentFormatStateEditor[command] = true;
+                }
             } else {
                 document.execCommand(command, false, value);
             }
             
             editInput.focus();
+            updateEditFormatButtons(taskId);
         }
 
         // Включение режима редактирования для задачи
@@ -858,10 +857,10 @@
             const editToolbar = taskCard.querySelector('.edit-toolbar');
             
             // Обновляем кнопки на основе сохраненного состояния
-            editToolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
-            editToolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
-            editToolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
-            editToolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
+            editToolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatStateEditor.bold);
+            editToolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatStateEditor.italic);
+            editToolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatStateEditor.underline);
+            editToolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatStateEditor.strikeThrough);
         }
 
         // Форматирование даты в русском формате
@@ -896,10 +895,10 @@
             } else if (activeElement.classList.contains('edit-input')) {
                 const taskId = activeElement.closest('.task-card').id;
                 // Обновляем состояние на основе текущего выделения
-                currentFormatState.bold = document.queryCommandState('bold');
-                currentFormatState.italic = document.queryCommandState('italic');
-                currentFormatState.underline = document.queryCommandState('underline');
-                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
+                currentFormatStateEditor.bold = document.queryCommandState('bold');
+                currentFormatStateEditor.italic = document.queryCommandState('italic');
+                currentFormatStateEditor.underline = document.queryCommandState('underline');
+                currentFormatStateEditor.strikeThrough = document.queryCommandState('strikeThrough');
                 updateEditFormatButtons(taskId);
             }
         });
@@ -944,7 +943,6 @@
             });
             
             const dataStr = JSON.stringify(tasks, null, 2);
-
             window.V8Proxy.fetch('exportTasks', dataStr);
             
         }
@@ -991,6 +989,9 @@
                         <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
                         <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
                         <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
+                        <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
+                            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
                         <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
                             <option value="">Размер</option>
                             <option value="1">Мелкий</option>
@@ -1023,9 +1024,6 @@
                         </button>
                         <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
                             <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
-                            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
                         </button>
                     </div>
                     <div class="edit-input hidden" contenteditable="true"></div>
