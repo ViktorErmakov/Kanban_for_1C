@@ -353,6 +353,15 @@
             color: var(--primary-color);
             text-decoration: underline;
         }
+
+        .bold-span {
+            font-weight: bold;
+        }
+
+        .noBold-span {
+            font-weight: normal;
+        }
+
     </style>
 </head>
 <body>
@@ -366,11 +375,11 @@
         
         <div class="editor-container">
             <div class="toolbar common-toolbar">
-                <button onclick="formatText('bold')"><b>Ж</b></button>
-                <button onclick="formatText('italic')"><i>К</i></button>
-                <button onclick="formatText('underline')"><u>Ч</u></button>
-                <button onclick="formatText('strikeThrough')"><s>З</s></button>
-                <button class="format-icon" onclick="formatText('removeFormat')" title="Очистить форматирование">
+                <button class="formatText" id="bold"><b>Ж</b></button>
+                <button class="formatText" id="italic"><i>К</i></button>
+                <button class="formatText" id="underline"><u>Ч</u></button>
+                <button class="formatText" id="strikeThrough"><s>З</s></button>
+                <button class="formatText" id="removeFormat" class="format-icon" title="Очистить форматирование">
                     <svg viewBox="0 0 24 24">
                         <path d="M18 6L6 18M6 6l12 12"/>
                     </svg>
@@ -497,6 +506,11 @@
             underline: false,
             strikeThrough: false
         };
+
+        const buttonsFormatText = document.querySelectorAll('.formatText');
+        buttonsFormatText.forEach( buttonFormatText => { 
+            buttonFormatText.addEventListener('click', formatText);
+        });
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
@@ -617,37 +631,128 @@
         }
         
         // Форматирование текста в редакторе
-        function formatText(command, value = null) {
-            const editor = document.getElementById('taskInput');
-            // const isFormatCommand = ['bold', 'italic', 'underline', 'strikeThrough'].includes(command);
-            const isFormatCommand = currentFormatState.hasOwnProperty(command);
+        function formatText(poinEvent) {
             
-            if (command === 'removeFormat') {
+            // document.getElementById("taskInput").focus(); // Возвращаем фокус в редактор
+            
+            const selection = window.getSelection()
+            if (!selection.rangeCount) return;
+
+            const element = poinEvent.currentTarget;
+            
+            const editor = document.getElementById('taskInput');
+            // editor.focus();
+            // editor.selectionStart = editor.selectionEnd = 0;
+
+            const isFormatCommand = currentFormatState.hasOwnProperty(element.id);
+            
+            if (element.id === 'removeFormat') {
                 
                 for (var key in currentFormatState) {
                     if (currentFormatState[key]) {
                         formatText(key);
                     }
                 }
-
-            } else if (isFormatCommand) {
-                const isActive = document.queryCommandState(command);
+            } else if (element.id === 'bold') {
                 
-                // Для надежного снятия форматирования
-                if (isActive) {
-                    document.execCommand(command, false, false);
-                    currentFormatState[command] = false;
+                // Выделяем кнопку стиля
+                element.classList.toggle('active-format');
+                
+                // Получаем выбранный текст
+                let selection = window.getSelection()
+                if (selection.rangeCount === 0) return;
+
+                // Получаем выбранную область
+                let range = selection.getRangeAt(0);
+                
+                let parentSelection = range.commonAncestorContainer;
+                
+                // if (parentSelection.tagName === 'SPAN' && parentSelection.textContent == selection.toString()) {
+                //     parentSelection.classList.toggle('bold-span');
+                //     parentSelection.classList.toggle('noBold-span');
+                //     return;
+                // } else if (parentSelection.parentElement.tagName === 'SPAN' && parentSelection.parentElement.textContent == selection.toString()) {
+                //     parentSelection.parentElement.classList.toggle('bold-span');
+                //     parentSelection.parentElement.classList.toggle('noBold-span');
+                //     return;
+                // };
+
+                // Не работает кейс - если выбрать всю строку жирным, потом внутри нее выделить часть, то удалет
+                let selectedfragment = range.extractContents();
+
+                // Создаем текстовую ноду с содержимым
+                const span = document.createElement("span");
+                span.append(selectedfragment.textContent);
+                
+                if (element.classList.contains('active-format')) {
+                    span.classList.add("bold-span");
                 } else {
-                    document.execCommand(command, false, true);
-                    currentFormatState[command] = true;
+                    span.classList.add('noBold-span');
                 }
-            } else {
-                document.execCommand(command, false, value);
+
+                range.insertNode(span);
+                
+                // Создаем новый range вокруг текста
+                range = document.createRange();
+                range.selectNodeContents(span);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                editor.focus();
+
+                const taskInput = document.getElementById('taskInput');
+                taskInput.querySelectorAll('span').forEach( element => {
+                    if (element.textContent=== '') {
+                        element.remove();
+                    }
+                })
+
+            // } else if (isFormatCommand) {
+            //     const isActive = document.queryCommandState(command);
+                
+            //     // Для надежного снятия форматирования
+            //     if (isActive) {
+            //         document.execCommand(command, false, false);
+            //         currentFormatState[command] = false;
+            //     } else {
+            //         document.execCommand(command, false, true);
+            //         currentFormatState[command] = true;
+            //     }
+            // } else {
+                // document.execCommand(command, false, value);
             }
             
-            editor.focus();
-            updateFormatButtons();
+            // editor.focus();
+            // document.getElementById("taskInput").focus(); // Возвращаем фокус в редактор
+            // updateFormatButtons();
         }
+
+         // Обработка ввода текста
+        document.getElementById("taskInput").addEventListener("input", (e) => {
+            
+            // let isBoldMode = document.getElementById('bold').classList.contains('active-format');
+            // if (!isBoldMode) return;
+
+            // const selection = window.getSelection();
+            // if (!selection.rangeCount) return;
+
+            // const range = selection.getRangeAt(0);
+            // const text = range.toString();
+
+            // // Если текст вводится (не удаляется)
+            // if (e.inputType.includes("insert")) {
+            // range.deleteContents(); // Удаляем "сырой" текст
+            // const strong = document.createElement("strong");
+            // strong.textContent = text;
+            // range.insertNode(strong); // Вставляем жирный текст
+
+            // // Перемещаем курсор после вставки
+            // const newRange = document.createRange();
+            // newRange.setStartAfter(strong);
+            // newRange.collapse(true);
+            // selection.removeAllRanges();
+            // selection.addRange(newRange);
+            // }
+        });
 
         // Добавление новой задачи
         function addTask() {
@@ -843,10 +948,10 @@
             const toolbar = editor.closest('.editor-container').querySelector('.toolbar');
             
             // Обновляем кнопки на основе сохраненного состояния
-            toolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
-            toolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
-            toolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
-            toolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
+            // toolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
+            // toolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
+            // toolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
+            // toolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
         }
 
         // Обновление состояния кнопок форматирования в редакторе задачи
