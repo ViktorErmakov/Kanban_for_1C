@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" />
     <style>
         :root {
             --primary-color: #4a6fa5;
@@ -233,13 +234,6 @@
             word-wrap: break-word;
         }
 
-        .task-actions {
-            position: absolute;
-            top: 1.5rem;
-            right: .5rem;
-            display: flex;
-        }
-
         .edit-btn, .save-btn, .cancel-btn {
             background: none;
             border: none;
@@ -263,15 +257,8 @@
         }
 
         .edit-input {
-            width: calc(100% - 2rem);
-            min-height: 8rem;
-            padding: 1rem;
-            border: 0.1rem solid var(--border-color);
-            border-radius: 0.4rem;
-            font-family: inherit;
-            font-size: 1.4rem;
-            resize: vertical;
-            margin-bottom: 1rem;
+            /* width: calc(100% - 2rem); */
+            /* resize: vertical; */
         }
 
         .timestamp {
@@ -284,24 +271,9 @@
             display: none;
         }
 
-        .import-export {
-            display: none;
-        }
-        
-        #fileInput {
-            display: none;
-        }
-
         .send-icon {
             width: 1.6rem;
             height: 1.6rem;
-        }
-        
-        .no-tasks {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            font-style: italic;
         }
         
         /* Модальное окно для вставки ссылок */
@@ -354,12 +326,30 @@
             text-decoration: underline;
         }
 
-        .bold-span {
-            font-weight: bold;
+        .edit-buttons {
+            display: flex;
+            flex-direction: row;
+            margin-top: 1rem;
         }
 
-        .noBold-span {
-            font-weight: normal;
+        .editor_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .display_none{
+            display: none;
+        }
+
+        .border_none {
+            border: none!important;
+        }
+
+        .editor_toolbar_content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
     </style>
@@ -373,66 +363,9 @@
         </div>
         <div class="search-info" id="searchInfo"></div>
         
+        
         <div class="editor-container">
-            <div class="toolbar common-toolbar">
-                <button class="formatText" id="bold"><b>Ж</b></button>
-                <button class="formatText" id="italic"><i>К</i></button>
-                <button class="formatText" id="underline"><u>Ч</u></button>
-                <button class="formatText" id="strikeThrough"><s>З</s></button>
-                <button class="formatText" id="removeFormat" class="format-icon" title="Очистить форматирование">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
-                <select onchange="formatText('fontSize', this.value)">
-                    <option value="">Размер</option>
-                    <option value="1">Мелкий</option>
-                    <option value="3">Обычный</option>
-                    <option value="5">Крупный</option>
-                    <option value="7">Огромный</option>
-                </select>
-                <select onchange="formatText('fontName', this.value)">
-                    <option value="">Шрифт</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Verdana">Verdana</option>
-                </select>
-                <button class="format-icon" onclick="formatText('insertUnorderedList')" title="Маркированный список">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M5 12h14M5 6h14M5 18h14"/>
-                    </svg>
-                </button>
-                <button class="format-icon" onclick="formatText('insertOrderedList')" title="Нумерованный список">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/>
-                    </svg>
-                </button>
-                <button class="format-icon" onclick="showLinkModal()" title="Вставить ссылку">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                    </svg>
-                </button>
-                <button class="format-icon" onclick="formatText('justifyLeft')" title="Выравнивание по левому краю">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 6H3M15 12H3M17 18H3"/>
-                    </svg>
-                </button>
-                <button class="format-icon" onclick="formatText('justifyCenter')" title="Выравнивание по центру">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 6H3M19 12H5M17 18H7"/>
-                    </svg>
-                </button>
-                <button class="format-icon" onclick="formatText('justifyRight')" title="Выравнивание по правому краю">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 6H3M21 12H9M21 18H7"/>
-                    </svg>
-                </button>
-                
-            </div>
-            <div id="taskInput" contenteditable="true" placeholder="Введите вашу задачу здесь..."></div>
+            <div id="editor"></div>
             <button id="addTaskBtn" onclick="addTask()">
                 <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -444,29 +377,34 @@
         
         <div class="tasks-container" id="tasksContainer"></div>
         
-        <div class="import-export">
-            <button id="exportTasks">Экспорт задач</button>
-        </div>
     </div>
-        
-    <!-- Модальное окно для вставки ссылок -->
-    <div id="linkModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="hideLinkModal()">&times;</span>
-            <h3>Вставка ссылки</h3>
-            <input type="text" id="linkUrl" placeholder="https://example.com">
-            <button id="insertLinkBtn">Вставить</button>
-        </div>
-    </div>
-
+    
     <button id='V8_request' style="display: none;"></button>
     <button id='V8_response' style="display: none;"></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script> -->
 
     <script>
         
         let UserName = "";
-        let currentSelection = null;
-        let currentTaskIdForLink = null;
+        const quillEditors = {};
+        const toolbarOptions = [
+            [{ 'font': [] }], 
+            // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+            // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+            
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'align': [] }],
+            ['clean']                                         // remove formatting button
+        ];
 
         window['V8Proxy'] = {
 
@@ -487,35 +425,23 @@
                 // console.log(userName1C);
 
                 UserName = userName1C;
-
                 importTasks(value);
 
             }
         }
 
-        let currentFormatState = {
-            bold: false,
-            italic: false,
-            underline: false,
-            strikeThrough: false
-        };
-
-        let currentFormatStateEditor = {
-            bold: false,
-            italic: false,
-            underline: false,
-            strikeThrough: false
-        };
-
-        const buttonsFormatText = document.querySelectorAll('.formatText');
-        buttonsFormatText.forEach( buttonFormatText => { 
-            buttonFormatText.addEventListener('click', formatText);
-        });
-        
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             
-            document.getElementById('taskInput').focus();
+            // НОВЫЙ РЕДАКТОР
+            quillEditors['main-editor'] = new Quill('#editor', {
+                theme: 'snow',
+                placeholder: 'Введите текст задачи...', 
+                modules: {
+                    toolbar: toolbarOptions
+                }
+            });
+            quillEditors['main-editor'].focus();
 
             window.V8Proxy.fetch('importTasks');
             
@@ -547,44 +473,17 @@
             clearSearch();
         });
         
-        // Обработчик для кнопки вставки ссылки
-        document.getElementById('insertLinkBtn').addEventListener('click', function() {
-            const url = document.getElementById('linkUrl').value.trim();
-            if (url && currentSelection) {
-                // Восстанавливаем выделение
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(currentSelection);
-                
-                // Применяем ссылку
-                if (currentTaskIdForLink) {
-                    // Для редактируемой задачи
-                    const editInput = document.getElementById(currentTaskIdForLink).querySelector('.edit-input');
-                    editInput.focus();
-                    document.execCommand('createLink', false, url);
-                } else {
-                    // Для основного редактора
-                    document.getElementById('taskInput').focus();
-                    document.execCommand('createLink', false, url);
-                }
-                
-                // Сбрасываем сохраненное выделение
-                currentSelection = null;
-            }
-            hideLinkModal();
-        });
-
         // Функция очистки поиска
         function clearSearch() {
             const tasks = document.querySelectorAll('.task-card');
-            
             tasks.forEach(task => {
                 task.style.display = '';
-                const content = task.querySelector('.task-content');
-                // Удаляем подсветку
-                content.innerHTML = content.innerHTML.replace(/<span class="highlight">([^<]*)<\/span>/gi, '$1');
+                const quill = quillEditors[task.id];
+                if (quill) {
+                    // Снимаем выделение (убираем background)
+                    quill.formatText(0, quill.getLength(), { background: false });
+                }
             });
-            
             document.getElementById('searchInfo').textContent = '';
         }
 
@@ -593,35 +492,42 @@
             const searchText = document.getElementById('searchInput').value.trim().toLowerCase();
             const tasks = document.querySelectorAll('.task-card');
             let foundCount = 0;
-            
+
             if (!searchText) {
                 clearSearch();
                 return;
             }
-            
+
             tasks.forEach(task => {
-                const content = task.querySelector('.task-content');
-                const text = content.textContent.toLowerCase();
-                const originalHtml = content.innerHTML;
-                
-                // Удаляем предыдущую подсветку
-                content.innerHTML = originalHtml.replace(/<span class="highlight">([^<]*)<\/span>/gi, '$1');
-                
-                if (text.includes(searchText)) {
+                const quill = quillEditors[task.id];
+                let text = '';
+                let found = false;
+
+                if (quill) {
+                    text = quill.getText().toLowerCase();
+                    // Снимаем старую подсветку
+                    quill.formatText(0, quill.getLength(), { background: false });
+
+                    // Ищем все вхождения и подсвечиваем
+                    let startIndex = 0;
+                    while (true) {
+                        const index = text.indexOf(searchText, startIndex);
+                        if (index === -1) break;
+                        quill.formatText(index, searchText.length, { background: '#fff9c4' }); // цвет как в стилях .highlight
+                        startIndex = index + searchText.length;
+                        found = true;
+                    }
+                }
+
+                if (found) {
                     task.style.display = '';
                     foundCount++;
-                    
-                    // Подсвечиваем найденный текст
-                    const regex = new RegExp(searchText, 'gi');
-                    content.innerHTML = originalHtml.replace(regex, match => 
-                        `<span class="highlight">${match}</span>`
-                    );
                 } else {
                     task.style.display = 'none';
                 }
             });
-            
-            // Показываем информацию о результатах поиска
+
+            // Информация о результатах
             const searchInfo = document.getElementById('searchInfo');
             if (foundCount === 0) {
                 searchInfo.textContent = 'Задачи не найдены';
@@ -630,133 +536,9 @@
             }
         }
         
-        // Форматирование текста в редакторе
-        function formatText(poinEvent) {
-            
-            // document.getElementById("taskInput").focus(); // Возвращаем фокус в редактор
-            
-            const selection = window.getSelection()
-            if (!selection.rangeCount) return;
-
-            const element = poinEvent.currentTarget;
-            
-            const editor = document.getElementById('taskInput');
-            // editor.focus();
-            // editor.selectionStart = editor.selectionEnd = 0;
-
-            const isFormatCommand = currentFormatState.hasOwnProperty(element.id);
-            
-            if (element.id === 'removeFormat') {
-                
-                for (var key in currentFormatState) {
-                    if (currentFormatState[key]) {
-                        formatText(key);
-                    }
-                }
-            } else if (element.id === 'bold') {
-                
-                // Выделяем кнопку стиля
-                element.classList.toggle('active-format');
-                
-                // Получаем выбранный текст
-                let selection = window.getSelection()
-                if (selection.rangeCount === 0) return;
-
-                // Получаем выбранную область
-                let range = selection.getRangeAt(0);
-                
-                let parentSelection = range.commonAncestorContainer;
-                
-                // if (parentSelection.tagName === 'SPAN' && parentSelection.textContent == selection.toString()) {
-                //     parentSelection.classList.toggle('bold-span');
-                //     parentSelection.classList.toggle('noBold-span');
-                //     return;
-                // } else if (parentSelection.parentElement.tagName === 'SPAN' && parentSelection.parentElement.textContent == selection.toString()) {
-                //     parentSelection.parentElement.classList.toggle('bold-span');
-                //     parentSelection.parentElement.classList.toggle('noBold-span');
-                //     return;
-                // };
-
-                // Не работает кейс - если выбрать всю строку жирным, потом внутри нее выделить часть, то удалет
-                let selectedfragment = range.extractContents();
-
-                // Создаем текстовую ноду с содержимым
-                const span = document.createElement("span");
-                span.append(selectedfragment.textContent);
-                
-                if (element.classList.contains('active-format')) {
-                    span.classList.add("bold-span");
-                } else {
-                    span.classList.add('noBold-span');
-                }
-
-                range.insertNode(span);
-                
-                // Создаем новый range вокруг текста
-                range = document.createRange();
-                range.selectNodeContents(span);
-                selection.removeAllRanges();
-                selection.addRange(range);
-                editor.focus();
-
-                const taskInput = document.getElementById('taskInput');
-                taskInput.querySelectorAll('span').forEach( element => {
-                    if (element.textContent=== '') {
-                        element.remove();
-                    }
-                })
-
-            // } else if (isFormatCommand) {
-            //     const isActive = document.queryCommandState(command);
-                
-            //     // Для надежного снятия форматирования
-            //     if (isActive) {
-            //         document.execCommand(command, false, false);
-            //         currentFormatState[command] = false;
-            //     } else {
-            //         document.execCommand(command, false, true);
-            //         currentFormatState[command] = true;
-            //     }
-            // } else {
-                // document.execCommand(command, false, value);
-            }
-            
-            // editor.focus();
-            // document.getElementById("taskInput").focus(); // Возвращаем фокус в редактор
-            // updateFormatButtons();
-        }
-
-         // Обработка ввода текста
-        document.getElementById("taskInput").addEventListener("input", (e) => {
-            
-            // let isBoldMode = document.getElementById('bold').classList.contains('active-format');
-            // if (!isBoldMode) return;
-
-            // const selection = window.getSelection();
-            // if (!selection.rangeCount) return;
-
-            // const range = selection.getRangeAt(0);
-            // const text = range.toString();
-
-            // // Если текст вводится (не удаляется)
-            // if (e.inputType.includes("insert")) {
-            // range.deleteContents(); // Удаляем "сырой" текст
-            // const strong = document.createElement("strong");
-            // strong.textContent = text;
-            // range.insertNode(strong); // Вставляем жирный текст
-
-            // // Перемещаем курсор после вставки
-            // const newRange = document.createRange();
-            // newRange.setStartAfter(strong);
-            // newRange.collapse(true);
-            // selection.removeAllRanges();
-            // selection.addRange(newRange);
-            // }
-        });
-
         // Добавление новой задачи
         function addTask() {
-            const taskInput = document.getElementById('taskInput');
+            const taskInput = document.getElementById('editor');
             const taskContent = taskInput.innerHTML.trim();
             
             
@@ -771,202 +553,43 @@
             const taskCard = document.createElement('div');
             taskCard.className = 'task-card';
             taskCard.id = taskId;
+
+            const task = {
+                created: timestamp,
+            };
             
-            taskCard.innerHTML = `
-                <div class="task-content">${taskContent}</div>
-                <div class="task-actions">
-                    <button class="edit-btn" onclick="enableEdit('${taskId}')">
-                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="timestamp">Создано: ${timestamp} ${UserName}</div>
-                <div class="edit-toolbar common-toolbar hidden">
-                    <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
-                    <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
-                    <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
-                    <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
-                     <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
-                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                    </button>
-                    <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
-                        <option value="">Размер</option>
-                        <option value="1">Мелкий</option>
-                        <option value="3">Обычный</option>
-                        <option value="5">Крупный</option>
-                        <option value="7">Огромный</option>
-                    </select>
-                    <select onchange="editFormatText('${taskId}', 'fontName', this.value)">
-                        <option value="">Шрифт</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Verdana">Verdana</option>
-                    </select>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'insertUnorderedList')" title="Маркированный список">
-                        <svg viewBox="0 0 24 24"><path d="M5 12h14M5 6h14M5 18h14"/></svg>
-                    </button>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'insertOrderedList')" title="Нумерованный список">
-                        <svg viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/></svg>
-                    </button>
-                    <button class="format-icon" onclick="showLinkModal('${taskId}')" title="Вставить ссылку">
-                        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                    </button>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyLeft')" title="Выравнивание по левому краю">
-                        <svg viewBox="0 0 24 24"><path d="M21 6H3M15 12H3M17 18H3"/></svg>
-                    </button>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyCenter')" title="Выравнивание по центру">
-                        <svg viewBox="0 0 24 24"><path d="M21 6H3M19 12H5M17 18H7"/></svg>
-                    </button>
-                    <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
-                        <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
-                    </button>
-                </div>
-                <div class="edit-input hidden" contenteditable="true"></div>
-                <div class="edit-buttons hidden">
-                    <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
-                    <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
-                </div>
-            `;
+            taskCard.innerHTML = editorHTML(task, taskId);
+
+            const editInput = taskCard.querySelector(`.edit-input`);
+            if (editInput) {
+                quillEditors[taskId] = new Quill(editInput, {
+                    theme: "snow",
+                    modules: { toolbar: toolbarOptions }
+                });
+            }
             
             tasksContainer.appendChild(taskCard);
-            taskInput.innerHTML = '';
+
+            // Вставляем текст в редактор
+            quillEditors[taskId].clipboard.dangerouslyPasteHTML(quillEditors['main-editor'].root.innerHTML);
+
+            // Очищаем основной редактор
+            quillEditors['main-editor'].deleteText(0, quillEditors['main-editor'].getLength());
             
-            // Сбрасываем состояние форматирования после добавления задачи
-            currentFormatState = {
-                bold: false,
-                italic: false,
-                underline: false,
-                strikeThrough: false
-            };
-            updateFormatButtons();
-            
+            editMode(taskId, false);
+
             // вызываем код для получения JSON
             exportTasks();
             
         }
-
-        // Форматирование текста при редактировании
-        function editFormatText(taskId, command, value = null) {
-            const editInput = document.getElementById(taskId).querySelector('.edit-input');
-            const isFormatCommand = currentFormatStateEditor.hasOwnProperty(command);
-            
-            if (command === 'removeFormat') {
-                
-                for (var key in currentFormatStateEditor) {
-                    if (currentFormatStateEditor[key]) {
-                        document.execCommand(key, false, false);
-                        currentFormatStateEditor[key] = false;
-                    }
-                }
-            } else if (isFormatCommand) {
-                const isActive = document.queryCommandState(command);
-                
-                // Для надежного снятия форматирования
-                if (isActive) {
-                    document.execCommand(command, false, false);
-                    currentFormatStateEditor[command] = false;
-                } else {
-                    document.execCommand(command, false, true);
-                    currentFormatStateEditor[command] = true;
-                }
-            } else {
-                document.execCommand(command, false, value);
+        
+        // Добавление задачи по нажатию Enter (Shift+Enter для новой строки)
+        document.getElementById('editor').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addTask();
             }
-            
-            editInput.focus();
-            updateEditFormatButtons(taskId);
-        }
-
-        // Включение режима редактирования для задачи
-        function enableEdit(taskId) {
-            const taskCard = document.getElementById(taskId);
-            const taskContent = taskCard.querySelector('.task-content').innerHTML;
-            const editInput = taskCard.querySelector('.edit-input');
-            const editButtons = taskCard.querySelector('.edit-buttons');
-            const editToolbar = taskCard.querySelector('.edit-toolbar');
-            
-            editInput.dataset.originalContent = taskContent;
-            
-            // Скрываем отображаемый контент и показываем элементы редактирования
-            taskCard.querySelector('.task-content').classList.add('hidden');
-            taskCard.querySelector('.edit-btn').classList.add('hidden');
-            
-            editInput.innerHTML = taskContent;
-            editInput.classList.remove('hidden');
-            editButtons.classList.remove('hidden');
-            editToolbar.classList.remove('hidden');
-            
-            editInput.focus();
-            setTimeout(() => updateEditFormatButtons(taskId), 100);
-        }
-        
-        // Отмена редактирования
-        function cancelEdit(taskId) {
-            const taskCard = document.getElementById(taskId);
-            const editInput = taskCard.querySelector('.edit-input');
-            
-            editInput.innerHTML = editInput.dataset.originalContent;
-            
-            taskCard.querySelector('.task-content').classList.remove('hidden');
-            taskCard.querySelector('.edit-btn').classList.remove('hidden');
-            editInput.classList.add('hidden');
-            taskCard.querySelector('.edit-buttons').classList.add('hidden');
-            taskCard.querySelector('.edit-toolbar').classList.add('hidden');
-        }
-
-        // Сохранение отредактированной задачи
-        function saveTask(taskId) {
-            const taskCard = document.getElementById(taskId);
-            const editInput = taskCard.querySelector('.edit-input');
-            const newContent = editInput.innerHTML.trim();
-            
-            if (!newContent) return;
-            
-            // Обновляем содержимое задачи
-            taskCard.querySelector('.task-content').innerHTML = newContent;
-            
-            // Скрываем элементы редактирования и показываем контент
-            taskCard.querySelector('.task-content').classList.remove('hidden');
-            taskCard.querySelector('.edit-btn').classList.remove('hidden');
-            editInput.classList.add('hidden');
-            taskCard.querySelector('.edit-buttons').classList.add('hidden');
-            taskCard.querySelector('.edit-toolbar').classList.add('hidden');
-            
-            // Обновляем временную метку
-            const now = new Date();
-            taskCard.querySelector('.timestamp').textContent = `Обновлено: ${formatDate(now)} ${UserName}`;
-        }
-        
-        // Обновление состояния кнопок форматирования
-        function updateFormatButtons() {
-            const editor = document.getElementById('taskInput');
-            if (!editor) return;
-            
-            const toolbar = editor.closest('.editor-container').querySelector('.toolbar');
-            
-            // Обновляем кнопки на основе сохраненного состояния
-            // toolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatState.bold);
-            // toolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatState.italic);
-            // toolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatState.underline);
-            // toolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatState.strikeThrough);
-        }
-
-        // Обновление состояния кнопок форматирования в редакторе задачи
-        function updateEditFormatButtons(taskId) {
-            const taskCard = document.getElementById(taskId);
-            if (!taskCard) return;
-            
-            const editToolbar = taskCard.querySelector('.edit-toolbar');
-            
-            // Обновляем кнопки на основе сохраненного состояния
-            editToolbar.querySelector('button[onclick*="bold"]').classList.toggle('active-format', currentFormatStateEditor.bold);
-            editToolbar.querySelector('button[onclick*="italic"]').classList.toggle('active-format', currentFormatStateEditor.italic);
-            editToolbar.querySelector('button[onclick*="underline"]').classList.toggle('active-format', currentFormatStateEditor.underline);
-            editToolbar.querySelector('button[onclick*="strikeThrough"]').classList.toggle('active-format', currentFormatStateEditor.strikeThrough);
-        }
+        });
 
         // Форматирование даты в русском формате
         function formatDate(date) {
@@ -978,59 +601,6 @@
             
             return `${day}.${month}.${year} ${hours}:${minutes}`;
         }
-
-        // Добавление задачи по нажатию Enter (Shift+Enter для новой строки)
-        document.getElementById('taskInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                addTask();
-            }
-        });
-        
-        // Обновление кнопок при клике
-        document.addEventListener('mouseup', function() {
-            const activeElement = document.activeElement;
-            if (activeElement.id === 'taskInput') {
-                // Обновляем состояние на основе текущего выделения
-                currentFormatState.bold = document.queryCommandState('bold');
-                currentFormatState.italic = document.queryCommandState('italic');
-                currentFormatState.underline = document.queryCommandState('underline');
-                currentFormatState.strikeThrough = document.queryCommandState('strikeThrough');
-                updateFormatButtons();
-            } else if (activeElement.classList.contains('edit-input')) {
-                const taskId = activeElement.closest('.task-card').id;
-                // Обновляем состояние на основе текущего выделения
-                currentFormatStateEditor.bold = document.queryCommandState('bold');
-                currentFormatStateEditor.italic = document.queryCommandState('italic');
-                currentFormatStateEditor.underline = document.queryCommandState('underline');
-                currentFormatStateEditor.strikeThrough = document.queryCommandState('strikeThrough');
-                updateEditFormatButtons(taskId);
-            }
-        });
-        
-        // Показ модального окна для ссылок
-        function showLinkModal(taskId = null) {
-            // Сохраняем текущее выделение
-            const selection = window.getSelection();
-            if (selection.rangeCount > 0 && !selection.isCollapsed) {
-                currentSelection = selection.getRangeAt(0).cloneRange();
-                currentTaskIdForLink = taskId;
-                
-                const modal = document.getElementById('linkModal');
-                modal.style.display = 'flex';
-                document.getElementById('linkUrl').value = '';
-                document.getElementById('linkUrl').focus();
-            } else {
-                alert('Пожалуйста, выделите текст, который должен стать ссылкой');
-            }
-        }
-
-        // Скрытие модального окна
-        function hideLinkModal() {
-            document.getElementById('linkModal').style.display = 'none';
-            currentSelection = null;
-            currentTaskIdForLink = null;
-        }
         
         // Экспорт задач в JSON
         function exportTasks() {
@@ -1039,7 +609,7 @@
 
             taskCards.forEach(card => {
                 tasks.push({
-                    content: card.querySelector('.task-content').innerHTML,
+                    content: quillEditors[card.id].root.innerHTML,
                     created: card.querySelector('.timestamp').textContent.replace('Создано: ', ''),
                     updated: card.querySelector('.timestamp').textContent.includes('Обновлено: ') 
                         ? card.querySelector('.timestamp').textContent.replace('Обновлено: ', '')
@@ -1053,19 +623,18 @@
         }
 
         // Для отладки
-        // value = 
-        // `[
+        // const value = JSON.stringify([
         //     {
-        //         "content": "новый комментарий",
-        //         "created": "16.06.2025 21:23 Ermakov Viktor",
-        //         "updated": null
+        //         content: "<p><strong><em><u>новая</u></em>&nbsp;</strong><span class='ql-size-large' style='color: rgb(230, 0, 0);'>разная&nbsp;</span><span class='ql-size-huge' style='background-color: rgb(0, 138, 0);'>строка</span></p>",
+        //         created: "16.06.2025 21:23 Ermakov Viktor",
+        //         updated: null
         //     },
         //     {
-        //         "content": "второй комментарий",
-        //         "created": "16.06.2025 21:23 Ermakov Viktor",
-        //         "updated": null
+        //         content: "второй комментарий",
+        //         created: "16.06.2025 21:23 Ermakov Viktor",
+        //         updated: "16.06.2025 21:23 Ermakova Alena"
         //     }
-        // ]`;
+        // ]);
         // importTasks(value);
         
         // Импорт задач из JSON
@@ -1079,69 +648,112 @@
                 taskCard.className = 'task-card';
                 taskCard.id = taskId;
                 
-                taskCard.innerHTML = `
-                    <div class="task-content">${task.content}</div>
-                    <div class="task-actions">
-                        <button class="edit-btn" onclick="enableEdit('${taskId}')">
-                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
-                    <div class="edit-toolbar common-toolbar hidden">
-                        <button onclick="editFormatText('${taskId}', 'bold')"><b>Ж</b></button>
-                        <button onclick="editFormatText('${taskId}', 'italic')"><i>К</i></button>
-                        <button onclick="editFormatText('${taskId}', 'underline')"><u>Ч</u></button>
-                        <button onclick="editFormatText('${taskId}', 'strikeThrough')"><s>З</s></button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'removeFormat')" title="Очистить форматирование">
-                            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                        </button>
-                        <select onchange="editFormatText('${taskId}', 'fontSize', this.value)">
-                            <option value="">Размер</option>
-                            <option value="1">Мелкий</option>
-                            <option value="3">Обычный</option>
-                            <option value="5">Крупный</option>
-                            <option value="7">Огромный</option>
-                        </select>
-                        <select onchange="editFormatText('${taskId}', 'fontName', this.value)">
-                            <option value="">Шрифт</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Verdana">Verdana</option>
-                        </select>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'insertUnorderedList')" title="Маркированный список">
-                            <svg viewBox="0 0 24 24"><path d="M5 12h14M5 6h14M5 18h14"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'insertOrderedList')" title="Нумерованный список">
-                            <svg viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18h-2v-4h4v4M5 18h1"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="showLinkModal('${taskId}')" title="Вставить ссылку">
-                            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyLeft')" title="Выравнивание по левому краю">
-                            <svg viewBox="0 0 24 24"><path d="M21 6H3M15 12H3M17 18H3"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyCenter')" title="Выравнивание по центру">
-                            <svg viewBox="0 0 24 24"><path d="M21 6H3M19 12H5M17 18H7"/></svg>
-                        </button>
-                        <button class="format-icon" onclick="editFormatText('${taskId}', 'justifyRight')" title="Выравнивание по правому краю">
-                            <svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H9M21 18H7"/></svg>
-                        </button>
-                    </div>
-                    <div class="edit-input hidden" contenteditable="true"></div>
-                    <div class="edit-buttons hidden">
-                        <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
-                        <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
-                    </div>
-                `;
-                
-                document.getElementById('tasksContainer').appendChild(taskCard);
+                taskCard.innerHTML = editorHTML(task, taskId);
+
+                const tasksContainer = document.getElementById('tasksContainer');
+                tasksContainer.appendChild(taskCard);
+
+                const editInput = document.querySelector(`#${taskId}.edit-input`);
+                if (editInput) {
+                    quillEditors[taskId] = new Quill(editInput, {
+                        theme: "snow",
+                        modules: { toolbar: toolbarOptions }
+                    });
+                };
+                // Вставляем текст в редактор
+                quillEditors[taskId].clipboard.dangerouslyPasteHTML(task.content);
+
+                editMode(taskId, false);
             });
         };
 
+        // Включение режима редактирования для задачи
+        function enableEdit(taskId) {
+            editMode(taskId, true);
+            const timestamp = document.querySelector(`#${taskId} .timestamp`);
+            timestamp.textContent = `Обновлено: ${formatDate(new Date())} ${UserName}`;
+
+        }
+
+        // Сохранение отредактированной задачи
+        function saveTask(taskId) {
+            const taskCard = document.getElementById(taskId);
+            editMode(taskId, false);
+        }
+
+        // Отмена редактирования
+        function cancelEdit(taskId) {
+            const taskCard = document.getElementById(taskId);
+            const originalContent = taskCard.dataset.originalContent;
+            if (originalContent !== undefined) {
+                quillEditors[taskId].clipboard.dangerouslyPasteHTML(originalContent);
+            }
+            editMode(taskId, false);
+        }
+
+        function editMode(taskId, mode) {
+            
+            const editInput = document.querySelector(`#${taskId}.edit-input`);
+            const taskCard = document.getElementById(taskId);
+
+            taskId = taskCard.id;
+            
+            // Скрываем панель инструментов редактора
+            const toolbar = taskCard.querySelector('.ql-toolbar');
+            toolbar.classList.toggle('display_none');
+            
+            // Скрываем кнопки редактирования
+            const editButtons = taskCard.querySelector('.edit-buttons');
+            editButtons.classList.toggle('display_none');
+
+            editInput.classList.toggle('border_none');
+            
+            // Изменяем режим редактирования 
+            quillEditors[taskId].enable(mode);
+
+            const task_actions = taskCard.querySelector('.task-actions');
+            if (mode) {
+                // Показываем панель инструментов редактора
+                task_actions.classList.add('display_none');
+
+                quillEditors[taskId].focus();
+                const length = quillEditors[taskId].getLength();
+                quillEditors[taskId].setSelection(length, 0);
+                
+                
+                // Сохраняем исходное содержимое при начале редактирования
+                taskCard.dataset.originalContent = quillEditors[taskId].root.innerHTML;
+            } else {
+                task_actions.classList.remove('display_none');
+            }
+        }
+
+        function editorHTML(task, taskId) {
+            
+            const editorHTML = `
+                <div id="editor">
+                    <div class="editor_container">
+                        <div class="editor_toolbar_content">
+                            <div id=${taskId} class="edit-input"></div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="edit-btn" onclick="enableEdit('${taskId}')">
+                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
+                    <div class="edit-buttons">
+                        <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
+                        <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
+                    </div>
+                </div>
+            `;
+            return editorHTML;
+        }
+        
     </script>
 </body>
 </html>
