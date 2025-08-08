@@ -352,6 +352,13 @@
             width: 100%;
         }
 
+        /* Specify our own scrolling container */
+        /* #scrolling-container {
+            height: 100%;
+            min-height: 100%;
+            overflow-y: auto;
+        } */
+
     </style>
 </head>
 <body>
@@ -363,16 +370,17 @@
         </div>
         <div class="search-info" id="searchInfo"></div>
         
-        
-        <div class="editor-container">
-            <div id="editor"></div>
-            <button id="addTaskBtn" onclick="addTask()">
-                <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Отправить
-            </button>
+        <div id="scrolling-container">
+            <div class="editor-container">
+                <div id="editor"></div>
+                <button id="addTaskBtn" onclick="addTask()">
+                    <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Отправить
+                </button>
+            </div>
         </div>
         
         <div class="tasks-container" id="tasksContainer"></div>
@@ -439,7 +447,8 @@
                 placeholder: 'Введите текст задачи...', 
                 modules: {
                     toolbar: toolbarOptions
-                }
+                },
+                // scrollingContainer: '#scrolling-container'
             });
             quillEditors['main-editor'].focus();
 
@@ -731,23 +740,25 @@
         function editorHTML(task, taskId) {
             
             const editorHTML = `
-                <div id="editor">
-                    <div class="editor_container">
-                        <div class="editor_toolbar_content">
-                            <div id=${taskId} class="edit-input"></div>
+                <div id="scrolling-container">
+                    <div id="editor">
+                        <div class="editor_container">
+                            <div class="editor_toolbar_content">
+                                <div id=${taskId} class="edit-input"></div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="edit-btn" onclick="enableEdit('${taskId}')">
+                                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="task-actions">
-                            <button class="edit-btn" onclick="enableEdit('${taskId}')">
-                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.94 5L19 10.06L9.062 20H4V14.938L13.94 5ZM13.94 5L15.757 3.18299C16.144 2.79699 16.776 2.79699 17.162 3.18299L20.818 6.83899C21.204 7.22499 21.204 7.85699 20.818 8.24299L19 10.06M13.94 5L19 10.06" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                        <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
+                        <div class="edit-buttons">
+                            <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
+                            <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
                         </div>
-                    </div>
-                    <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated: 'Создано: ' + task.created}</div>
-                    <div class="edit-buttons">
-                        <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
-                        <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
                     </div>
                 </div>
             `;
