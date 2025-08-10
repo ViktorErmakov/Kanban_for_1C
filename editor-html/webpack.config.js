@@ -4,7 +4,7 @@ const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    devtool: 'source-map',
+    // devtool: 'source-map',
     entry: {
         index: './src/index.js',
         // print: './src/print.js',
@@ -19,7 +19,7 @@ module.exports = {
     output: {
         // filename: '[name].bundle.js',
         // path: path.resolve(__dirname, 'dist'),
-        // clean: true,
+        clean: true,
     },
     module: {
         rules: [
