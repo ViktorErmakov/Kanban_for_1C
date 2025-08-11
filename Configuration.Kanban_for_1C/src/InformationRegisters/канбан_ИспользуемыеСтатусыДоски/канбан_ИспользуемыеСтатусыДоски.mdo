@@ -17,21 +17,6 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="9e9d1f96-6033-436c-abd0-6e994048d845">
-    <name>СтатусЗадачи</name>
-    <synonym>
-      <key>ru</key>
-      <value>Статус задачи</value>
-    </synonym>
-    <type>
-      <types>DefinedType.канбан_СтатусыЗадач</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <attributes uuid="94ae3b5d-8036-450a-b47c-8283b416fa8f">
     <name>КнопкаДобавить</name>
     <synonym>
@@ -84,5 +69,22 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="3b74c295-6e58-4ca8-a87d-c95aa14197ef">
+    <name>СтатусЗадачи</name>
+    <synonym>
+      <key>ru</key>
+      <value>Статус задачи</value>
+    </synonym>
+    <type>
+      <types>DefinedType.канбан_СтатусыЗадач</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
   </dimensions>
 </mdclass:InformationRegister>
