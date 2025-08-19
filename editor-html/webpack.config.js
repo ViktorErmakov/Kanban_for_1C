@@ -13,6 +13,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'OneKanban',
             template: './index.html',
+            // minify: false, // Отключает минификацию HTML
         }),
         new HtmlInlineScriptPlugin(),
     ],
@@ -28,6 +29,9 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
         ],
+    },
+    optimization: {
+        // minimize: false // Отключает минификацию JS
     },
 };
 
