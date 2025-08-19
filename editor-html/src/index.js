@@ -2,7 +2,17 @@ import './style.css';
 import './style_quill_1.3.7.css';
 import Quill from './quill_1.3.7';
 
-let UserName = "";
+function createTaskSettings() {
+    return {
+      created: '',
+      updated: '',
+      taskId: '',
+      content: '',
+    }
+  };
+
+let UserName = ""; // Имя пользователя по умолчанию
+
 const quillEditors = {};
 const toolbarOptions = [
   [{ 'font': [] }],
@@ -100,53 +110,82 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Добавление новой задачи
   function addTask() {
-    const taskInput = document.getElementById('editor');
-    const taskContent = taskInput.innerHTML.trim();
-
-
-    if (!taskContent) return;
+    // console.log(quillEditors['main-editor'].getText().trim());
+    if (quillEditors['main-editor'].getText().trim() === '') {
+      return; // Не добавляем пустую задачу
+    }
 
     const tasksContainer = document.getElementById('tasksContainer');
-    const now = new Date();
-    const timestamp = formatDate(now);
 
-    const taskId = 'task-' + Date.now();
+    const now = new Date();
+    const taskSettings = createTaskSettings();
+    taskSettings.created = `Создано: ${formatDate(now)} ${UserName}`;
+    taskSettings.taskId = 'task-' + Date.now();
 
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
-    taskCard.id = taskId;
+    taskCard.id = taskSettings.taskId;
 
-    const task = {
-      created: timestamp,
-    };
-
-    taskCard.innerHTML = editorHTML(task, taskId);
-    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskId); // Добавляем обработчик для кнопки редактирования
-    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskId);
-    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskId);
+    taskCard.innerHTML = editorHTML(taskSettings);
+    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.taskId); // Добавляем обработчик для кнопки редактирования
+    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.taskId);
+    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.taskId);
 
     const editInput = taskCard.querySelector(`.edit-input`);
     if (editInput) {
-      quillEditors[taskId] = new Quill(editInput, {
+      quillEditors[taskSettings.taskId] = new Quill(editInput, {
         theme: "snow",
         modules: { toolbar: toolbarOptions }
       });
+    }
+    
+    // Скрываем панель инструментов сразу после создания
+    const toolbar = taskCard.querySelector('.ql-toolbar');
+    if (toolbar) {
+      toolbar.classList.add('display_none');
     }
 
     tasksContainer.appendChild(taskCard);
 
     // Вставляем текст в редактор
-    quillEditors[taskId].clipboard.dangerouslyPasteHTML(quillEditors['main-editor'].root.innerHTML);
+    quillEditors[taskSettings.taskId].clipboard.dangerouslyPasteHTML(quillEditors['main-editor'].root.innerHTML);
 
     // Очищаем основной редактор
     quillEditors['main-editor'].deleteText(0, quillEditors['main-editor'].getLength());
 
-    editMode(taskId, false);
+    editMode(taskSettings.taskId, false);
 
     // вызываем код для получения JSON
     exportTasks();
 
   }
+
+  // Для отладки
+  // const value = JSON.stringify(
+  //   [
+  //     {
+  //       "content": "<pre class=\"ql-syntax\" spellcheck=\"false\">// Сохранение отредактированной задачи\nfunction saveTask(taskId) {\n&nbsp;const taskCard = document.getElementById(taskId);\n&nbsp;editMode(taskId, false);\n&nbsp;exportTasks();\n}\n</pre>",
+  //       "created": "Обновлено: 15.08.2025 22:46 ",
+  //       "updated": "15.08.2025 22:46 "
+  //     },
+  //     {
+  //       "content": "<p class=\"ql-indent-4\"><strong class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><em>Обычный текст </em></strong><sup class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em>степень</em></strong></sup><sub class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em> корень</em></strong></sub></p>",
+  //       "created": "Обновлено: 15.08.2025 22:47 ",
+  //       "updated": "15.08.2025 22:47 "
+  //     },
+  //     {
+  //       "content": "<ol><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Первый пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Второй пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Третий пункт</span></li></ol>",
+  //       "created": "Обновлено: 15.08.2025 22:44 ",
+  //       "updated": "15.08.2025 22:44 "
+  //     },
+  //     {
+  //       "content": "<p><span class=\"ql-size-huge ql-font-monospace\" style=\"background-color: rgb(102, 185, 102);\">Четвертый </span><span class=\"ql-size-huge ql-font-monospace\" style=\"background-color: rgb(102, 185, 102); color: rgb(161, 0, 0);\">комментарий</span></p>",
+  //       "created": "15.08.2025 21:43",
+  //       "updated": null
+  //     }
+  //   ]
+  // );
+  // importTasks(value);
 
 });
 
@@ -213,8 +252,6 @@ function searchTasks() {
   }
 }
 
-
-
 // Форматирование даты в русском формате
 function formatDate(date) {
   const day = date.getDate().toString().padStart(2, '0');
@@ -232,13 +269,14 @@ function exportTasks() {
   const taskCards = document.querySelectorAll('.task-card');
 
   taskCards.forEach(card => {
-    tasks.push({
-      content: quillEditors[card.id].root.innerHTML,
-      created: card.querySelector('.timestamp').textContent.replace('Создано: ', ''),
-      updated: card.querySelector('.timestamp').textContent.includes('Обновлено: ')
-        ? card.querySelector('.timestamp').textContent.replace('Обновлено: ', '')
-        : null
-    });
+    const taskSettings = createTaskSettings();
+    taskSettings.content = quillEditors[card.id].root.innerHTML;
+    taskSettings.taskId = card.id;
+
+    taskSettings.created = card.querySelector('.created').textContent;
+    taskSettings.updated = card.querySelector('.updated').textContent;
+
+    tasks.push(taskSettings);
   });
 
   const dataStr = JSON.stringify(tasks, null, 2);
@@ -246,66 +284,60 @@ function exportTasks() {
 
 }
 
-// Для отладки
-// const value = JSON.stringify([
-//     {
-//         content: "<p><strong><em><u>новая</u></em>&nbsp;</strong><span class='ql-size-large' style='color: rgb(230, 0, 0);'>разная&nbsp;</span><span class='ql-size-huge' style='background-color: rgb(0, 138, 0);'>строка</span></p>",
-//         created: "16.06.2025 21:23 Ermakov Viktor",
-//         updated: null
-//     },
-//     {
-//         content: "второй комментарий",
-//         created: "16.06.2025 21:23 Ermakov Viktor",
-//         updated: "16.06.2025 21:23 Ermakova Alena"
-//     }
-// ]);
-// importTasks(value);
-
 // Импорт задач из JSON
 function importTasks(value) {
 
   const tasks = JSON.parse(value); // Это будет работать без ошибок
 
   tasks.forEach(task => {
-    const taskId = 'task-' + Date.now();
+    
+    const taskSettings = createTaskSettings();
+    // taskSettings.taskId = task.taskId;
+    taskSettings.taskId = 'task-' + Date.now();
+    taskSettings.content = task.content;
+    taskSettings.created = task.created;
+    taskSettings.updated = task.updated;
+
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
-    taskCard.id = taskId;
+    taskCard.id = taskSettings.taskId;
 
-    taskCard.innerHTML = editorHTML(task, taskId);
-    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskId); // Добавляем обработчик для кнопки редактирования
-    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskId);
-    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskId);
+    taskCard.innerHTML = editorHTML(taskSettings);
+    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.taskId); // Добавляем обработчик для кнопки редактирования
+    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.taskId);
+    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.taskId);
     
     const tasksContainer = document.getElementById('tasksContainer');
     tasksContainer.appendChild(taskCard);
 
-    const editInput = document.querySelector(`#${taskId}.edit-input`);
+    const editInput = document.querySelector(`#${taskSettings.taskId}.edit-input`);
     if (editInput) {
-      quillEditors[taskId] = new Quill(editInput, {
+      quillEditors[taskSettings.taskId] = new Quill(editInput, {
         theme: "snow",
         modules: { toolbar: toolbarOptions }
       });
     };
     // Вставляем текст в редактор
-    quillEditors[taskId].clipboard.dangerouslyPasteHTML(task.content);
+    quillEditors[taskSettings.taskId].clipboard.dangerouslyPasteHTML(taskSettings.content);
 
-    editMode(taskId, false);
+    editMode(taskSettings.taskId, false);
   });
 };
 
 // Включение режима редактирования для задачи
 function enableEdit(taskId) {
   editMode(taskId, true);
-  const timestamp = document.querySelector(`#${taskId} .timestamp`);
-  timestamp.textContent = `Обновлено: ${formatDate(new Date())} ${UserName}`;
-
 }
 
 // Сохранение отредактированной задачи
 function saveTask(taskId) {
   const taskCard = document.getElementById(taskId);
   editMode(taskId, false);
+  
+  const updated = document.querySelector(`#${taskId} .updated`);
+  updated.textContent = `Обновлено: ${formatDate(new Date())} ${UserName}`;
+
+  exportTasks();
 }
 
 // Отмена редактирования
@@ -327,42 +359,40 @@ function editMode(taskId, mode) {
 
   // Скрываем панель инструментов редактора
   const toolbar = taskCard.querySelector('.ql-toolbar');
-  toolbar.classList.toggle('display_none');
+  mode ? toolbar.classList.remove('display_none') : toolbar.classList.add('display_none');
 
   // Скрываем кнопки редактирования
   const editButtons = taskCard.querySelector('.edit-buttons');
-  editButtons.classList.toggle('display_none');
+  mode ? editButtons.classList.remove('display_none') : editButtons.classList.add('display_none');
+  
+  // Показываем панель инструментов редактора
+  const task_actions = taskCard.querySelector('.task-actions');
+  mode ? task_actions.classList.add('display_none') : task_actions.classList.remove('display_none');
 
   editInput.classList.toggle('border_none');
 
   // Изменяем режим редактирования 
   quillEditors[taskId].enable(mode);
 
-  const task_actions = taskCard.querySelector('.task-actions');
   if (mode) {
-    // Показываем панель инструментов редактора
-    task_actions.classList.add('display_none');
-
+    
     quillEditors[taskId].focus();
     const length = quillEditors[taskId].getLength();
     quillEditors[taskId].setSelection(length, 0);
 
-
     // Сохраняем исходное содержимое при начале редактирования
     taskCard.dataset.originalContent = quillEditors[taskId].root.innerHTML;
-  } else {
-    task_actions.classList.remove('display_none');
   }
 }
 
-function editorHTML(task, taskId) {
+function editorHTML(task) {
 
   const editorHTML = `
                 <div id="scrolling-container">
                     <div id="editor">
                         <div class="editor_container">
                             <div class="editor_toolbar_content">
-                                <div id=${taskId} class="edit-input"></div>
+                                <div id=${task.taskId} class="edit-input"></div>
                             </div>
                             <div class="task-actions">
                                 <button class="edit-btn">
@@ -372,10 +402,11 @@ function editorHTML(task, taskId) {
                                 </button>
                             </div>
                         </div>
-                        <div class="timestamp">${task.updated ? 'Обновлено: ' + task.updated : 'Создано: ' + task.created}</div>
-                        <div class="edit-buttons">
-                            <button class="save-btn" onclick="saveTask('${taskId}')">Сохранить</button>
-                            <button class="cancel-btn" onclick="cancelEdit('${taskId}')">Отмена</button>
+                        <div class="created">${task.created}</div>
+                        <div class="updated">${task.updated}</div>
+                        <div class="edit-buttons" class="display_none">
+                            <button class="save-btn" onclick="saveTask('${task.taskId}')">Сохранить</button>
+                            <button class="cancel-btn" onclick="cancelEdit('${task.taskId}')">Отмена</button>
                         </div>
                     </div>
                 </div>

@@ -257,7 +257,7 @@ body {
   /* resize: vertical; */
 }
 
-.timestamp {
+.created, .updated {
   font-size: 1.2rem;
   color: #666;
   margin-top: 1rem;
