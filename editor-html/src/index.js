@@ -6,7 +6,7 @@ function createTaskSettings() {
     return {
       created: '',
       updated: '',
-      taskId: '',
+      commentId: '',
       content: '',
     }
   };
@@ -120,20 +120,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const now = new Date();
     const taskSettings = createTaskSettings();
     taskSettings.created = `Создано: ${formatDate(now)} ${UserName}`;
-    taskSettings.taskId = 'task-' + Date.now();
+    taskSettings.commentId = 'task-' + Date.now();
 
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
-    taskCard.id = taskSettings.taskId;
+    taskCard.id = taskSettings.commentId;
 
     taskCard.innerHTML = editorHTML(taskSettings);
-    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.taskId); // Добавляем обработчик для кнопки редактирования
-    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.taskId);
-    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.taskId);
+    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.commentId); // Добавляем обработчик для кнопки редактирования
+    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.commentId);
+    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.commentId);
 
     const editInput = taskCard.querySelector(`.edit-input`);
     if (editInput) {
-      quillEditors[taskSettings.taskId] = new Quill(editInput, {
+      quillEditors[taskSettings.commentId] = new Quill(editInput, {
         theme: "snow",
         modules: { toolbar: toolbarOptions }
       });
@@ -148,12 +148,12 @@ document.addEventListener('DOMContentLoaded', function () {
     tasksContainer.appendChild(taskCard);
 
     // Вставляем текст в редактор
-    quillEditors[taskSettings.taskId].clipboard.dangerouslyPasteHTML(quillEditors['main-editor'].root.innerHTML);
+    quillEditors[taskSettings.commentId].clipboard.dangerouslyPasteHTML(quillEditors['main-editor'].root.innerHTML);
 
     // Очищаем основной редактор
     quillEditors['main-editor'].deleteText(0, quillEditors['main-editor'].getLength());
 
-    editMode(taskSettings.taskId, false);
+    editMode(taskSettings.commentId, false);
 
     // вызываем код для получения JSON
     exportTasks();
@@ -271,7 +271,7 @@ function exportTasks() {
   taskCards.forEach(card => {
     const taskSettings = createTaskSettings();
     taskSettings.content = quillEditors[card.id].root.innerHTML;
-    taskSettings.taskId = card.id;
+    taskSettings.commentId = card.id;
 
     taskSettings.created = card.querySelector('.created').textContent;
     taskSettings.updated = card.querySelector('.updated').textContent;
@@ -292,70 +292,69 @@ function importTasks(value) {
   tasks.forEach(task => {
     
     const taskSettings = createTaskSettings();
-    // taskSettings.taskId = task.taskId;
-    taskSettings.taskId = 'task-' + Date.now();
+    taskSettings.commentId = task.taskId;
     taskSettings.content = task.content;
     taskSettings.created = task.created;
     taskSettings.updated = task.updated;
 
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
-    taskCard.id = taskSettings.taskId;
+    taskCard.id = taskSettings.commentId;
 
     taskCard.innerHTML = editorHTML(taskSettings);
-    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.taskId); // Добавляем обработчик для кнопки редактирования
-    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.taskId);
-    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.taskId);
+    taskCard.querySelector('.edit-btn').onclick = () => enableEdit(taskSettings.commentId); // Добавляем обработчик для кнопки редактирования
+    taskCard.querySelector('.save-btn').onclick = () => saveTask(taskSettings.commentId);
+    taskCard.querySelector('.cancel-btn').onclick = () => cancelEdit(taskSettings.commentId);
     
     const tasksContainer = document.getElementById('tasksContainer');
     tasksContainer.appendChild(taskCard);
 
-    const editInput = document.querySelector(`#${taskSettings.taskId}.edit-input`);
+    const editInput = document.querySelector(`#${taskSettings.commentId}.edit-input`);
     if (editInput) {
-      quillEditors[taskSettings.taskId] = new Quill(editInput, {
+      quillEditors[taskSettings.commentId] = new Quill(editInput, {
         theme: "snow",
         modules: { toolbar: toolbarOptions }
       });
     };
     // Вставляем текст в редактор
-    quillEditors[taskSettings.taskId].clipboard.dangerouslyPasteHTML(taskSettings.content);
+    quillEditors[taskSettings.commentId].clipboard.dangerouslyPasteHTML(taskSettings.content);
 
-    editMode(taskSettings.taskId, false);
+    editMode(taskSettings.commentId, false);
   });
 };
 
 // Включение режима редактирования для задачи
-function enableEdit(taskId) {
-  editMode(taskId, true);
+function enableEdit(commentId) {
+  editMode(commentId, true);
 }
 
 // Сохранение отредактированной задачи
-function saveTask(taskId) {
-  const taskCard = document.getElementById(taskId);
-  editMode(taskId, false);
+function saveTask(commentId) {
+  const taskCard = document.getElementById(commentId);
+  editMode(commentId, false);
   
-  const updated = document.querySelector(`#${taskId} .updated`);
+  const updated = document.querySelector(`#${commentId} .updated`);
   updated.textContent = `Обновлено: ${formatDate(new Date())} ${UserName}`;
 
   exportTasks();
 }
 
 // Отмена редактирования
-function cancelEdit(taskId) {
-  const taskCard = document.getElementById(taskId);
+function cancelEdit(commentId) {
+  const taskCard = document.getElementById(commentId);
   const originalContent = taskCard.dataset.originalContent;
   if (originalContent !== undefined) {
-    quillEditors[taskId].clipboard.dangerouslyPasteHTML(originalContent);
+    quillEditors[commentId].clipboard.dangerouslyPasteHTML(originalContent);
   }
-  editMode(taskId, false);
+  editMode(commentId, false);
 }
 
-function editMode(taskId, mode) {
+function editMode(commentId, mode) {
 
-  const editInput = document.querySelector(`#${taskId}.edit-input`);
-  const taskCard = document.getElementById(taskId);
+  const editInput = document.querySelector(`#${commentId}.edit-input`);
+  const taskCard = document.getElementById(commentId);
 
-  taskId = taskCard.id;
+  commentId = taskCard.id;
 
   // Скрываем панель инструментов редактора
   const toolbar = taskCard.querySelector('.ql-toolbar');
@@ -372,16 +371,16 @@ function editMode(taskId, mode) {
   editInput.classList.toggle('border_none');
 
   // Изменяем режим редактирования 
-  quillEditors[taskId].enable(mode);
+  quillEditors[commentId].enable(mode);
 
   if (mode) {
     
-    quillEditors[taskId].focus();
-    const length = quillEditors[taskId].getLength();
-    quillEditors[taskId].setSelection(length, 0);
+    quillEditors[commentId].focus();
+    const length = quillEditors[commentId].getLength();
+    quillEditors[commentId].setSelection(length, 0);
 
     // Сохраняем исходное содержимое при начале редактирования
-    taskCard.dataset.originalContent = quillEditors[taskId].root.innerHTML;
+    taskCard.dataset.originalContent = quillEditors[commentId].root.innerHTML;
   }
 }
 
@@ -392,7 +391,7 @@ function editorHTML(task) {
                     <div id="editor">
                         <div class="editor_container">
                             <div class="editor_toolbar_content">
-                                <div id=${task.taskId} class="edit-input"></div>
+                                <div id=${task.commentId} class="edit-input"></div>
                             </div>
                             <div class="task-actions">
                                 <button class="edit-btn">
@@ -405,8 +404,8 @@ function editorHTML(task) {
                         <div class="created">${task.created}</div>
                         <div class="updated">${task.updated}</div>
                         <div class="edit-buttons" class="display_none">
-                            <button class="save-btn" onclick="saveTask('${task.taskId}')">Сохранить</button>
-                            <button class="cancel-btn" onclick="cancelEdit('${task.taskId}')">Отмена</button>
+                            <button class="save-btn" onclick="saveTask('${task.commentId}')">Сохранить</button>
+                            <button class="cancel-btn" onclick="cancelEdit('${task.commentId}')">Отмена</button>
                         </div>
                     </div>
                 </div>
