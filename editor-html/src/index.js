@@ -164,24 +164,28 @@ document.addEventListener('DOMContentLoaded', function () {
   // const value = JSON.stringify(
   //   [
   //     {
-  //       "content": "<pre class=\"ql-syntax\" spellcheck=\"false\">// Сохранение отредактированной задачи\nfunction saveTask(taskId) {\n&nbsp;const taskCard = document.getElementById(taskId);\n&nbsp;editMode(taskId, false);\n&nbsp;exportTasks();\n}\n</pre>",
-  //       "created": "Обновлено: 15.08.2025 22:46 ",
-  //       "updated": "15.08.2025 22:46 "
+  //       "created": "Создано: 19.08.2025 21:26 Администратор",
+  //       "updated": "Обновлено: 19.08.2025 22:26 Администратор",
+  //       "taskId": "task-1755631841882",
+  //       "content": "<pre class=\"ql-syntax\" spellcheck=\"false\">// Сохранение отредактированной задачи\nfunction saveTask(taskId) {\n&nbsp;const taskCard = document.getElementById(taskId);\n&nbsp;editMode(taskId, false);\n&nbsp;exportTasks();\n}\n</pre>"
   //     },
   //     {
-  //       "content": "<p class=\"ql-indent-4\"><strong class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><em>Обычный текст </em></strong><sup class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em>степень</em></strong></sup><sub class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em> корень</em></strong></sub></p>",
-  //       "created": "Обновлено: 15.08.2025 22:47 ",
-  //       "updated": "15.08.2025 22:47 "
+  //       "created": "Создано: 19.08.2025 21:27 Администратор",
+  //       "updated": "Обновлено: 19.08.2025 22:27 Администратор",
+  //       "taskId": "task-1755631841958",
+  //       "content": "<p class=\"ql-indent-4\"><strong class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><em>Обычный текст </em></strong><sup class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em>степень</em></strong></sup><sub class=\"ql-size-large\" style=\"background-color: rgb(204, 224, 245); color: rgb(153, 51, 255);\"><strong><em> корень</em></strong></sub></p>"
   //     },
   //     {
-  //       "content": "<ol><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Первый пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Второй пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-size-huge ql-font-serif\" style=\"color: rgb(230, 0, 0);\">Третий пункт</span></li></ol>",
-  //       "created": "Обновлено: 15.08.2025 22:44 ",
-  //       "updated": "15.08.2025 22:44 "
+  //       "created": "Создано: 19.08.2025 21:27 Администратор",
+  //       "updated": "Обновлено: 19.08.2025 22:27 Администратор",
+  //       "taskId": "task-1755631842035",
+  //       "content": "<ol><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-font-serif ql-size-huge\" style=\"color: rgb(230, 0, 0);\">Первый пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-font-serif ql-size-huge\" style=\"color: rgb(230, 0, 0);\">Второй пункт</span></li><li class=\"ql-direction-rtl ql-align-center\"><span class=\"ql-font-serif ql-size-huge\" style=\"color: rgb(230, 0, 0);\">Третий пункт</span></li></ol>"
   //     },
   //     {
-  //       "content": "<p><span class=\"ql-size-huge ql-font-monospace\" style=\"background-color: rgb(102, 185, 102);\">Четвертый </span><span class=\"ql-size-huge ql-font-monospace\" style=\"background-color: rgb(102, 185, 102); color: rgb(161, 0, 0);\">комментарий</span></p>",
-  //       "created": "15.08.2025 21:43",
-  //       "updated": null
+  //       "created": "Создано: 19.08.2025 21:27 Администратор",
+  //       "updated": "Обновлено: 19.08.2025 22:27 Администратор",
+  //       "taskId": "task-1755631842106",
+  //       "content": "<p><span class=\"ql-font-monospace ql-size-huge\" style=\"background-color: rgb(102, 185, 102);\">Четвертый </span><span class=\"ql-font-monospace ql-size-huge\" style=\"background-color: rgb(102, 185, 102); color: rgb(161, 0, 0);\">комментарий</span></p>"
   //     }
   //   ]
   // );
@@ -196,8 +200,13 @@ function clearSearch() {
     task.style.display = '';
     const quill = quillEditors[task.id];
     if (quill) {
-      // Снимаем выделение (убираем background)
-      quill.formatText(0, quill.getLength(), { background: false });
+      // Восстанавливаем исходный background, если был сохранён
+      if (task.dataset.originalContent) {
+        quill.root.innerHTML = task.dataset.originalContent;
+        delete task.dataset.originalContent;
+      } else {
+        quill.formatText(0, quill.getLength(), { background: false });
+      }
     }
   });
   document.getElementById('searchInfo').textContent = '';
@@ -221,8 +230,14 @@ function searchTasks() {
 
     if (quill) {
       text = quill.getText().toLowerCase();
+
+      // Сохраняем исходный HTML перед поиском
+      if (!task.dataset.originalContent) {
+        task.dataset.originalContent = quill.root.innerHTML;
+      }
+
       // Снимаем старую подсветку
-      quill.formatText(0, quill.getLength(), { background: false });
+      // quill.formatText(0, quill.getLength(), { background: false });
 
       // Ищем все вхождения и подсвечиваем
       let startIndex = 0;
