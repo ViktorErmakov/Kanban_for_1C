@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://viktorermakov.github.io/Kanban_for_1C/blog</id>
+    <id>https://viktorermakov.github.io/OneKanban/blog</id>
     <title>OneKanban Blog</title>
     <updated>2025-05-22T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://viktorermakov.github.io/Kanban_for_1C/blog"/>
+    <link rel="alternate" href="https://viktorermakov.github.io/OneKanban/blog"/>
     <subtitle>OneKanban Blog</subtitle>
-    <icon>https://viktorermakov.github.io/Kanban_for_1C/img/favicon.ico</icon>
+    <icon>https://viktorermakov.github.io/OneKanban/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Первое знакомство]]></title>
-        <id>https://viktorermakov.github.io/Kanban_for_1C/blog/welcome</id>
-        <link href="https://viktorermakov.github.io/Kanban_for_1C/blog/welcome"/>
+        <id>https://viktorermakov.github.io/OneKanban/blog/welcome</id>
+        <link href="https://viktorermakov.github.io/OneKanban/blog/welcome"/>
         <updated>2025-05-22T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Привет, друзья!]]></summary>
         <content type="html"><![CDATA[<p>Привет, друзья!
