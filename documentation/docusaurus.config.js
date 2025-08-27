@@ -18,7 +18,7 @@ const config = {
   url: 'https://viktorermakov.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/Kanban_for_1C',
+  baseUrl: '/OneKanban',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
