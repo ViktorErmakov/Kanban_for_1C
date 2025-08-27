@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OneKanban',
-  tagline: 'Канбан доска для платформы 1С на чистом HTML, написанная в стиле библиотеки для возможности внедрения в любые конфигурации',
+  tagline: 'Канбан доска для платформы 1С на HTML/CSS/JS, написанная в стиле библиотеки для возможности внедрения в любые конфигурации',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -46,7 +46,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ViktorErmakov/Kanban_for_1C/blob/main/documentation/',
+            'https://github.com/ViktorErmakov/Kanban_for_1C/tree/main/documentation/',
         },
         blog: {
           showReadingTime: true,
@@ -57,7 +57,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ViktorErmakov/Kanban_for_1C/blob/main/documentation/',
+            'https://github.com/ViktorErmakov/Kanban_for_1C/tree/main/documentation/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -74,12 +74,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/OneKanban_logo.jpg',
+      
       navbar: {
         title: 'OneKanban',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/OneKanban_logo.jpg',
+          alt: 'OneKanban Logo',
+          src: 'img/OneKanban_1.png',
         },
         items: [
           {
@@ -91,11 +91,16 @@ const config = {
           {to: '/blog', label: 'Блог', position: 'left'},
         ],
       },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
           {
-            title: 'Docs',
+            title: 'Документация',
             items: [
               {
                 label: 'Описание',
@@ -104,7 +109,7 @@ const config = {
             ],
           },
           {
-            title: 'Community',
+            title: 'Контакты',
             items: [
               {
                 label: 'Telegram',
@@ -113,7 +118,7 @@ const config = {
             ],
           },
           {
-            title: 'More',
+            title: 'Дополнительно',
             items: [
               {
                 label: 'GitHub',
