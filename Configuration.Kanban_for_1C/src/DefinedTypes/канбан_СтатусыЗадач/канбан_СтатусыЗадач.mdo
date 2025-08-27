@@ -9,6 +9,6 @@
     <value>Статусы задач</value>
   </synonym>
   <type>
-    <types>CatalogRef.узСтатусыЗадачи</types>
+    <types>CatalogRef.канбан_СтатусыЗадач</types>
   </type>
 </mdclass:DefinedType>

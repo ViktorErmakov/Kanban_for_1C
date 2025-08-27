@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fa489bc0-bdea-454d-9477-2f76c50f90f1">
+  <producedTypes>
+    <objectType typeId="a8fb6c70-9c4b-4782-adec-be3783141435" valueTypeId="da85477e-1d6f-4ca7-8f72-af2370ff519e"/>
+    <refType typeId="92d0223c-0f93-42b2-9250-1bddec79aa99" valueTypeId="a6b210f5-8159-4084-a3ab-fbf7500d0547"/>
+    <selectionType typeId="96949525-960d-4370-8fa5-d28de0232773" valueTypeId="03f77038-7a6d-4e5b-b605-7f82b49b07ee"/>
+    <listType typeId="408a7dce-1085-4381-9069-52cc4038600b" valueTypeId="441cc67e-d3df-4e2e-95be-4d8eef2e41bf"/>
+    <managerType typeId="41698bbe-1e18-47e6-b561-da4586cacbf3" valueTypeId="0f18bd62-3843-4268-93d0-6db1d5a09748"/>
+  </producedTypes>
+  <name>канбан_СтатусыЗадач</name>
+  <synonym>
+    <key>ru</key>
+    <value>Статусы задач (по умолчанию)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.канбан_СтатусыЗадач.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.канбан_СтатусыЗадач.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>11</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="d376db6f-a83b-4edb-aaa0-3315f8db85ca">
+      <name>Зарегистрирована</name>
+      <description>Зарегистрирована</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000001</value>
+      </code>
+    </items>
+    <items id="53ba3f22-cbb5-45fb-ae67-9e1bdaa6e96c">
+      <name>ОжидаетОтвета</name>
+      <description>Ожидает ответа</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000002</value>
+      </code>
+    </items>
+    <items id="418a9b10-791b-41cf-a295-74308d4e2e76">
+      <name>ВПроцессеВыполнения</name>
+      <description>В процессе выполнения</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000003</value>
+      </code>
+    </items>
+    <items id="52435bcb-20a3-44f2-ac3e-1fbca81a51ea">
+      <name>НаТестированииПоказПользователям</name>
+      <description>На тестировании показ пользователям</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000004</value>
+      </code>
+    </items>
+    <items id="a21d56a5-eb48-4553-b410-2d1fed5debae">
+      <name>КПереносуВРабочую</name>
+      <description>К переносу в рабочую</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000005</value>
+      </code>
+    </items>
+    <items id="7c76e6ad-11ee-48c8-a1bf-c603398c5cae">
+      <name>Готово</name>
+      <description>Готово</description>
+      <code xsi:type="core:StringValue">
+        <value>00000000006</value>
+      </code>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="7fb7aeba-2746-4b98-ba21-8f6b358f98b6">
+    <name>НаименованиеДляКанбанДоски</name>
+    <synonym>
+      <key>ru</key>
+      <value>Наименование для канбан доски</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>150</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

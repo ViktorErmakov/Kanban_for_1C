@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OneKanban</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" /> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск по содержимому...">
+            <button class="clear-search" id="clearSearchBtn" title="Очистить поиск">×</button>
+            <button id="searchBtn">Найти</button>
+        </div>
+        <div class="search-info" id="searchInfo"></div>
+
+        <div id="scrolling-container">
+            <div class="editor-container">
+                <div id="editor"></div>
+                <button id="addTaskBtn">
+                    <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Отправить
+                </button>
+            </div>
+        </div>
+
+        <div class="tasks-container" id="tasksContainer"></div>
+
+    </div>
+
+    <button id='V8_request' style="display: none;"></button>
+    <button id='V8_response' style="display: none;"></button>
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script> -->
+
+    <!-- <script src="./js/main.js"></script> -->
+</body>
+
+</html>

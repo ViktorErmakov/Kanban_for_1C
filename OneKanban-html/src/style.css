@@ -1,0 +1,476 @@
+/* :root {
+            
+        } */
+
+/* подключаем внешний шрифт */
+/*@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");*/
+
+/* общие настройки для всего */
+html {
+    /* font-size: 10px; */
+    font-size: 62.5%;
+    /* Это делает 1rem = 10px по умолчанию (16px * 0.625 = 10px) */
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-size: 1.7rem;
+    overflow: auto;
+    height: 100vh;
+}
+
+/* Скрываем полосу прокрутки */
+.scrollable-container::-webkit-scrollbar {
+    width: 0;
+    /* Для вертикальной полосы */
+    /*height: 0;*/
+    /* Для горизонтальной полосы */
+}
+
+.wrapper {
+    color: #333333;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.sticky_blok {
+    display: flex;
+    position: fixed;
+    top: 0;
+    flex-direction: column;
+    z-index: 100;
+    width: 100%;
+}
+
+#kanban-board {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#kanban_header {
+    display: flex;
+    width: 100%;
+}
+
+#main-content-wrapper {
+    /* Чтобы масштабирование происходило из верхнего левого угла, а не из центра */
+    transform-origin: top left;
+    /* Добавьте transition для плавности масштабирования */
+    /* transition: transform 0.2s ease-in-out;  */
+}
+
+.block_header {
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.block_header:first-child {
+    margin-left: .5rem;
+}
+
+.kanban_body {
+    display: flex;
+    width: 100%;
+    top: 4rem;
+    /* min-height: 91vh; */
+}
+
+.kanban-block {
+    margin-top: 17.1rem;
+}
+
+.block_header,
+.kanban-block {
+    /* Для равномерного распределения колонок: */
+    flex: 1;
+    /* Позволяет элементам расти и занимать доступное пространство */
+    min-width: 0;
+    /* Важно для flex: 1, чтобы избежать переполнения */
+
+    padding: 0.6rem;
+    background-color: rgb(247, 246, 246);
+    margin-right: .5rem;
+    /* box-sizing: border-box; */
+}
+
+.kanban-block:first-child {
+    margin-left: .5rem;
+}
+
+.kanban-block:hover {
+    background-color: aliceblue;
+}
+
+/* Пример стилей для подсветки */
+.block_header--hovered {
+    background-color: aliceblue;
+    /* Более светлый фон */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Небольшая тень */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    /* Плавный переход */
+}
+
+/* чекбоксы */
+/* скрываем флажок у чекбокса */
+input[type="checkbox"] {
+    display: none;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: row;
+    max-width: 250rem;
+    overflow-x: auto;
+    /* Показывает прокрутку только при необходимости */
+    border: 2px solid #ebebeb;
+    border-radius: .4rem;
+    /* min-height: 10rem; */
+}
+
+.checkbox {
+    padding: .5rem;
+}
+
+/* общие настройки для тегов */
+.tag {
+    /* внешние отступы */
+    padding: .6rem 1.2rem;
+    /*min-height: 2.5rem;*/
+    /* подгоняем размер блока под содержимое */
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    /* радиус скругления */
+    border-radius: .4rem;
+    /* запрещаем выделять мышкой этот элемент */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* user-select: none; */
+    background-color: lightgrey;
+}
+
+/* добавляем хештег перед тегом */
+.tag::before {
+    /* добавляем текст, отступ и прозрачность */
+    content: "#";
+    margin-right: .2rem;
+    opacity: 0.3;
+}
+
+/* оставляем тег чуть бледнее при нажатии */
+.tag__inactive {
+    opacity: 0.5;
+    background-color: rgb(233, 233, 233);
+}
+
+.tag_task {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* чекбоксы */
+
+/* КАРТОЧКИ */
+/* настройки карточки */
+.card {
+    /* цвет фона */
+    background-color: #ffffff;
+    /* граница */
+    border: 1px solid #ebebeb;
+    /* рисуем границу по периметру карточки */
+    /* межстрочное расстояние */
+    line-height: 1.5;
+    /* радиус скругления */
+    border-radius: .8rem;
+    /* рисуем тень */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 4px;
+    /* скрываем всё, что не помещается в блок */
+    /* overflow: hidden; */
+    /* включаем гибкую вёрстку */
+    display: flex;
+    /* организуем вёрстку по столбцам */
+    flex-direction: column;
+    /* выравниваем карточки по центру друг относительно друга */
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: .5rem;
+
+    /* Обеспечиваем плавный переход для opacity и height */
+    transition: opacity 0.5s ease-out, height 0.5s ease-out;
+    /* Время и тип анимации */
+    overflow: hidden;
+    /* Важно! Скрывает контент, когда высота уменьшается */
+
+}
+
+/* меняем цвет рамки карточки при наведении */
+.card:hover {
+    /*border: .12rem solid #2E9AFF;*/
+    background-color: lightgrey;
+}
+
+/* если тег не отмечен */
+.card__inactive {
+    opacity: 0;
+    /* Делаем невидимым */
+    height: 0;
+    /* Устанавливаем высоту в 0, чтобы элемент не занимал место */
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+}
+
+/* КАРТОЧКИ */
+label {
+    cursor: pointer;
+}
+
+/* делаем тег чуть бледнее при наведении */
+label:hover {
+    opacity: 0.5;
+}
+
+.kanban-block__name {
+    margin-left: 1rem;
+    color: rgb(121, 121, 121);
+}
+
+.kanban-block__number {
+    margin-left: 1rem;
+    color: rgb(80, 80, 80);
+}
+
+.card__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.card__link {
+    color: rgb(17, 138, 236);
+    text-decoration: none;
+}
+
+.card__link:hover {
+    text-decoration: underline;
+}
+
+.card__photo {
+    width: 3.5rem;
+    height: 4rem;
+    border: 1px solid rgb(184, 194, 196);
+}
+
+.card__photo:hover {
+    background-color: lightgrey;
+    transform: scale(1.4);
+    position: relative;
+    right: 1rem;
+    top: 1rem;
+}
+
+.card__text {
+    display: flex;
+    width: 100%;
+}
+
+.command_panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: .5rem;
+    background-color: white;
+    justify-content: space-between;
+    height: 10.3rem;
+}
+
+.command_panel_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2rem;
+}
+
+.command_panel_buttons>* {
+    margin-right: 2rem;
+    /* Отступ между элементами */
+}
+
+.command_panel_buttons>*:last-child {
+    margin-right: 0;
+    /* Убираем отступ у последнего элемента */
+}
+
+#update_svg,
+#setup_svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    transition: transform 0.4s ease;
+}
+
+/*Вращаем кнопку обновления на 180 градусов*/
+#update_svg:hover,
+#setup_svg:hover {
+    transform: rotate(180deg);
+}
+
+/*Убираем вращение и увеличиваем кнопку*/
+#update_svg:active,
+#setup_svg:active {
+    transform: rotate(-180deg) scale(1.2);
+}
+
+.my_tasks {
+    color: rgb(17, 138, 236);
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 2px solid #ebebeb;
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
+.my_tasks:hover {
+    background-color: #f0f0f0;
+    color: rgb(17, 138, 236);
+}
+
+.my_tasks_active {
+    transform: scale(0.98);
+    background-color: #8c8c8c;
+    color: white;
+}
+
+@media only screen and (max-width: 1450px) {
+    body {
+        font-size: 1.5rem;
+    }
+
+    .card__photo {
+        width: 2.5rem;
+        height: 3rem;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    body {
+        font-size: 1.3rem;
+    }
+
+    .card__photo {
+        width: 2rem;
+        height: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    body {
+        font-size: 1.1rem;
+    }
+
+    .card__photo {
+        width: 1.5rem;
+        height: 2rem;
+    }
+}
+
+@media only screen and (max-width: 1010px) {
+    body {
+        font-size: .9rem;
+    }
+
+    .card__photo {
+        width: 1rem;
+        height: 1.5rem;
+    }
+
+    .tag_task {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    body {
+        font-size: .7rem;
+    }
+
+    .card__photo {
+        min-width: 0.5rem;
+        min-height: 1rem;
+    }
+
+    .tag_task {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+/* кнопка добавления задач +++ */
+.add_task {
+    min-width: 26px;
+    min-height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: none;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.add_task * {
+    pointer-events: none;
+}
+
+.add_task:hover {
+    background-color: #8c8c8c;
+    transform: rotate(90deg);
+}
+
+.add_task:hover svg path {
+    stroke: white;
+}
+
+.add_task:active {
+    transform: scale(0.9) rotate(90deg);
+}
+
+.add_task svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* кнопка добавления задач --- */
+
+/* Стили для Drag & Drop подсветки */
+.kanban-block--dragover {
+    background-color: #e6f7ff;
+    /* Например, светло-голубой фон */
+    /* border: 2px dashed #91d5ff; Пунктирная граница */
+    outline: 2px dashed #91d5ff;
+    /* Используем outline вместо border */
+    outline-offset: -2px;
+    /* Опционально: сдвигает контур внутрь, чтобы он был внутри padding */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    /* Плавный переход */
+}

@@ -9,6 +9,6 @@
     <value>Проекты</value>
   </synonym>
   <type>
-    <types>CatalogRef.узПроекты</types>
+    <types>CatalogRef.канбан_Проекты</types>
   </type>
 </mdclass:DefinedType>

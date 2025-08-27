@@ -10,64 +10,6 @@
     <items xsi:type="form:FormGroup">
       <name>ГруппаЛево</name>
       <id>7</id>
-      <items xsi:type="form:FormField">
-        <name>КанбанДоскаHTML</name>
-        <id>9</id>
-        <title>
-          <key>ru</key>
-          <value>Канбан доска HTML</value>
-        </title>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>КанбанДоскаHTML</segments>
-        </dataPath>
-        <titleLocation>Right</titleLocation>
-        <toolTip>
-          <key>ru</key>
-          <value>Не обязательный флаг, 
-подменяет типовую канбан доску при открытии на HTML.</value>
-        </toolTip>
-        <toolTipRepresentation>ShowTop</toolTipRepresentation>
-        <handlers>
-          <event>OnChange</event>
-          <name>КанбанДоскаHTMLПриИзменении</name>
-        </handlers>
-        <extendedTooltip>
-          <name>КанбанДоскаHTMLРасширеннаяПодсказка</name>
-          <id>11</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>КанбанДоскаHTMLКонтекстноеМеню</name>
-          <id>10</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>CheckBoxField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -276,7 +218,6 @@
       <representation>NormalSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
-      <showTitle>true</showTitle>
       <throughAlign>Auto</throughAlign>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>

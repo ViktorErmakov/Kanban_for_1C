@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e2a60556-c92b-4885-8747-6bf8ca30be0e" extendedConfigurationObject="1a9177fe-6699-42b3-9588-eed9c6008c2d">
+  <producedTypes>
+    <containerType typeId="ec27b6f8-7ad0-4515-ad38-61bc009c4005" valueTypeId="930566e7-2523-4e67-8ea2-39e04eb0c3f5"/>
+  </producedTypes>
+  <name>ВладелецПрисоединенныхФайловОбъект</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DefinedTypeExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+    <typeExtension>
+      <types>
+        <state>Extended</state>
+        <type>CatalogObject.канбан_Задачи</type>
+      </types>
+    </typeExtension>
+  </extension>
+</mdclass:DefinedType>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="098439d6-ac81-462f-b03d-c0bce34a253c">
-  <name>Kanban_for_1C</name>
+  <name>OneKanban</name>
   <synonym>
     <key>ru</key>
-    <value>Kanban for 1 C</value>
+    <value>OneKanban</value>
   </synonym>
+  <comment>Канбан доска в поле HTML</comment>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:ConfigurationExtension">
     <defaultRunMode>Checked</defaultRunMode>
@@ -36,7 +37,7 @@
   <scriptVariant>Russian</scriptVariant>
   <defaultRoles>Role.канбан_ОбщиеПрава</defaultRoles>
   <vendor>@ViktorErmakov</vendor>
-  <version>1.0.2</version>
+  <version>2.0</version>
   <defaultLanguage>Language.Русский</defaultLanguage>
   <interfaceCompatibilityMode>TaxiEnableVersion8_2</interfaceCompatibilityMode>
   <compatibilityMode>8.3.21</compatibilityMode>
@@ -50,7 +51,6 @@
   </languages>
   <subsystems>Subsystem.канбан_Доска</subsystems>
   <subsystems>Subsystem.канбан_ДоскаИнтерфейс</subsystems>
-  <commonPictures>CommonPicture.ВыбратьВариантОтчета</commonPictures>
   <commonPictures>CommonPicture.канбан_Доска</commonPictures>
   <commonPictures>CommonPicture.канбан_ФотоПоУмолчанию</commonPictures>
   <roles>Role.канбан_ОбщиеПрава</roles>
@@ -59,18 +59,30 @@
   <commonModules>CommonModule.канбан_КанбанДоскаКлиент</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
+  <commonModules>CommonModule.РаботаСФайламиКлиентСервер</commonModules>
+  <commonModules>CommonModule.узОбщийМодульСервер</commonModules>
+  <eventSubscriptions>EventSubscription.ОпределитьФормуПрисоединенногоФайлаКанбан</eventSubscriptions>
+  <definedTypes>DefinedType.ВладелецПрисоединенныхФайлов</definedTypes>
+  <definedTypes>DefinedType.ВладелецПрисоединенныхФайловОбъект</definedTypes>
+  <definedTypes>DefinedType.ВладелецФайлов</definedTypes>
   <definedTypes>DefinedType.канбан_Задачи</definedTypes>
   <definedTypes>DefinedType.канбан_Пользователь</definedTypes>
   <definedTypes>DefinedType.канбан_Проекты</definedTypes>
   <definedTypes>DefinedType.канбан_СтатусыЗадач</definedTypes>
+  <commonCommands>CommonCommand.канбан_Задачи</commonCommands>
+  <commonCommands>CommonCommand.канбан_Проекты</commonCommands>
+  <commonCommands>CommonCommand.канбан_СтатусыЗадач</commonCommands>
   <commandGroups>CommandGroup.канбан_Информация</commandGroups>
+  <catalogs>Catalog.канбан_Задачи</catalogs>
+  <catalogs>Catalog.канбан_Проекты</catalogs>
+  <catalogs>Catalog.канбан_СтатусыЗадач</catalogs>
   <catalogs>Catalog.Пользователи</catalogs>
   <catalogs>Catalog.узЗадачи</catalogs>
   <catalogs>Catalog.узПроекты</catalogs>
   <catalogs>Catalog.узСтатусыЗадачи</catalogs>
+  <catalogs>Catalog.Файлы</catalogs>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.канбан_ТехПоддержка</dataProcessors>
-  <dataProcessors>DataProcessor.узКанбанДоска</dataProcessors>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеПроектыДоски</informationRegisters>
   <informationRegisters>InformationRegister.канбан_ИспользуемыеСтатусыДоски</informationRegisters>
 </mdclass:Configuration>

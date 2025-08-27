@@ -9,5 +9,17 @@
       <command>DataProcessor.Канбан_Доска_HTML.Command.ОткрытьСтраницуРазработки</command>
       <visible/>
     </visibilityFragments>
+    <visibilityFragments>
+      <command>Catalog.канбан_Задачи.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Catalog.канбан_Проекты.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Catalog.канбан_СтатусыЗадач.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
   </commandsVisibility>
 </cmi:CommandInterface>
