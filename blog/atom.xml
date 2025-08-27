@@ -13,15 +13,16 @@
         <link href="https://viktorermakov.github.io/Kanban_for_1C/blog/welcome"/>
         <updated>2025-05-22T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Привет, друзья!]]></summary>
-        <content type="html"><![CDATA[<p>Привет, друзья!<br>
-<!-- -->Сегодня я хочу рассказать вам о крутом инструменте — OneKanban, который точно заслуживает вашего внимания! 😎</p>
+        <content type="html"><![CDATA[<p>Привет, друзья!
+Сегодня я хочу рассказать вам о крутом инструменте — OneKanban, который точно заслуживает вашего внимания! 😎</p>
 <p>Это расширение с открытым исходным кодом, которое превращает ваши процессы в удобную и наглядную канбан-доску прямо в ПолеHTML.<br>
 <!-- -->Давайте разберёмся, что это за зверь и какие возможности он предлагает!
 Погнали знакомиться с OneKanban — будет интересно! 🚀</p>
-<p><a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Тут ссылка на ютубчик</a><br>
-<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Тут ссылка на инфостарт</a><br>
-<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Тут ссылка на на проект на гитхабе</a><br>
-<!-- -->тут само видео</p>]]></content>
+<p><a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Ютубчик</a><br>
+<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Инфостарт</a><br>
+<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Гитхаб</a></p>
+<video controls="" width="600"><source src="../static/video/1.webm" type="video/webm"><p>Ваш браузер не поддерживает видео.</p></video>
+<video controls="" width="600"><source src="https://youtu.be/SSIYygVDklw"><p>Ваш браузер не поддерживает видео.</p></video>]]></content>
         <author>
             <name>Ermakov Viktor</name>
             <uri>https://viktorermakov.ru/</uri>
