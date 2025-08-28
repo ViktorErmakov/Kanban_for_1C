@@ -12,17 +12,9 @@ authors: [Ermakov]
 Давайте разберёмся, что это за зверь и какие возможности он предлагает!
 Погнали знакомиться с OneKanban — будет интересно! 🚀
 
-[Ютубчик](https://www.youtube.com/watch?v=I-hYKNgaMmE&list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL)  
-[Инфостарт](https://www.youtube.com/watch?v=I-hYKNgaMmE&list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL)  
-[Гитхаб](https://www.youtube.com/watch?v=I-hYKNgaMmE&list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL)  
+[Статья на Инфостарт](https://www.youtube.com/watch?v=I-hYKNgaMmE&list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL)
+
+[Проект на github](https://github.com/ViktorErmakov/OneKanban)
 
 
-<video controls width="600">
-  <source src="../static/video/1.webm" type="video/webm" />
-  Ваш браузер не поддерживает видео.
-</video>
-
-<video controls width="600">
-  <source src="https://youtu.be/SSIYygVDklw"/>
-  Ваш браузер не поддерживает видео.
-</video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SSIYygVDklw?si=kWaSkcNFjPbbs6RX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
