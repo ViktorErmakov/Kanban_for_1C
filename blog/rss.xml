@@ -19,11 +19,9 @@
 <p>Это расширение с открытым исходным кодом, которое превращает ваши процессы в удобную и наглядную канбан-доску прямо в ПолеHTML.<br>
 <!-- -->Давайте разберёмся, что это за зверь и какие возможности он предлагает!
 Погнали знакомиться с OneKanban — будет интересно! 🚀</p>
-<p><a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Ютубчик</a><br>
-<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Инфостарт</a><br>
-<a href="https://www.youtube.com/watch?v=I-hYKNgaMmE&amp;list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL" target="_blank" rel="noopener noreferrer">Гитхаб</a></p>
-<video controls="" width="600"><source src="../static/video/1.webm" type="video/webm"><p>Ваш браузер не поддерживает видео.</p></video>
-<video controls="" width="600"><source src="https://youtu.be/SSIYygVDklw"><p>Ваш браузер не поддерживает видео.</p></video>]]></content:encoded>
+<p><a href="https://infostart.ru/1c/tools/2398094/" target="_blank" rel="noopener noreferrer">Статья на Инфостарт</a></p>
+<p><a href="https://github.com/ViktorErmakov/OneKanban" target="_blank" rel="noopener noreferrer">Проект на github</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SSIYygVDklw?si=kWaSkcNFjPbbs6RX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content:encoded>
         </item>
     </channel>
 </rss>
