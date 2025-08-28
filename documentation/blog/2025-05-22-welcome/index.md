@@ -12,7 +12,7 @@ authors: [Ermakov]
 Давайте разберёмся, что это за зверь и какие возможности он предлагает!
 Погнали знакомиться с OneKanban — будет интересно! 🚀
 
-[Статья на Инфостарт](https://www.youtube.com/watch?v=I-hYKNgaMmE&list=PLY91jl6VVD7wn8SHdWKRg3AAEKbHQYaNL)
+[Статья на Инфостарт](https://infostart.ru/1c/tools/2398094/)
 
 [Проект на github](https://github.com/ViktorErmakov/OneKanban)
 
