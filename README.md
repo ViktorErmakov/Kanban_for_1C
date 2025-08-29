@@ -5,9 +5,8 @@
 
 Документация https://viktorermakov.github.io/OneKanban/
 
-Статья на инфостарт
-https://infostart.ru/1c/tools/2398094/
 ![image](https://infostart.ru/bitrix/templates/sandbox_empty/assets/tpl/abo/img/logo.svg)
+https://infostart.ru/1c/tools/2398094/
 
 Начиная с версии 2.0 доска работает в любой конфигурации написанной на основе БСП.
 А так же доска адаптируется под готовые решения, т.е. использует объекты задачи, проекты и т.д. :
