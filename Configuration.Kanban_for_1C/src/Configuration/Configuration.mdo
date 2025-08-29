@@ -17,7 +17,6 @@
     <mainSectionCommandInterface>Extended</mainSectionCommandInterface>
     <defaultLanguage>Checked</defaultLanguage>
     <interfaceCompatibilityMode>Checked</interfaceCompatibilityMode>
-    <compatibilityMode>Checked</compatibilityMode>
     <defaultStyle>Extended</defaultStyle>
     <defaultRoles>Extended</defaultRoles>
   </extension>
@@ -37,10 +36,9 @@
   <scriptVariant>Russian</scriptVariant>
   <defaultRoles>Role.канбан_ОбщиеПрава</defaultRoles>
   <vendor>@ViktorErmakov</vendor>
-  <version>2.0</version>
+  <version>2.1</version>
   <defaultLanguage>Language.Русский</defaultLanguage>
   <interfaceCompatibilityMode>TaxiEnableVersion8_2</interfaceCompatibilityMode>
-  <compatibilityMode>8.3.21</compatibilityMode>
   <languages uuid="9bb2d542-5c6b-457a-88d2-15e059da5635">
     <name>Русский</name>
     <objectBelonging>Adopted</objectBelonging>
@@ -60,7 +58,6 @@
   <commonModules>CommonModule.канбан_КанбанДоскаКлиентПереопределяемый</commonModules>
   <commonModules>CommonModule.канбан_КанбанДоскаПереопределяемый</commonModules>
   <commonModules>CommonModule.РаботаСФайламиКлиентСервер</commonModules>
-  <commonModules>CommonModule.узОбщийМодульСервер</commonModules>
   <eventSubscriptions>EventSubscription.ОпределитьФормуПрисоединенногоФайлаКанбан</eventSubscriptions>
   <definedTypes>DefinedType.ВладелецПрисоединенныхФайлов</definedTypes>
   <definedTypes>DefinedType.ВладелецПрисоединенныхФайловОбъект</definedTypes>
@@ -77,9 +74,6 @@
   <catalogs>Catalog.канбан_Проекты</catalogs>
   <catalogs>Catalog.канбан_СтатусыЗадач</catalogs>
   <catalogs>Catalog.Пользователи</catalogs>
-  <catalogs>Catalog.узЗадачи</catalogs>
-  <catalogs>Catalog.узПроекты</catalogs>
-  <catalogs>Catalog.узСтатусыЗадачи</catalogs>
   <catalogs>Catalog.Файлы</catalogs>
   <dataProcessors>DataProcessor.Канбан_Доска_HTML</dataProcessors>
   <dataProcessors>DataProcessor.канбан_ТехПоддержка</dataProcessors>
